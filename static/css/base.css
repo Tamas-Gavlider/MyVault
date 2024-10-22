@@ -8,6 +8,7 @@ body {
     font-style: normal;
 }
 
+/* Style for logo letter V overlap the M */
 #logoV {
     left: 5.6px !important;
     color: #9d00ff  !important;
@@ -19,6 +20,19 @@ body {
     font-size: xxx-large;
 }
 
+/* color for a tag in the header nav */
+
 .nav a {
+    color: #FFFFFF !important;
+}
+
+/* Pushing down the sign up,sign in form */
+
+#signup, #login { 
+    margin-top: 10px !important;
+}
+
+/* Color of the sign up button */
+.button {
     color: #FFFFFF !important;
 }

@@ -1,21 +1,48 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<div class="container" id="signup">
+    <div class="row">
+        <div class="col-12 text-center mx-auto">
+            <h1>{% trans "Sign Up" %}</h1>
+            <div class="user-container rounded-3 mx-auto shadow mt-4 p-3">
+                <form method="post" action="{% url 'account_signup' %}" class="text-right">
+                    {% csrf_token %}
+                    
+                    <div class="form-group mb-3">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+                    <button class="primary-btn button shadow mt-3 mb-3 btn" type="submit">{% trans "Sign Up" %}</button>
+                    
+                    {{ redirect_field }}
+                    
+                </form>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
-
-{% endblock content %}
+                <p class="account-p mt-3">{% trans "Already have an account?" %} 
+                    <a class="account-link" href="{% url 'account_login' %}">{% trans "Log In" %}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
