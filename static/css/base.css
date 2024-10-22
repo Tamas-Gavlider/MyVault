@@ -1,8 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
 body {
-    background-color: #333333;
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
     font-family: "Nanum Myeongjo", serif;
     font-weight: 400;
     font-style: normal;
+}
+
+#logoV {
+    left: 5.6px !important;
+    color: #9d00ff  !important;
+    font-weight: bold;
+}
+
+.logo-text {
+    color:#FFFFFF !important;
+    font-size: xxx-large;
+}
+
+.nav a {
+    color: #FFFFFF !important;
 }
