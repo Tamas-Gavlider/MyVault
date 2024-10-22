@@ -2,5 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h1> TEST profile</h1>
+<h1> Username: {{profile.user}}</h1>
+<h2>Sending address: {{profile.sending_address}}</h2>
+<h2>Location: {{profile.showLocation}}</h2>
 {% endblock content %}
