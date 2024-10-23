@@ -13,7 +13,7 @@
     {%endif%}
 </h2> 
 <h2>Logged in Locations: {% if profile.showLocation%}
-    <a href="#">Check Locations</a>
+    <a href="{% url 'location' %}">Check Locations</a>
     {% else %}
     Disabled
     {% endif %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<h3>Google Map Test</h3>
+<div class="container">
+  <div id="map"></div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLxwwsCAQfKfLW9G5HVGRHs3hX1HoLgxY&callback=initMap"
+  defer></script>
+
+<script src="{% static 'js/index.js'%}">
+</script>
+{% endblock %}

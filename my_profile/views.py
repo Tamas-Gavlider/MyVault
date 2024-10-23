@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileUpdateForm
 import secrets
+from django.http import JsonResponse
+from django.conf import settings
+
+
 
 # Create your views here.
 
@@ -29,9 +33,14 @@ def update_profile(request):
         form = ProfileUpdateForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            # Optionally add a success message
-            return redirect('my_profile')  # Redirect to a profile page or success page
+            return redirect('my_profile')  
     else:
         form = ProfileUpdateForm(instance=profile)
     
     return render(request, 'update_profile.html', {'form': form})
+
+@login_required
+def location(request):
+    api_key = settings.GOOGLE_API_KEY
+    return render(request, 'location.html', {'google_api_key': api_key})
+
