@@ -8,9 +8,11 @@ from django.conf import settings
 
 
 
+
+
 # Create your views here.
 
-
+@login_required
 def my_profile(request):
     # Check if the profile exists for the current user, create one if not
     profile, created = Profile.objects.get_or_create(user=request.user)
@@ -43,4 +45,3 @@ def update_profile(request):
 def location(request):
     api_key = settings.GOOGLE_API_KEY
     return render(request, 'location.html', {'google_api_key': api_key})
-
