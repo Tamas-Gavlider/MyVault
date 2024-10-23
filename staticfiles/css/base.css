@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+body {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Style for logo letter V overlap the M */
+#logoV {
+    left: 5.6px !important;
+    color: #9d00ff  !important;
+    font-weight: bold;
+}
+
+.logo-text {
+    color:#FFFFFF !important;
+    font-size: xxx-large;
+}
+
+/* color for a tag in the header nav */
+
+.nav a {
+    color: #FFFFFF !important;
+}
+
+/* Pushing down the sign up,sign in form */
+
+#signup, #login { 
+    margin-top: 10px !important;
+}
+
+/* Color of the sign up button */
+.button {
+    color: #FFFFFF !important;
+}
+
+/* Style for Google Maps */
+#map {
+    height: 500px;  /* Set a fixed height */
+    width: 100%;   /* Full width */
+    margin-top: 100px;
+}
+  
+.custom-map-control-button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    height: 40px;
+    cursor: pointer;
+  }
+.custom-map-control-button:hover {
+    background: rgb(235, 235, 235);
+  }
