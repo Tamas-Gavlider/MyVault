@@ -9,6 +9,7 @@ dicttoxml==1.7.16
 dj-database-url==2.2.0
 Django==4.2.16
 django-allauth==0.57.2
+django-background-tasks==1.2.8
 frozenlist==1.5.0
 future==1.0.0
 geocoder==1.38.1
