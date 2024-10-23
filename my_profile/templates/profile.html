@@ -2,7 +2,21 @@
 {% load static %}
 
 {% block content %}
-<h1> Username: {{profile.user}}</h1>
-<h2>Sending address: {{profile.sending_address}}</h2>
-<h2>Location: {{profile.showLocation}}</h2>
+<h2> Username : {{user}}</h2>
+<h2>Sending Address : {{profile.sending_address}}</h2>
+<h2>Receiving Address : {{profile.receiving_address}}</h2>
+<h2>Balance : {{profile.balance}}</h2>
+<h2>Email Notifications :{% if profile.notificationEmail %}
+    Active
+    {% else %}
+    Disabled
+    {%endif%}
+</h2> 
+<h2>Logged in Locations: {% if profile.showLocation%}
+    <a href="#">Check Locations</a>
+    {% else %}
+    Disabled
+    {% endif %}
+</h2>
+
 {% endblock content %}
