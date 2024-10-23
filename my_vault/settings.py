@@ -32,7 +32,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net','.herokuapp.com']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net'
+    'https://8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net',
+    "https://*.herokuapp.com"
 ]
 
 # Application definition
@@ -58,6 +59,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
