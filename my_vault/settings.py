@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net','.herokuapp.com']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net'
