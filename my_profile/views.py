@@ -6,10 +6,6 @@ from .forms import ProfileUpdateForm
 import secrets
 from django.conf import settings
 
-
-
-
-
 # Create your views here.
 
 @login_required
