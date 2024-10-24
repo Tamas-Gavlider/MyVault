@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'background_task',
     'my_home',
     'my_profile',
+    'my_transactions',
 ]
 
 SITE_ID = 1

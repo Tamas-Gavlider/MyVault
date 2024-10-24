@@ -17,6 +17,7 @@ class Transactions(models.Model):
     deposit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     money_sent = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     money_received = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    status = models.CharField(max_length=50, choices=TRANSACTIONS_STATUS, default='Pending')
     date = models.DateTimeField(auto_now_add=True)
     
     
