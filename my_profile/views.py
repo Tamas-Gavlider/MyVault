@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from .models import Profile
 from .forms import ProfileUpdateForm
 import secrets
-from django.http import JsonResponse
 from django.conf import settings
 
 
