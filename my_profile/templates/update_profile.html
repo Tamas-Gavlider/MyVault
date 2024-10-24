@@ -5,7 +5,11 @@
 <h2>Update Profile</h2>
 <form method="post">
     {% csrf_token %}
+    {{form2.as_p}}
     {{ form.as_p }}
     <button type="submit">Save Changes</button>
+    {% for error in form2.email.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
 </form>
 {% endblock %}

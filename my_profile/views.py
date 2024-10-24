@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from .models import Profile
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
 from django.conf import settings
 
@@ -44,13 +44,16 @@ def update_profile(request):
     
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+        form2 = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid() and form2.is_valid():
+            form.save()       
+            form2.save() 
             return redirect('my_profile')  
     else:
         form = ProfileUpdateForm(instance=profile)
+        form2 = UserUpdateForm(instance=request.user)
     
-    return render(request, 'update_profile.html', {'form': form})
+    return render(request, 'update_profile.html', {'form': form, 'form2':form2})
 
 @login_required
 def delete_profile(request):
