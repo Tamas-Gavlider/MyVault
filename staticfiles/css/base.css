@@ -8,6 +8,27 @@ body {
     font-style: normal;
 }
 
+/* Home page background img */
+.bg-img {
+    background-image: url('/static/images/background.jpg') !important;
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.slogan-left {
+    font-size: 400%;
+    margin-bottom: 80px;
+}
+
+.slogan-right {
+    color: #e1f4f3!important;
+    font-size: 300%;
+    margin-bottom: 20px;
+}
+
 /* Style for logo letter V overlap the M */
 #logoV {
     left: 5.6px !important;
@@ -59,3 +80,10 @@ body {
 .custom-map-control-button:hover {
     background: rgb(235, 235, 235);
   }
+
+
+@media (min-width: 768px) {
+    .slogan-right {
+        color: #333333  !important;
+    }
+}
