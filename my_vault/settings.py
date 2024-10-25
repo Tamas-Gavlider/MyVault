@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import stripe
 import os
 if os.path.isfile('env.py'):
     import env
@@ -91,7 +92,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_vault.wsgi.application'
 
+# Stripe keys
 
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

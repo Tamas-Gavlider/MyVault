@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -23,5 +24,5 @@ class Transactions(models.Model):
     
     
     def __str__(self):
-        return f'{self.withdraw} - {self.deposit}'
+        return f'{self.withdraw} - {self.deposit} - {self.money_sent} - {self.money_received}'
         
