@@ -6,9 +6,11 @@
 <h2>Email Address: {{user.email}}</h2>
 <h2>Sending Address : {{profile.sending_address}}</h2>
 {% if profile.raw_key %}
-    <script>
-        alert("Your unique private key: {{ raw_key }}. Please save it securely, as it cannot be recovered.");
-    </script>
+<div class="alert alert-danger" role="alert">
+    <p>Your secret key is: {{profile.raw_key}}</p>
+    <p>Please keep it at safe place and never share it.</p>
+    <p>To guarantee the security of your account this key cannot be restored.</p>
+  </div>
     {% endif %}
 <h2>Receiving Address : {{profile.receiving_address}}</h2>
 <h2>Balance : {{profile.balance}}</h2>

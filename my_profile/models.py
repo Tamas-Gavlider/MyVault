@@ -21,6 +21,9 @@ class Profile(models.Model):
         return f'{self.user} - {self.email}'
     
     def generate_private_key(self):
+        """
+        Generates the unique private key
+        """
         characters = string.ascii_letters + string.digits
         raw_key = ''.join(secrets.choice(characters) for i in range(30))
         self.raw_key = raw_key  

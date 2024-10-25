@@ -27,6 +27,7 @@ def my_profile(request):
     # Check if the profile exists for the current user, create one if not
     profile, created = Profile.objects.get_or_create(user=request.user)
     
+    # Create the unique sending, receiving address and the private key
     if not profile.sending_address:
         profile.sending_address = generate_unique_sending_address()
         profile.save()  
@@ -42,6 +43,10 @@ def my_profile(request):
 
 @login_required
 def update_profile(request):
+    """
+    Form activate/disable email notification and login location
+    Form is for changing the email address
+    """
     profile = Profile.objects.get(user=request.user)
     
     if request.method == 'POST':
@@ -61,11 +66,11 @@ def update_profile(request):
 def delete_profile(request):
     if request.method == "POST":
         user_profile = get_object_or_404(Profile, user=request.user)
-        user = user_profile.user  # Get the associated User instance
-        user_profile.delete()  # Delete the Profile instance
-        user.delete()  # Delete the User instance
+        user = user_profile.user  
+        user_profile.delete() 
+        user.delete() 
         print("User and profile deleted successfully.")
-        logout(request)  # Log the user out
+        logout(request)  
         return redirect('my_home')
     return render(request, 'delete_profile.html')
     
@@ -78,6 +83,9 @@ def location(request):
 
 @login_required
 def validate_private_key(request):
+    """
+    Validate the private key after registration
+    """
     if request.method == 'POST':
         input_key = request.POST.get('private_key')
         profile = Profile.objects.get(user=request.user)
