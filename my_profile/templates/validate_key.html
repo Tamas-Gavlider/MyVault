@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{%block content %}
+<form method="POST" action="{% url 'validate_key' %}">
+    {% csrf_token %}
+    <label for="private_key">Enter your private key:</label>
+    <input type="text" name="private_key" id="private_key" required>
+    <button type="submit">Validate</button>
+</form>
+
+<div id="response"></div>
+
+<script>
+    document.querySelector("form").onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const response = await fetch("{% url 'validate_key' %}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        });
+        const result = await response.json();
+        document.getElementById("response").innerText = result.message;
+    };
+</script>
+
+{% endblock %}

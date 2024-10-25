@@ -7,15 +7,14 @@ from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
 from django.conf import settings
 
+
 # Create your views here.
 
-# Generate unique address
 def generate_unique_sending_address():
     while True:
         address = secrets.token_hex(10)
         if not Profile.objects.filter(sending_address=address).exists():
             return address
-        
 
 def generate_unique_receiving_address():
     while True:
@@ -34,9 +33,12 @@ def my_profile(request):
     if not profile.receiving_address:
         profile.receiving_address = generate_unique_receiving_address()
         profile.save()  
+        
+    if not profile.private_key:
+        profile.generate_private_key()
+        raw_key = profile.raw_key 
     
-    
-    return render(request, 'profile.html', {"profile": profile})
+    return render(request, 'profile.html', {"profile": profile, "raw_key":raw_key if created else None})
 
 @login_required
 def update_profile(request):
@@ -72,3 +74,17 @@ def delete_profile(request):
 def location(request):
     api_key = settings.GOOGLE_API_KEY
     return render(request, 'location.html', {'google_api_key': api_key})
+
+
+@login_required
+def validate_private_key(request):
+    if request.method == 'POST':
+        input_key = request.POST.get('private_key')
+        profile = Profile.objects.get(user=request.user)
+        
+        if profile.validate_private_key(input_key):
+            return JsonResponse({'status': 'success', 'message': 'Private key is valid.'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Invalid private key.'})
+
+    return render(request, 'validate_key.html')
