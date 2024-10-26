@@ -24,5 +24,5 @@ class Transactions(models.Model):
     
     
     def __str__(self):
-        return f'{self.withdraw} - {self.deposit} - {self.money_sent} - {self.money_received}'
+        return f'{self.withdraw} - {self.deposit} - {self.date}'
         

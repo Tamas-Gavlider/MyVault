@@ -6,7 +6,9 @@ from my_profile.models import Profile
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import Transactions
+from decimal import Decimal
 import stripe
+import json
 
 
 # Create your views here.
@@ -19,18 +21,25 @@ def payment_form(request):
 @login_required
 def process_payment(request):
     if request.method == 'POST':
-        token = request.POST.get('stripeToken')
-        print("Stripe Token:", token) 
+        amount = request.POST.get('amount')
+        if amount is not None:
+            request.session['payment_amount'] = amount
         try:
-            charge = stripe.Charge.create(
-                amount=5000,  # Amount in cents (e.g., $50.00)
-                currency="usd",
-                source=token,
+            
+            intent = stripe.PaymentIntent.create(
+                amount=amount,           
+                currency='usd',
+                payment_method_types=['card'],
                 description="Payment for Order #1234",
-            )
-            return render(request, 'payment_success.html')
-        except stripe.error.CardError as e:
-            return render(request, 'payment_failed.html')
+                metadata={'user_id': request.user.id})
+            return render(request, 'payment_form.html', {
+                'client_secret': intent.client_secret,
+                'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY
+            })
+
+        except Exception as e:
+            return render(request, 'payment_failed.html', {'error': str(e)})
+    
     return render(request, 'payment_form.html')
 
 @csrf_exempt
@@ -53,6 +62,43 @@ def stripe_webhook(request):
         print("Payment was successful!")
 
     return JsonResponse({'status': 'success'}, status=200)
+
+@csrf_exempt  # Stripe requests will require CSRF exempt if you're calling it directly
+def create_payment_intent(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            amount = data.get('amount') 
+
+            # Create PaymentIntent with the dynamic amount
+            intent = stripe.PaymentIntent.create(
+                amount=amount,
+                currency='usd',
+                payment_method_types=['card']
+            )
+
+            return JsonResponse({'client_secret': intent.client_secret})
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+
+def payment_success(request):
+    profile = Profile.objects.get(user=request.user)
+    
+    # Retrieve the amount from the session or other relevant source
+    amount = request.session.get('payment_amount', None)
+    
+    # Update the user's balance
+    amount = Decimal(amount) 
+    profile.balance += amount
+    profile.save()
+    
+    # Clear the amount from session after use
+    del request.session['payment_amount']
+    
+    return render(request, 'payment_success.html')
+
+
 
 @login_required
 def my_transactions(request):
