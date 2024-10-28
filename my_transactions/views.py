@@ -124,3 +124,41 @@ def create_charge(request):
         Charge.objects.create(user=request.user, amount=amount)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'})
+
+# Sending/Receiving payments between users
+
+@login_required
+def send_payment(request):
+    if request.method == 'POST':
+        # Get values from POST data
+        sending_address = request.POST.get('sending_address')
+        amount = request.POST.get('sending_amount')
+        
+        # Find the recipient by receiving address
+        receiving_profile = Profile.objects.filter(receiving_address=sending_address).first()
+        
+        if not receiving_profile:
+            return render(request, 'send_payment.html', {'error': 'Recipient not found'})
+        
+        try:
+            amount = Decimal(amount)  # Convert amount to Decimal
+            if amount <= 0:
+                return render(request, 'send_payment.html', {'error': 'Amount must be positive'})
+
+            # Deduct amount from sender's profile
+            sender_profile = Profile.objects.get(user=request.user)
+            if sender_profile.balance < amount:
+                return render(request, 'send_payment.html', {'error': 'Insufficient balance'})
+
+            sender_profile.balance -= amount
+            receiving_profile.balance += amount
+            sender_profile.save()
+            receiving_profile.save()
+
+            # Redirect or render success message
+            return render(request, 'send_payment.html', {'message': 'Payment sent successfully!'})
+
+        except Exception as e:
+            return render(request, 'send_payment.html', {'error': 'Error processing payment: {}'.format(e)})
+
+    return render(request, 'send_payment.html')

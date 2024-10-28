@@ -23,7 +23,11 @@
             }
         });
         const result = await response.json();
-        document.getElementById("response").innerText = result.message;
+        if(result.message = 'Private key is valid.'){
+            document.getElementById("response").innerHTML = `<a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>`
+        } else {
+            document.getElementById("response").innerText = result.message;
+        }
     };
 </script>
 

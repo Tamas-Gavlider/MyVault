@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form id="send-payment" method="POST" action="{% url 'send_payment' %}">
+    {% csrf_token %}
+    <label for="sending_amount">Amount:</label>
+    <input type="number" name="sending_amount" id="sending_amount" required>
+    
+    <label for="sending_address">User Address:</label>
+    <input type="text" name="sending_address" id="sending_address" required>
+    
+    <button type="submit">Send</button>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</form>
+
+{% endblock %}

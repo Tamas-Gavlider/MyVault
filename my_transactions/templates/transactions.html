@@ -1,7 +1,30 @@
 {% extends 'base.html'%}
 {%load static %}
 {% block content %}
-<div class="container-fluid">
+<div id="transactions-main">
+<form method="POST" action="{% url 'validate_key' %}">
+  {% csrf_token %}
+  <label for="private_key">Enter your private key:</label>
+  <input type="text" name="private_key" id="private_key" required>
+  <button type="submit">Validate</button>
+</form>
+
+<div id="response"></div>
+</div>
+<script>
+  document.querySelector("form").onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch("{% url 'validate_key' %}", {
+          method: "POST",
+          body: formData,
+          headers: {
+              'X-CSRFToken': '{{ csrf_token }}'
+          }
+      });
+      const result = await response.json();
+      if(result.message = 'Private key is valid.'){
+          document.getElementById('transactions-main').innerHTML= `<div class="container-fluid">
   <div class="row">
     <div class="col text-center mx-auto m-3">
       <h1>Transactions</h1>
@@ -24,11 +47,16 @@
             </div>
 
             <div class="d-flex text-center">
-              <a href="#" class="new-appl-view text-decoration-none fw-bold px-2">View</a>
+              <a href="{% url 'send_payment'%}" class="new-appl-view text-decoration-none fw-bold px-2">Send Payment</a>
             </div>
           </div>
         </div>
       </div>
       
-      <a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>
+      <a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>`
+      } else {
+          document.getElementById("response").innerText = result.message;
+      }
+  };
+</script>
       {% endblock %}
