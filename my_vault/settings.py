@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-tamasgavlider-myvault-cj8q11w2skb.ws.codeinstitute-ide.net','.herokuapp.com']
 
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 4
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [

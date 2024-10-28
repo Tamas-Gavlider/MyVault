@@ -34,7 +34,7 @@
               <a class="nav-link active" aria-current="page" href="{%url 'my_home'%}">Home</a>
             </li>
             <li>
-              <a class="nav-link active" aria-current="page" href="{%url 'faq'%}">FAQ</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'faq' %}">FAQ</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
