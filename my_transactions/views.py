@@ -56,14 +56,9 @@ def stripe_webhook(request):
         return JsonResponse({'status': 'invalid payload'}, status=400)
     except stripe.error.SignatureVerificationError:
         return JsonResponse({'status': 'invalid signature'}, status=400)
-
-    if event['type'] == 'charge.succeeded':
-        # Handle successful charge
-        print("Payment was successful!")
-
     return JsonResponse({'status': 'success'}, status=200)
 
-@csrf_exempt  # Stripe requests will require CSRF exempt if you're calling it directly
+@csrf_exempt 
 def create_payment_intent(request):
     if request.method == 'POST':
         try:
