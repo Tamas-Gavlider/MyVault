@@ -4,7 +4,6 @@
 {% block content %}
 <h2> Username : {{user}}</h2>
 <h2>Email Address: {{user.email}}</h2>
-<h2>Sending Address : {{profile.sending_address}}</h2>
 {% if profile.raw_key %}
 <div class="alert alert-danger" role="alert">
     <p>Your secret key is: {{profile.raw_key}}</p>
@@ -12,7 +11,6 @@
     <p>To guarantee the security of your account this key cannot be restored.</p>
   </div>
     {% endif %}
-<h2>Receiving Address : {{profile.receiving_address}}</h2>
 <h2>Balance : {{profile.balance}}</h2>
 <h2>Email Notifications :{% if profile.notificationEmail %}
     Active

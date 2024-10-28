@@ -52,8 +52,11 @@
           </div>
         </div>
       </div>
+      <p> Sending address: {{profile.sending_address}}</p>
+      <p>Receiving address: {{profile.receiving_address}}</p>
       
-      <a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>`
+      <a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>
+      <a href="{% url 'transactions_history' %}">History</a>`      
       } else {
           document.getElementById("response").innerText = result.message;
       }

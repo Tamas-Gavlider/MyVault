@@ -7,11 +7,13 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import Transactions
 from decimal import Decimal
+from datetime import datetime
 import stripe
 import json
 
 
-# Create your views here.
+
+# Check if the profile exists for the current user, create one if not
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -38,6 +40,14 @@ def process_payment(request):
             })
 
         except Exception as e:
+            Transactions.objects.create(
+            user=request.user,
+            type='Deposit',  
+            status='Failed',  
+            amount=amount,
+            sending_address=None,  
+            receiving_address=None 
+        )
             return render(request, 'payment_failed.html', {'error': str(e)})
     
     return render(request, 'payment_form.html')
@@ -87,7 +97,13 @@ def payment_success(request):
     amount = Decimal(amount) 
     profile.balance += amount
     profile.save()
-    
+    Transactions.objects.create(
+            user=request.user,
+            type='Deposit',  
+            status='Completed',  
+            sending_address=None, 
+            receiving_address=None  
+        )
     # Clear the amount from session after use
     del request.session['payment_amount']
     
@@ -102,7 +118,7 @@ def my_transactions(request):
     balance = profile.balance
     context = {
         'transactions': user_transactions,
-        'balance':balance
+        'profile': profile,
     }
     
     return render(request,'transactions.html', context)
@@ -130,7 +146,6 @@ def create_charge(request):
 @login_required
 def send_payment(request):
     if request.method == 'POST':
-        # Get values from POST data
         sending_address = request.POST.get('sending_address')
         amount = request.POST.get('sending_amount')
         
@@ -141,7 +156,7 @@ def send_payment(request):
             return render(request, 'send_payment.html', {'error': 'Recipient not found'})
         
         try:
-            amount = Decimal(amount)  # Convert amount to Decimal
+            amount = Decimal(amount)
             if amount <= 0:
                 return render(request, 'send_payment.html', {'error': 'Amount must be positive'})
 
@@ -154,11 +169,59 @@ def send_payment(request):
             receiving_profile.balance += amount
             sender_profile.save()
             receiving_profile.save()
+            # Log the transaction for the sender as "Sent"
+            Transactions.objects.create(
+                user=request.user,
+                type='Sent',
+                status='Completed',
+                amount=amount,
+                sending_address=sender_profile.sending_address,  # Get sending address from sender's profile
+                receiving_address=receiving_profile.receiving_address,  # Get receiving address from recipient's profile
+            )
+
+            # Log the transaction for the receiver as "Received"
+            Transactions.objects.create(
+                user=receiving_profile.user,  # Use the receiver's user
+                type='Received',  # Change type to 'Received'
+                status='Completed',
+                amount=amount,
+                sending_address=sender_profile.sending_address,  # Include sender's address if needed
+                receiving_address=receiving_profile.receiving_address,  # Include recipient's address
+            )
+
+            context = {
+                'message': 'Payment sent successfully!',
+                'recipient_sending_address': receiving_profile.sending_address,
+                'amount': amount
+            }
 
             # Redirect or render success message
-            return render(request, 'send_payment.html', {'message': 'Payment sent successfully!'})
+            return render(request, 'send_payment.html', context)
 
         except Exception as e:
+            Transactions.objects.create(
+                user=request.user,
+                type='Sent',
+                status='Failed',
+                amount=amount,
+                sending_address=sender_profile.sending_address,  
+                receiving_address=receiving_profile.receiving_address,  
+            )
+
+            # Log the transaction for the receiver as "Received"
+            Transactions.objects.create(
+                user=receiving_profile.user, 
+                type='Received', 
+                status='Failed',
+                amount=amount,
+                sending_address=sender_profile.sending_address,  
+                receiving_address=receiving_profile.receiving_address,  
+            )
             return render(request, 'send_payment.html', {'error': 'Error processing payment: {}'.format(e)})
 
     return render(request, 'send_payment.html')
+
+@login_required
+def transactions_history(request):
+    transactions = Transactions.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'transactions_history.html', {'transactions': transactions})
