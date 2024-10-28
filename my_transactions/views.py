@@ -32,7 +32,7 @@ def process_payment(request):
                 amount=amount,           
                 currency='usd',
                 payment_method_types=['card'],
-                description="Payment for Order #1234",
+                description="Top Up Account",
                 metadata={'user_id': request.user.id})
             return render(request, 'payment_form.html', {
                 'client_secret': intent.client_secret,
@@ -45,8 +45,6 @@ def process_payment(request):
             type='Deposit',  
             status='Failed',  
             amount=amount,
-            sending_address=None,  
-            receiving_address=None 
         )
             return render(request, 'payment_failed.html', {'error': str(e)})
     
@@ -90,20 +88,25 @@ def create_payment_intent(request):
 def payment_success(request):
     profile = Profile.objects.get(user=request.user)
     
-    # Retrieve the amount from the session or other relevant source
     amount = request.session.get('payment_amount', None)
-    
-    # Update the user's balance
+
+    if amount is None:
+        return render(request, 'payment_failed.html', {'error': 'Payment amount is missing.'})
+
     amount = Decimal(amount) 
+
+    # Update the user's balance
     profile.balance += amount
     profile.save()
+
+    # Create the transaction record including the amount
     Transactions.objects.create(
-            user=request.user,
-            type='Deposit',  
-            status='Completed',  
-            sending_address=None, 
-            receiving_address=None  
-        )
+        user=request.user,
+        type='Deposit',  
+        status='Completed',  
+        amount=amount, 
+    )
+
     # Clear the amount from session after use
     del request.session['payment_amount']
     
@@ -149,7 +152,6 @@ def send_payment(request):
         sending_address = request.POST.get('sending_address')
         amount = request.POST.get('sending_amount')
         
-        # Find the recipient by receiving address
         receiving_profile = Profile.objects.filter(receiving_address=sending_address).first()
         
         if not receiving_profile:
@@ -160,7 +162,6 @@ def send_payment(request):
             if amount <= 0:
                 return render(request, 'send_payment.html', {'error': 'Amount must be positive'})
 
-            # Deduct amount from sender's profile
             sender_profile = Profile.objects.get(user=request.user)
             if sender_profile.balance < amount:
                 return render(request, 'send_payment.html', {'error': 'Insufficient balance'})
@@ -175,18 +176,18 @@ def send_payment(request):
                 type='Sent',
                 status='Completed',
                 amount=amount,
-                sending_address=sender_profile.sending_address,  # Get sending address from sender's profile
-                receiving_address=receiving_profile.receiving_address,  # Get receiving address from recipient's profile
+                sending_address=sender_profile.sending_address,  
+                receiving_address=receiving_profile.receiving_address,  
             )
 
             # Log the transaction for the receiver as "Received"
             Transactions.objects.create(
-                user=receiving_profile.user,  # Use the receiver's user
-                type='Received',  # Change type to 'Received'
+                user=receiving_profile.user,  
+                type='Received',  
                 status='Completed',
                 amount=amount,
-                sending_address=sender_profile.sending_address,  # Include sender's address if needed
-                receiving_address=receiving_profile.receiving_address,  # Include recipient's address
+                sending_address=sender_profile.sending_address, 
+                receiving_address=receiving_profile.receiving_address,  
             )
 
             context = {
@@ -195,10 +196,11 @@ def send_payment(request):
                 'amount': amount
             }
 
-            # Redirect or render success message
+            
             return render(request, 'send_payment.html', context)
 
         except Exception as e:
+            # Log the failed transaction for the sender as "Sent"
             Transactions.objects.create(
                 user=request.user,
                 type='Sent',
@@ -208,7 +210,7 @@ def send_payment(request):
                 receiving_address=receiving_profile.receiving_address,  
             )
 
-            # Log the transaction for the receiver as "Received"
+            # Log the failed transaction for the receiver as "Received"
             Transactions.objects.create(
                 user=receiving_profile.user, 
                 type='Received', 

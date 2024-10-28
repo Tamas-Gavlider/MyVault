@@ -13,8 +13,8 @@ class Profile(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     notificationEmail = models.BooleanField(default=True)
     showLocation = models.BooleanField(default=True)
-    sending_address = models.CharField(max_length=50, blank=True, null=True)
-    receiving_address = models.CharField(max_length=50, blank=True, null=True)
+    sending_address = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    receiving_address = models.CharField(max_length=50, blank=True, null=True, unique=True)
     private_key = models.CharField(max_length=128, blank=True, null=True)
     
     def __str__(self):

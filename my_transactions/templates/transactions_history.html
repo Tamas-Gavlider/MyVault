@@ -3,12 +3,17 @@
 {% block content %}
 
 {% for transaction in transactions %}
+{% if transaction.type == "Sent" or transaction.type == "Received" %}
     <p>
-        {{ transaction.date }} - {{ transaction.type }} - Status: {{ transaction.status }}
+      {{ transaction.type }} - Status: {{ transaction.status }}
         Sending Address: {{ transaction.sending_address }} - 
         Receiving Address: {{ transaction.receiving_address }}
         Amount: {{transaction.amount}}
+        {{ transaction.date }} 
         </p>
+{% else %}
+<p>{{ transaction.type }} - {{ transaction.status }} - Amount: {{transaction.amount}}-{{ transaction.date }}</p>
+{% endif %}
 {% endfor %}
 
 {% endblock %}
