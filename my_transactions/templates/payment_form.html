@@ -16,7 +16,7 @@
   <!-- Stripe.js -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe('{{ STRIPE_PUBLISHABLE_KEY }}');
+    var stripe = Stripe('pk_test_51QDQ1UJtxNbZKq3VsDXUfk8qOMbjTNKf1iypnwanoWa0TGVlmjL7Iu33EJvCCBIVfcr455R3onLbfBlMGXwdWjwg00Ho0caCwt');
     var elements = stripe.elements();
     var card = elements.create('card');
     card.mount('#card-element');
