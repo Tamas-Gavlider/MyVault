@@ -1,19 +1,41 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mx-auto pb-2">
+      <h1 class="mx-auto mb-4 p-2">Frequently Asked Questions</h1>
+      <p>Welcome to the MyVault FAQ section! Here you'll find answers to the most commonly asked questions about using
+        our platform.</p>
+    </div>
 
-<h1>MyVault FAQ</h1>
-<div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
+    <div class="col mb-3">
+      <div>
+        <div class="accordion shadow" id="faqAccordion">
+          {% for faq in faqs %}
+
+          <!-- FAQ Item -->
+          <div class="faq-card card">
+            <div class="faq-card-header card-header shadow" id="faqHeading{{ faq.id }}" data-bs-toggle="collapse"
+              data-bs-target="#faqCollapse{{ faq.id }}" aria-expanded="true" aria-controls="faqCollapse{{ faq.id }}"
+              role="button">
+              <h2 class="mb-0 d-flex justify-content-between align-items-center faq-link btn">
+                {{ faq.question }}
+                <small><i class="fa-solid fa-chevron-down"></i></small>
+              </h2>
+            </div>
+            <div id="faqCollapse{{ faq.id }}" class="collapse" aria-labelledby="faqHeading{{ faq.id }}"
+              data-bs-parent="#faqAccordion">
+              <div class="card-body pb-2 pl-2">
+                {{ faq.answer }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
   </div>
+</div>
 
-{% endblock %}
+{% endblock content %}
