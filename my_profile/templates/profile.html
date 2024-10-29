@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<div class="container text-center">
 <h2> Username : {{user}}</h2>
 <h2>Email Address: {{user.email}}</h2>
 {% if profile.raw_key %}
@@ -29,5 +30,6 @@
 
 <br>
 <a href="{% url 'validate_key' %}">Click here to validate your private key</a>
+</div>
 
 {% endblock content %}
