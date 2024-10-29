@@ -26,9 +26,9 @@
           <h1 class="logo-text position-absolute top-0 start-0" id="logoM">M</h1>
           <h1 class="logo-text position-absolute top-0 start-0" id="logoV">V</h1>
         </a>
-        <button class="navbar-toggler navbar-toggler-sm" type="button" data-bs-toggle="collapse"
+        <button class="navbar-toggler navbar-toggler-sm bg-light-subtle" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon bg-light-subtle"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="nav justify-content-end">
@@ -75,7 +75,9 @@
 
   {% if request.path == '/' %}
   <footer>
-    <p class="text-center">Great wealth, greater responsibility.</p>
+    <div class="text-center">
+      <h3>Great wealth, greater responsibility.</h3>
+    </div>
   </footer>
   {% endif %}
 
