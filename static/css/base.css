@@ -41,20 +41,14 @@ body {
     font-size: xxx-large;
 }
 
-/* color for a tag in the header nav */
-
-.nav a {
-    color: #FFFFFF !important;
-}
-
 /* Pushing down the sign up,sign in form */
 
 #signup, #login { 
     margin-top: 10px !important;
 }
 
-/* Color of the sign up button */
-.button, .navbar-toggler-icon {
+/* Color of the sign up button, the hamburger menu adn the a tags in nav */
+.button, .navbar-toggler-icon, .nav a {
     color: #FFFFFF !important;
 }
 
