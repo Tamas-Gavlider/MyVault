@@ -32,19 +32,8 @@
         <div class="task-container">
           <div class="text-start task" id="task-{{ application.id }}">
             <div class="field">
-              <span class="label">Amount</span>
-              <span class="value">{{balance}}</span>
-            </div>
-
-            <div class="field">
-              <span class="label">Time</span>
-              <span class="value">{{transactions.date}}</span>
-            </div>
-
-            <div class="field">
-              <span class="label">Status</span>
-              <span class="value">Pending</span>
-            </div>
+              <h2>Balance : {{profile.balance}}</h2>
+              </div>
 
             <div class="d-flex text-center">
               <a href="{% url 'send_payment'%}" class="new-appl-view text-decoration-none fw-bold px-2">Send Payment</a>

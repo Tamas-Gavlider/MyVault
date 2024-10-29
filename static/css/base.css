@@ -54,7 +54,7 @@ body {
 }
 
 /* Color of the sign up button */
-.button {
+.button, .navbar-toggler-icon {
     color: #FFFFFF !important;
 }
 
