@@ -79,6 +79,9 @@ body {
     background: rgb(235, 235, 235);
   }
 
+#submit_payment {
+    background-color: #333333 !important;
+}
 /*
 @media (min-width: 768px) {
     .slogan-right {
