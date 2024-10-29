@@ -26,7 +26,7 @@ def on_user_login(sender, request, user, **kwargs):
         print(f"User {email} logged in!")  # Debugging statement
         print("Sending login email...")  # Debugging statement
         send_login_email(email)
-        print("Login email sent")
+        print("email sent")
     except Profile.DoesNotExist:
         print("Profile not found for user.")
         
