@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% url 'account_reset_password' as password_reset_url %}
 
 {% block content %}
 <div class="container text-center">
@@ -26,6 +27,7 @@
 </h2>
 <a href="{% url 'update_profile' %}">Edit profile</a>
 <a href="{% url 'delete_profile' %}">Delete profile</a>
+<a href="{% url 'account_reset_password' %}">Reset Password</a>
 
 <br>
 <a href="{% url 'validate_key' %}">Click here to validate your private key</a>

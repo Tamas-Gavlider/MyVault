@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 import logging
 from my_profile.models import Profile 
 from my_vault import settings
+import os
 
 def send_login_email(email):
     try:
@@ -22,10 +23,11 @@ def send_login_email(email):
 def on_user_login(sender, request, user, **kwargs):
     try:
         profile = Profile.objects.get(user=user)
-        email = user.email
-        print(f"User {email} logged in!")  # Debugging statement
+        print(f"User {user.email} logged in!")  # Debugging statement
         print("Sending login email...")  # Debugging statement
-        send_login_email(email)
+        send_login_email(user.email)
+        print(os.getenv('EMAIL_ADDRESS'))
+        print(os.getenv('EMAIL_PASSWORD'))
         print("email sent")
     except Profile.DoesNotExist:
         print("Profile not found for user.")
