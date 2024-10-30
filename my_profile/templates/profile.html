@@ -4,33 +4,38 @@
 
 {% block content %}
 <div class="container text-center">
-<h2> Username : {{user}}</h2>
-<h2>Email Address: {{user.email}}</h2>
-{% if profile.raw_key %}
-<div class="alert alert-danger" role="alert">
-    <p>Your secret key is: {{profile.raw_key}}</p>
-    <p>Please keep it at safe place and never share it.</p>
-    <p>To guarantee the security of your account this key cannot be restored.</p>
-  </div>
-    {% endif %}
-<h2>Email Notifications :{% if profile.notificationEmail %}
-    Active
-    {% else %}
-    Disabled
-    {%endif%}
-</h2> 
-<h2>Logged in Locations: {% if profile.showLocation%}
-    <a href="{% url 'location' %}">Check Locations</a>
-    {% else %}
-    Disabled
-    {% endif %}
-</h2>
-<a href="{% url 'update_profile' %}">Edit profile</a>
-<a href="{% url 'delete_profile' %}">Delete profile</a>
-<a href="{% url 'account_reset_password' %}">Reset Password</a>
+    <div class="row">
+        <h2> Username : {{user}}</h2>
+        <h2>Email Address: {{user.email}}</h2>
+        {% if profile.raw_key %}
+        <div class="alert alert-danger" role="alert">
+            <p>Your secret key is: {{profile.raw_key}}</p>
+            <p>Please keep it at safe place and never share it.</p>
+            <p>To guarantee the security of your account this key cannot be restored.</p>
+        </div>
+        {% endif %}
+        <h2>Email Notifications :{% if profile.notificationEmail %}
+            Active
+            {% else %}
+            Disabled
+            {%endif%}
+        </h2>
+        <h2>Logged in Locations: {% if profile.showLocation%}
+            <a href="{% url 'location' %}">Check Locations</a>
+            {% else %}
+            Disabled
+            {% endif %}
+        </h2>
+        <div class="d-grid gap-2 col-4 mx-auto">
+        <a href="{% url 'update_profile' %}" class="btn btn-secondary">Edit Profile</a>
 
-<br>
-<a href="{% url 'validate_key' %}">Click here to validate your private key</a>
+        <a href="{% url 'delete_profile' %}" class="btn btn-secondary">Delete Profile</a>
+
+        <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
+
+        <a href="{% url 'validate_key' %}" class="btn btn-secondary">Click here to validate your private key</a>
+    </div>
+    </div>
 </div>
 
 {% endblock content %}

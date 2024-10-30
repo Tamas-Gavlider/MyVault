@@ -6,6 +6,6 @@
     {% csrf_token %}
     <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
     <button type="submit">Delete Profile</button>
-    <a href="{% url 'my_home' %}">Cancel</a>
+    <a href="{% url 'my_profile' %}">Cancel</a>
 </form>
 {% endblock content %}
