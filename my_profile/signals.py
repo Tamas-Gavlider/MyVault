@@ -1,10 +1,10 @@
+import logging
+import os
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 from django.core.mail import send_mail
-import logging
 from my_profile.models import Profile 
 from my_vault import settings
-import os
 
 def send_login_email(email):
     try:
@@ -26,8 +26,8 @@ def on_user_login(sender, request, user, **kwargs):
         print(f"User {user.email} logged in!")  # Debugging statement
         print("Sending login email...")  # Debugging statement
         send_login_email(user.email)
-        print(os.getenv('EMAIL_ADDRESS'))
-        print(os.getenv('EMAIL_PASSWORD'))
+        print(os.getenv('EMAIL_HOST_USER'))
+        print(os.getenv('EMAIL_HOST_PASS'))
         print("email sent")
     except Profile.DoesNotExist:
         print("Profile not found for user.")
