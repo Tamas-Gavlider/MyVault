@@ -10,7 +10,16 @@ def send_login_email(email):
     try:
         send_mail(
             'Login Alert',
-            'You have logged in successfully.',
+            """
+            Hello,
+
+            You have successfully logged in to your MyVault account. If you did not perform this 
+            login, please access your account immediately to change your password.
+
+            Thank you,
+            
+            The MyVault Team
+            """,
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=False,
@@ -23,12 +32,7 @@ def send_login_email(email):
 def on_user_login(sender, request, user, **kwargs):
     try:
         profile = Profile.objects.get(user=user)
-        print(f"User {user.email} logged in!")  # Debugging statement
-        print("Sending login email...")  # Debugging statement
         send_login_email(user.email)
-        print(os.getenv('EMAIL_HOST_USER'))
-        print(os.getenv('EMAIL_HOST_PASS'))
-        print("email sent")
     except Profile.DoesNotExist:
         print("Profile not found for user.")
         
