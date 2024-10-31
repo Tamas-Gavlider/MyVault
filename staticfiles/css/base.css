@@ -23,6 +23,10 @@ body {
     
 }
 
+#accordionExample {
+    background-color: #333333 !important;
+}
+
 .slogan-right {
     color: #333333 !important;
     font-size: 450%;
@@ -48,7 +52,7 @@ body {
 }
 
 /* Color of the sign up button, the hamburger menu adn the a tags in nav */
-.button, .navbar-toggler-icon, .nav a {
+.button, .nav a {
     color: #FFFFFF !important;
 }
 
@@ -75,6 +79,13 @@ body {
     background: rgb(235, 235, 235);
   }
 
+#submit_payment {
+    background-color: #333333 !important;
+}
+
+#transactions-main {
+    display: none;
+}
 /*
 @media (min-width: 768px) {
     .slogan-right {
