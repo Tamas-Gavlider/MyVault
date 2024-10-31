@@ -89,9 +89,8 @@ def validate_private_key(request):
     if request.method == 'POST':
         input_key = request.POST.get('private_key')
         profile = Profile.objects.get(user=request.user)
-        
         if profile.validate_private_key(input_key):
-            return JsonResponse({'status': 'success', 'message': 'Private key is valid.'})
+            return JsonResponse({'status': 'success', 'message': 'Valid private key'})
         else:
             return JsonResponse({'status': 'error', 'message': 'Invalid private key.'})
 

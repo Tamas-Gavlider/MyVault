@@ -32,7 +32,8 @@ def send_login_email(email):
 def on_user_login(sender, request, user, **kwargs):
     try:
         profile = Profile.objects.get(user=user)
-        send_login_email(user.email)
+        if profile.notificationEmail == True:
+            send_login_email(user.email)
     except Profile.DoesNotExist:
         print("Profile not found for user.")
         
