@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-
+{% url 'account_reset_password' as password_reset_url %}
 {% block head_title %}{% trans "Log In" %}{% endblock %}
 
 {% block content %}
@@ -39,7 +39,10 @@
                     </div>
                     {% endif %}
 
-                    <button class="primary-btn button shadow mt-3 mb-3 btn" type="submit">{% trans "Login" %}</button>
+                    <button class="btn-secondary button shadow mt-3 mb-3 btn" type="submit">{% trans "Login" %}</button>
+                    <br>
+                    <a href="{% url 'account_reset_password' %}" class="btn btn-secondary button shadow mt-3 mb-3">Forgot Password</a>
+
 
                     {{ redirect_field }}
 
