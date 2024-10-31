@@ -23,8 +23,8 @@
           }
       });
       const result = await response.json();
-      if(result.message = 'Private key is valid.'){
-          document.getElementById('transactions-main').innerHTML= `<div class="container-fluid">
+      if(result.status === 'success'){
+          document.getElementById('response').innerHTML= `<div class="container-fluid">
   <div class="row">
     <div class="col text-center mx-auto m-3">
       <h1>Transactions</h1>

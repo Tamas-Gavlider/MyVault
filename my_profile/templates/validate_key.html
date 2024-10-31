@@ -2,18 +2,22 @@
 {% load static %}
 
 {%block content %}
-<div class="container text-center">
+<div class="container" id="login">
     <div class="row">
-        <form method="POST" action="{% url 'validate_key' %}">
-            {% csrf_token %}
-            <label for="private_key">Enter your private key:</label>
-            <input type="text" name="private_key" id="private_key" required>
-            <button type="submit" class="btn btn-secondary">Validate</button>
-        </form>
-
-        <div id="response"></div>
+        <div class="col-12 text-center mx-auto">
+            <form method="POST" action="{% url 'validate_key' %}">
+                {% csrf_token %}
+                <label for="private_key">Enter your private key:</label>
+                <input type="text" name="private_key" id="private_key" required>
+                <button type="submit">Validate</button>
+            </form>
+            <div id="response"></div>
+        </div>
     </div>
 </div>
+
+
+
 <script>
     document.querySelector("form").onsubmit = async (e) => {
         e.preventDefault();
@@ -26,8 +30,8 @@
             }
         });
         const result = await response.json();
-        if (result.message = 'Private key is valid.') {
-            document.getElementById("response").innerHTML = `<a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>`
+        if (result.message === 'success') {
+            document.getElementById('transactions-main').innerHTML = 'Valid Private Key'
         } else {
             document.getElementById("response").innerText = result.message;
         }
