@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}"></form>
+    {% csrf_token %}
+    <label for="amount">Amount (USD):</label>
+    <input type="number" name="amount" id="amount" required>
+    <button type="submit">Withdraw</button>
+</form>
+
+
+{% endblock %}

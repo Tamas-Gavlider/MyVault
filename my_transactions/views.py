@@ -223,6 +223,25 @@ def send_payment(request):
 
     return render(request, 'send_payment.html')
 
+
+def withdraw_fund(request):
+    if request.method == "POST":
+        amount = int(request.POST.get("amount"))  # Amount in cents (e.g., 500 for $5)
+        user_stripe_id = request.user.profile.stripe_customer_id  
+
+        try:
+            charge = stripe.Charge.create(
+                customer=user_stripe_id,
+                amount=amount,
+                currency="usd",
+                description="Withdrawal from MyVault",
+            )
+            return JsonResponse({"status": "success", "message": "Withdrawal successful."})
+        except stripe.error.StripeError as e:
+            return JsonResponse({"status": "error", "message": str(e)})
+
+    return render(request, "withdraw.html")
+
 @login_required
 def transactions_history(request):
     transactions = Transactions.objects.filter(user=request.user).order_by('-date')
