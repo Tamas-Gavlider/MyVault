@@ -2,29 +2,35 @@
 {%load static %}
 {% block content %}
 <div id="transactions-main">
-<form method="POST" action="{% url 'validate_key' %}">
-  {% csrf_token %}
-  <label for="private_key">Enter your private key:</label>
-  <input type="text" name="private_key" id="private_key" required>
-  <button type="submit">Validate</button>
-</form>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mx-auto">
+        <form method="POST" action="{% url 'validate_key' %}">
+          {% csrf_token %}
+          <label for="private_key">Enter your private key:</label>
+          <input type="text" name="private_key" id="private_key" required>
+          <button type="submit">Validate</button>
+        </form>
 
-<div id="response"></div>
+        <div id="response"></div>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
   document.querySelector("form").onsubmit = async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const response = await fetch("{% url 'validate_key' %}", {
-          method: "POST",
-          body: formData,
-          headers: {
-              'X-CSRFToken': '{{ csrf_token }}'
-          }
-      });
-      const result = await response.json();
-      if(result.status === 'success'){
-          document.getElementById('response').innerHTML= `<div class="container-fluid">
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const response = await fetch("{% url 'validate_key' %}", {
+      method: "POST",
+      body: formData,
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+    });
+    const result = await response.json();
+    if (result.status === 'success') {
+      document.getElementById('transactions-main').innerHTML = `<div class="container-fluid">
   <div class="row">
     <div class="col text-center mx-auto m-3">
       <h1>Transactions</h1>
@@ -45,10 +51,10 @@
       <p>Receiving address: {{profile.receiving_address}}</p>
       
       <a href="{% url 'process_payment' %}" id="top-up-link">Top Up</a>
-      <a href="{% url 'transactions_history' %}">History</a>`      
-      } else {
-          document.getElementById("response").innerText = result.message;
-      }
+      <a href="{% url 'transactions_history' %}">History</a>`
+    } else {
+      document.getElementById("response").innerText = result.message;
+    }
   };
 </script>
-      {% endblock %}
+{% endblock %}
