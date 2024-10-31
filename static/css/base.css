@@ -82,6 +82,10 @@ body {
 #submit_payment {
     background-color: #333333 !important;
 }
+
+#transactions-main {
+    display: none;
+}
 /*
 @media (min-width: 768px) {
     .slogan-right {
