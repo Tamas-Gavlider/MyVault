@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from my_profile.models import Profile
@@ -17,112 +18,76 @@ import json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-def payment_form(request):
-    return render(request, 'payment_form.html', {'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY})
+def payment_success(request):
+    return render(request, 'transactions/payment_success.html')
 
-@login_required
-def process_payment(request):
-    if request.method == 'POST':
-        amount = request.POST.get('amount')
-        if amount is not None:
-            request.session['payment_amount'] = amount
+def payment_failed(request):
+    return render(request, 'payment_failed.html')
+
+def create_checkout_session(request):
+    if request.method == "POST":
         try:
-            
-            intent = stripe.PaymentIntent.create(
-                amount=amount,           
-                currency='usd',
-                payment_method_types=['card'],
-                description="Top Up Account",
-                metadata={'user_id': request.user.id})
-            return render(request, 'payment_form.html', {
-                'client_secret': intent.client_secret,
-                'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY
-            })
-
-        except Exception as e:
-            Transactions.objects.create(
-            user=request.user,
-            type='Deposit',  
-            status='Failed',  
-            amount=amount,
-        )
-            return render(request, 'payment_failed.html', {'error': str(e)})
-    
-    return render(request, 'payment_form.html')
-
-@csrf_exempt
-def stripe_webhook(request):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-
-    # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed':
-        print("Payment was successful.")
-        # TODO: run some custom code here
-
-    return HttpResponse(status=200)
-
-@csrf_exempt 
-def create_payment_intent(request):
-    if request.method == 'POST':
-        try:
+            # Parse JSON body to retrieve amount
             data = json.loads(request.body)
-            amount = data.get('amount') 
-
-            # Create PaymentIntent with the dynamic amount
-            intent = stripe.PaymentIntent.create(
-                amount=amount,
-                currency='usd',
-                payment_method_types=['card']
+            amount = data.get("amount")
+            # Create the Stripe checkout session
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price_data': {
+                        'currency': 'usd',
+                        'product_data': {
+                            'name': 'Account Top-Up',
+                        },
+                        'unit_amount': amount,
+                    },
+                    'quantity': 1,
+                }],
+                mode='payment',
+                success_url=request.build_absolute_uri('/transactions/payment_success/'),
+                cancel_url=request.build_absolute_uri('/transactions/payment_failed/'),
             )
 
-            return JsonResponse({'client_secret': intent.client_secret})
-        
+            # Store the amount in session for later reference
+            request.session["payment_amount"] = amount / 100  # Convert to dollars for display
+            
+            return JsonResponse({'url': checkout_session.url})
+
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
-
+        
 def payment_success(request):
     profile = Profile.objects.get(user=request.user)
     
     amount = request.session.get('payment_amount', None)
-
     if amount is None:
-        return render(request, 'payment_failed.html', {'error': 'Payment amount is missing.'})
+        Transactions.objects.create(
+            user=request.user,
+            type='Deposit',
+            status='Failed',
+            amount=amount,
+        )
+        profile.save()
+        return render(request, 'payment_failed.html', {'error': 'Payment amount is not available.'})
 
-    amount = Decimal(amount) 
+    try:
+        amount = Decimal(amount)
+        profile.balance += amount
+        profile.save()
+        
+        # Record the transaction
+        Transactions.objects.create(
+            user=request.user,
+            type='Deposit',
+            status='Completed',
+            amount=amount,
+        )
 
-    # Update the user's balance
-    profile.balance += amount
-    profile.save()
+        del request.session['payment_amount']
+        return render(request, 'payment_success.html')
 
-    # Create the transaction record including the amount
-    Transactions.objects.create(
-        user=request.user,
-        type='Deposit',  
-        status='Completed',  
-        amount=amount, 
-    )
-
-    # Clear the amount from session after use
-    del request.session['payment_amount']
-    
-    return render(request, 'payment_success.html')
-
-
+    except (ValueError, InvalidOperation):
+        return render(request, 'payment_failed.html', {'error': 'Invalid amount.'})
 
 @login_required
 def my_transactions(request):
@@ -135,24 +100,6 @@ def my_transactions(request):
     }
     
     return render(request,'transactions.html', context)
-
-@login_required
-def create_charge(request):
-    if request.method == 'POST':
-        amount = int(request.POST.get('amount'))  
-        customer = stripe.Customer.create(
-            email=request.user.email,
-            source=request.POST.get('stripeToken')
-        )
-        charge = stripe.Charge.create(
-            customer=customer.id,
-            amount=amount,
-            currency='usd',
-            description='Charge for {}'.format(request.user.email)
-        )
-        Charge.objects.create(user=request.user, amount=amount)
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'})
 
 # Sending/Receiving payments between users
 
