@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views 
-from .views import my_transactions, send_payment, transactions_history, withdraw_fund, create_checkout_session, payment_success, payment_failed
+
 
 urlpatterns = [
     path('', views.my_transactions, name='my_transactions'),

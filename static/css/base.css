@@ -86,6 +86,10 @@ body {
 #transactions-main {
     display: none;
 }
+
+.modal-body {
+    color: #333333 !important;
+}
 /*
 @media (min-width: 768px) {
     .slogan-right {

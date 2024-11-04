@@ -4,50 +4,62 @@
 <div class="container" id="signup">
   <div class="row">
     <div class="col-12 text-center mx-auto">
-      {% for transaction in transactions %}
-      <table class="table">
+      <table class="table-responsive">
         <thead>
           <tr>
-            <th scope="col"></th>
             <th scope="col">Transaction Type</th>
             <th scope="col">Status</th>
-            <th scope="col">Sending Address</th>
-            <th scope="col">Receiving Address</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
+            <th scope="col">Details</th>
           </tr>
         </thead>
-        {% if transaction.type == "Sent" or transaction.type == "Received" %}
-        <tbody>
-          <tr>
-            <th></th>
-            <th>{{ transaction.type }}</th>
-            <td>{{ transaction.status }}</td>
-            <td>{{ transaction.sending_address }}</td>
-            <td>{{ transaction.receiving_address }}</td>
-            <td>{{transaction.amount}}</td>
-            <td> {{ transaction.date }}</td>
-          </tr>
-        </tbody>
-      </table>
-      {% else %}
+      {% for transaction in transactions %}
       <tbody>
-        <tr>
-          <th></th>
-          <th>{{ transaction.type }}</th>
+        <tr></th>
+          <td>{{ transaction.type }}</td>
           <td>{{ transaction.status }}</td>
-          <td> <p> N/A </p> </td>
-          <td> <p> N/A </p> </td>
-          <td>{{transaction.amount}}</td>
-          <td> {{ transaction.date }}</td>
-        </tr>
-      </tbody>
-      </table>
-      {% endif %}
+          <td>
+        
+      <!-- Button trigger modal -->
+      <button type="button" class="btn-secondary button shadow mt-3 mb-3 btn" data-bs-toggle="modal" data-bs-target="#modal-{{ forloop.counter }}">
+        Details
+      </button>
+    </td>
+  </tr>
+      <!-- Modal -->
+      <div class="modal fade" id="modal-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction Details</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% if transaction.type == 'Sent' or transaction.type == 'Received' %}
+            <div class="modal-body">
+              <p>Transaction Type: {{ transaction.type }}</p>
+              <p>Transaction Status: {{ transaction.status }}</p>
+              <p>Sending Address: {{ transaction.sending_address }}</p>
+              <p>Receiving Address: {{ transaction.receiving_address }}</p>
+              <p>Amount: {{ transaction.amount }}</p>
+              <p>{{ transaction.date }}</p>
+            </div>
+            {% else %}
+            <div class="modal-body">
+              <p>Transaction Type: {{ transaction.type }}</p>
+              <p>Transaction Status: {{ transaction.status }}</p>
+              <p>Amount: {{ transaction.amount }}</p>
+              <p>Transaction Date: {{ transaction.date }}</p>
+            </div>
+            {% endif %}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       {% endfor %}
+    </tbody>
+  </table>
     </div>
   </div>
 </div>
-
-
 {% endblock %}
