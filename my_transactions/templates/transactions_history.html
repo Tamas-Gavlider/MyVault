@@ -1,19 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<div class="container" id="signup">
+  <div class="row">
+    <div class="col-12 text-center mx-auto">
+      {% for transaction in transactions %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Transaction Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Sending Address</th>
+            <th scope="col">Receiving Address</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        {% if transaction.type == "Sent" or transaction.type == "Received" %}
+        <tbody>
+          <tr>
+            <th></th>
+            <th>{{ transaction.type }}</th>
+            <td>{{ transaction.status }}</td>
+            <td>{{ transaction.sending_address }}</td>
+            <td>{{ transaction.receiving_address }}</td>
+            <td>{{transaction.amount}}</td>
+            <td> {{ transaction.date }}</td>
+          </tr>
+        </tbody>
+      </table>
+      {% else %}
+      <tbody>
+        <tr>
+          <th></th>
+          <th>{{ transaction.type }}</th>
+          <td>{{ transaction.status }}</td>
+          <td> <p> N/A </p> </td>
+          <td> <p> N/A </p> </td>
+          <td>{{transaction.amount}}</td>
+          <td> {{ transaction.date }}</td>
+        </tr>
+      </tbody>
+      </table>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
-{% for transaction in transactions %}
-{% if transaction.type == "Sent" or transaction.type == "Received" %}
-    <p>
-      {{ transaction.type }} - Status: {{ transaction.status }}
-        Sending Address: {{ transaction.sending_address }} - 
-        Receiving Address: {{ transaction.receiving_address }}
-        Amount: {{transaction.amount}}
-        {{ transaction.date }} 
-        </p>
-{% else %}
-<p>{{ transaction.type }} - {{ transaction.status }} - Amount: {{transaction.amount}}-{{ transaction.date }}</p>
-{% endif %}
-{% endfor %}
 
 {% endblock %}
