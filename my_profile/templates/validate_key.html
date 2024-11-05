@@ -2,40 +2,24 @@
 {% load static %}
 
 {%block content %}
-<div class="container" id="login">
-    <div class="row">
+<div id="pk_validation">
+    <div class="container">
+      <div class="row">
         <div class="col-12 text-center mx-auto">
-            <form method="POST" action="{% url 'validate_key' %}">
-                {% csrf_token %}
-                <label for="private_key">Enter your private key:</label>
-                <input type="text" name="private_key" id="private_key" required>
-                <button type="submit">Validate</button>
-            </form>
-            <div id="response"></div>
+          {% if not is_valid %}
+          <form method="POST" action="{% url 'validate_key' %}">
+            {% csrf_token %}
+            <label for="private_key">Enter your private key:</label>
+            <input type="text" name="private_key" id="private_key" required>
+            <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Validate</button>
+          </form>
+          {% else %}
+          <div id="response" style="color: green;">
+            {{ message }}  <!-- This message is set in the view when key is valid -->
+          </div>
+          {% endif %}
         </div>
+      </div>
     </div>
-</div>
-
-
-
-<script>
-    document.querySelector("form").onsubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const response = await fetch("{% url 'validate_key' %}", {
-            method: "POST",
-            body: formData,
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
-            }
-        });
-        const result = await response.json();
-        if (result.status === 'success') {
-            document.getElementById('response').innerHTML = "Private key is valid";
-        } else {
-            document.getElementById("response").innerText = result.message;
-        }
-    };
-</script>
 
 {% endblock %}

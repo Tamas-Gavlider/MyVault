@@ -80,18 +80,22 @@ def location(request):
     api_key = settings.GOOGLE_API_KEY
     return render(request, 'location.html', {'google_api_key': api_key})
 
-
 @login_required
 def validate_private_key(request):
     """
-    Validate the private key after registration
+    Validate the private key and store validation status in the session.
     """
     if request.method == 'POST':
         input_key = request.POST.get('private_key')
         profile = Profile.objects.get(user=request.user)
+        
         if profile.validate_private_key(input_key):
-            return JsonResponse({'status': 'success', 'message': 'Valid private key'})
+            # Set session variable to indicate validation
+            request.session['is_validated'] = True
+            # Redirect to transactions page
+            return redirect('my_transactions')
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid private key.'})
+            message = 'Invalid private key. Please try again.'
+            return render(request, 'validate_key.html', {'message': message, 'status': 'error'})
 
     return render(request, 'validate_key.html')
