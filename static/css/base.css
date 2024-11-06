@@ -28,7 +28,7 @@ body {
 }
 
 .slogan-right {
-    color: #333333 !important;
+    color: #FFFFFF !important;
     font-size: 450%;
     
 }
@@ -94,9 +94,9 @@ body {
 #private-key {
     word-wrap: break-word;
 }
-/*
-@media (min-width: 768px) {
+
+@media (min-width: 965px) {
     .slogan-right {
         color: #333333  !important;
     }
-*/
+}
