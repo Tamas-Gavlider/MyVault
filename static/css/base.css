@@ -95,11 +95,6 @@ body {
     word-wrap: break-word;
 }
 
-#profile-details {
-    background-color: #706c61 !important;
-
-}
-
 @media (min-width: 965px) {
     .slogan-right {
         color: #333333  !important;

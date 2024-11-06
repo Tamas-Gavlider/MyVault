@@ -2,10 +2,26 @@
 {% load static %}
 
 {% block content %}
-<form method="POST" action="{% url 'delete_profile' %}">
-    {% csrf_token %}
-    <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-    <button type="submit">Delete Profile</button>
-    <a href="{% url 'my_profile' %}">Cancel</a>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mx-auto">
+            <div class="user-container rounded-3 mx-auto shadow mt-4 p-3">
+                <form method="POST" action="{% url 'delete_profile' %}">
+                    {% csrf_token %}
+                    <p>Are you sure you want to delete your profile?</p>
+                    <p>This action will result in the loss of all your
+                        funds, and you will no longer be able to access your account.</p>
+                    <div class="grid gap-3">
+                        <div class="p-2 g-col-6">
+                            <button type="submit" class="btn btn-secondary">Delete My Profile</button>
+                        </div>
+                        <div class="p-2 g-col-6">
+                            <a href="{% url 'my_profile' %}" class="btn btn-secondary">Back to Profile</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
