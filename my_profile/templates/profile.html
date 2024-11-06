@@ -3,46 +3,61 @@
 {% url 'account_reset_password' as password_reset_url %}
 
 {% block content %}
+{% if profile.raw_key %}
+<div class="alert alert-danger" role="alert">
+    <p>Your secret key is:</p>
+    <p id="private-key"><strong>{{profile.raw_key}}</strong></p>
+    <p>Please keep it at safe place and never share it.</p>
+    <p><strong>This is the only time you will be able to view your private key. The private key will
+            disappear forever once you reload or leave the page.</strong></p>
+    <p>To guarantee the security of your account this key cannot be restored.</p>
+</div>
+{% endif %}
 <div class="container text-center">
-    <div class="row">
-        <div class="col-12 text-center mx-auto">
+    <div class="grid text-center" style="--bs-gap: .25rem 1rem;">
+        <div class="user-container rounded-3 mx-auto shadow mt-4 p-3" id="profile-details">
+
             <h2> Username : {{user}}</h2>
+
+
             <h2>Email Address: {{user.email}}</h2>
-            <h2>First Name: {{user.first_name}}</h2>
-            <h2>Last Name: {{user.last_name}}</h2>
-            {% if profile.raw_key %}
-            <div class="alert alert-danger" role="alert">
-                <p>Your secret key is:</p>
-                <p id="private-key"><strong>{{profile.raw_key}}</strong></p>
-                <p>Please keep it at safe place and never share it.</p>
-                <p><strong>This is the only time you will be able to view your private key. The private key will
-                        disappear forever once you reload or leave the page.</strong></p>
-                <p>To guarantee the security of your account this key cannot be restored.</p>
+
+            <h2>Name: {{user.first_name}} {{user.last_name}}</h2>
+
+            <h2>Email Notifications :{% if profile.notificationEmail %}
+                Active
+                {% else %}
+                Disabled
+                {%endif%}
+            </h2>
+
+            <h2>Logged in Locations: {% if profile.showLocation%}
+                <a href="{% url 'location' %}">Check Locations</a>
+                {% else %}
+                Disabled
+                {% endif %}
+            </h2>
+            <div class="p-2 g-col-6">
+                <div class="container text-center">
+                    <div class="row align-items-end">
+                        <div class="col">
+                            <a href="{% url 'update_profile' %}" class="btn btn-secondary">Edit Profile</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'delete_profile' %}" class="btn btn-secondary">Delete Profile</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'validate_key' %}" class="btn btn-secondary">Validate Key</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        {% endif %}
-        <h2>Email Notifications :{% if profile.notificationEmail %}
-            Active
-            {% else %}
-            Disabled
-            {%endif%}
-        </h2>
-        <h2>Logged in Locations: {% if profile.showLocation%}
-            <a href="{% url 'location' %}">Check Locations</a>
-            {% else %}
-            Disabled
-            {% endif %}
-        </h2>
-        <div class="d-grid gap-2 col-4 mx-auto">
-            <a href="{% url 'update_profile' %}" class="btn btn-secondary">Edit Profile</a>
-
-            <a href="{% url 'delete_profile' %}" class="btn btn-secondary">Delete Profile</a>
-
-            <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
-
-            <a href="{% url 'validate_key' %}" class="btn btn-secondary">Click here to validate your private key</a>
         </div>
     </div>
 </div>
+
 
 {% endblock content %}
