@@ -9,7 +9,6 @@ import string
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    email = models.EmailField()
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     notificationEmail = models.BooleanField(default=True)
     showLocation = models.BooleanField(default=True)
@@ -18,7 +17,7 @@ class Profile(models.Model):
     private_key = models.CharField(max_length=128, blank=True, null=True)
     
     def __str__(self):
-        return f'{self.user} - {self.email}'
+        return f'{self.user} - {self.sending_address} - {self.receiving_address}'
     
     def generate_private_key(self):
         """
