@@ -6,16 +6,15 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mx-auto">
-          {% if not is_valid %}
+          {% if not is_validated %}
           <form method="POST" action="{% url 'validate_key' %}">
             {% csrf_token %}
             <label for="private_key">Enter your private key:</label>
             <input type="text" name="private_key" id="private_key" required>
             <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Validate</button>
           </form>
-          {% else %}
-          <div id="response" style="color: green;">
-            {{ message }}  <!-- This message is set in the view when key is valid -->
+          <div id="response">
+            {{ message }}
           </div>
           {% endif %}
         </div>

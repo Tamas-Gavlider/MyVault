@@ -91,10 +91,12 @@ def payment_success(request):
 
 @login_required
 def my_transactions(request):
+    is_validated = request.session.get('is_validated', False)
     user_transactions = Transactions.objects.filter(user=request.user)
     profile = Profile.objects.get(user=request.user)
     balance = profile.balance
     context = {
+        'is_validated' : is_validated,
         'transactions': user_transactions,
         'profile': profile,
     }
