@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.conf import settings
 from django.urls import reverse
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from my_profile.models import Profile
@@ -155,7 +157,6 @@ def send_payment(request):
                 'amount': amount
             }
 
-            
             return redirect('my_transactions')
 
         except Exception as e:
@@ -210,7 +211,6 @@ def transactions_history(request):
     min_amount = request.GET.get('min_amount')
     max_amount = request.GET.get('max_amount')
     transaction_type = request.GET.get('transaction_type')
-    sender_name = request.GET.get('sender_name')
 
     if date_from:
         transactions = transactions.filter(date__gte=date_from)
@@ -220,9 +220,11 @@ def transactions_history(request):
         transactions = transactions.filter(amount__gte=min_amount)
     if max_amount:
         transactions = transactions.filter(amount__lte=max_amount)
-    if sender_name:
-        transactions = transactions.filter(user= sender_name)
     if transaction_type:
         transactions = transactions.filter(type=transaction_type)
+        
+    paginator = Paginator(transactions, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'transactions_history.html', {'transactions': transactions})
+    return render(request, 'transactions_history.html', {'page_obj': page_obj})
