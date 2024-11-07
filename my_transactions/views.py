@@ -145,7 +145,7 @@ def send_payment(request):
                 type='Received',  
                 status='Completed',
                 amount=amount,
-                sending_address=sender_profile.sending_address, 
+                sending_address = f"{sender_profile.user.first_name} {sender_profile.user.last_name}",
                 receiving_address=receiving_profile.receiving_address,  
             )
 
@@ -156,7 +156,7 @@ def send_payment(request):
             }
 
             
-            return render(request, 'send_payment.html', context)
+            return redirect('my_transactions')
 
         except Exception as e:
             # Log the failed transaction for the sender as "Sent"
@@ -175,7 +175,7 @@ def send_payment(request):
                 type='Received', 
                 status='Failed',
                 amount=amount,
-                sending_address=sender_profile.sending_address,  
+                sending_address= f"{sender_profile.user.first_name} {sender_profile.user.last_name}",  
                 receiving_address=receiving_profile.receiving_address,  
             )
             return render(request, 'send_payment.html', {'error': 'Error processing payment: {}'.format(e)})
@@ -204,4 +204,25 @@ def withdraw_fund(request):
 @login_required
 def transactions_history(request):
     transactions = Transactions.objects.filter(user=request.user).order_by('-date')
+    
+    date_from = request.GET.get('date_from')
+    date_to = request.GET.get('date_to')
+    min_amount = request.GET.get('min_amount')
+    max_amount = request.GET.get('max_amount')
+    transaction_type = request.GET.get('transaction_type')
+    sender_name = request.GET.get('sender_name')
+
+    if date_from:
+        transactions = transactions.filter(date__gte=date_from)
+    if date_to:
+        transactions = transactions.filter(date__lte=date_to)
+    if min_amount:
+        transactions = transactions.filter(amount__gte=min_amount)
+    if max_amount:
+        transactions = transactions.filter(amount__lte=max_amount)
+    if sender_name:
+        transactions = transactions.filter(user= sender_name)
+    if transaction_type:
+        transactions = transactions.filter(type=transaction_type)
+
     return render(request, 'transactions_history.html', {'transactions': transactions})
