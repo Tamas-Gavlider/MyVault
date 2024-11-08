@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}"></form>
+<form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}">
     {% csrf_token %}
     <label for="amount">Amount:</label>
     <input type="number" name="amount" id="amount" required>

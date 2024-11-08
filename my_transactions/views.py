@@ -183,22 +183,40 @@ def send_payment(request):
 
     return render(request, 'send_payment.html')
 
-
+@login_required
 def withdraw_fund(request):
     if request.method == "POST":
-        amount = int(request.POST.get("amount"))  # Amount in cents (e.g., 500 for $5)
-        user_stripe_id = request.user.profile.stripe_customer_id  
-
+        amount = request.POST.get("amount")
         try:
-            charge = stripe.Charge.create(
-                customer=user_stripe_id,
-                amount=amount,
-                currency="usd",
-                description="Withdrawal from MyVault",
+            amount = Decimal(amount)
+        except (TypeError, ValueError):
+            # Record the failed transaction with amount as None, or you can set it to 0
+            Transactions.objects.create(
+                user=request.user,
+                transaction_type='Withdraw',
+                status='Failed',
+                amount=None,  # Use None if the conversion failed
             )
-            return JsonResponse({"status": "success", "message": "Withdrawal successful."})
-        except stripe.error.StripeError as e:
-            return JsonResponse({"status": "error", "message": str(e)})
+            return render(request, 'withdraw.html', {'error': 'Invalid amount entered.'})
+        
+        profile = Profile.objects.get(user=request.user)
+        balance = profile.balance
+        if balance < amount:
+            return render(request, 'withdraw.html', {'error': 'Balance not sufficient'})
+        
+        # Deduct amount and save to profile
+        profile.balance -= amount
+        profile.save()
+        
+        # Record the transaction
+        Transactions.objects.create(
+            user=request.user,
+            type='Withdraw',
+            status='Completed',
+            amount=amount,
+        )
+        
+        return redirect('my_transactions')
 
     return render(request, "withdraw.html")
 
