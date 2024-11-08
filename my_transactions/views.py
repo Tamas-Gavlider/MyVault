@@ -223,7 +223,7 @@ def transactions_history(request):
     if transaction_type:
         transactions = transactions.filter(type=transaction_type)
         
-    paginator = Paginator(transactions, 5)
+    paginator = Paginator(transactions, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
