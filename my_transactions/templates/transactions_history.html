@@ -5,7 +5,8 @@
   <div class="row">
     <div class="col-12 text-center mx-auto">
       <div class="user-container rounded-3 mx-auto shadow p-3 ">
-        <form method="GET" action="{% url 'transactions_history' %}" class="d-flex flex-column align-content-center flex-wrap">
+        <form method="GET" action="{% url 'transactions_history' %}">
+          <div class="form-control">
           <label for="date_from">Date From:</label>
           <input type="date" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
           <label for="date_to">Date To:</label>
@@ -24,17 +25,22 @@
             <option value="Received" {% if request.GET.transaction_type == 'Received' %}selected{% endif %}>Received
             </option>
           </select>
+        </div>
           <br>
+          <div>
           <button type="submit" class="btn btn-secondary">Filter</button>
+        </div>
         </form>
         <!-- Transactions Loop -->
         <div class="row">
         {% for transaction in page_obj.object_list %}
-        <div class="col-md-6 col-lg-4 mb-4"> 
+
+        <div class="col-md-4 col-lg-4 mb-4 sm-4"> 
         <div class="p-2 g-col-6">
           <div class="container text-center">
             <div class="row align-items-end">
               <div class="col">
+                <div class="user-container rounded-3 mx-auto shadow p-3 ">
                 <p>Type: {{ transaction.type }}</p>
                 <p>Status: {{ transaction.status }}</p>
                 <!-- Button trigger modal -->
@@ -42,6 +48,7 @@
                   data-bs-target="#modal-{{ forloop.counter }}">
                   Details
                 </button>
+              </div>
               </div>
             </div>
           </div>
@@ -87,7 +94,7 @@
           <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
             <li>
-              <a class="page-link"
+              <a class="page-link btn-secondary button shadow mt-3 mb-3 btn"
                 href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}&{{ key }}={{ value }}{% endfor %}">&laquo;
                 PREV</a>
             </li>
@@ -95,7 +102,7 @@
             {% if page_obj.has_next %}
             <li>
               <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}&{{ key }}={{ value }}{% endfor %}"
-                class="page-link">NEXT &raquo;</a>
+                class="page-link btn-secondary button shadow mt-3 mb-3 btn">NEXT &raquo;</a>
             </li>
             {% endif %}
           </ul>
