@@ -203,7 +203,8 @@ def withdraw_fund(request):
         balance = profile.balance
         if balance < amount:
             return render(request, 'withdraw.html', {'error': 'Balance not sufficient'})
-        
+        elif amount < 0 : 
+            return render(request, 'withdraw.html', {'error': 'Amoutn must be positive'})
         # Deduct amount and save to profile
         profile.balance -= amount
         profile.save()
