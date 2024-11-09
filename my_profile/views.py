@@ -92,6 +92,8 @@ def validate_private_key(request):
         if profile.validate_private_key(input_key):
             # Set session variable to indicate validation
             request.session['is_validated'] = True
+            profile.suspended = False
+            profile.save()
             return redirect('my_transactions')
         else:
             message = 'Invalid private key. Please try again.'

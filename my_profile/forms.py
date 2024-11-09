@@ -5,7 +5,12 @@ from django.contrib.auth.models import User
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['notificationEmail', 'showLocation']
+        fields = ['notificationEmail', 'showLocation','suspended']
+        labels = {
+            'notificationEmail': 'Email notifications',
+            'showLocation':' Login location',
+            'suspended':'Suspend'
+        }
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
