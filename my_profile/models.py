@@ -15,6 +15,7 @@ class Profile(models.Model):
     sending_address = models.CharField(max_length=50, blank=True, null=True, unique=True)
     receiving_address = models.CharField(max_length=50, blank=True, null=True, unique=True)
     private_key = models.CharField(max_length=128, blank=True, null=True)
+    suspended = models.BooleanField(default=False)
     
     def __str__(self):
         return f'{self.user} - {self.sending_address} - {self.receiving_address}'

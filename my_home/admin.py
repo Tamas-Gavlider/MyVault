@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FAQ
+from .models import FAQ, UserQuestion
 
 # Register your models here.
 
@@ -12,3 +12,9 @@ class FAQAdmin(admin.ModelAdmin):
     is displayed in the Django admin interface.
     """
     list_display = ('question', 'answer')
+    
+@admin.register(UserQuestion)
+class UserQuestionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'question_text', 'date_asked')
+    list_filter = ('date_asked',)
+    search_fields = ('question_text', 'user__username')
