@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import JsonResponse
+from django.core.mail import send_mail
 from .models import Profile
 from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
@@ -54,7 +55,24 @@ def update_profile(request):
         form2 = UserUpdateForm(request.POST, instance=request.user)
         if form.is_valid() and form2.is_valid():
             form.save()       
-            form2.save() 
+            form2.save()
+            if profile.notificationEmail == True:
+                send_mail(
+                'Account Changes Alert',
+                """
+                Hello,
+
+                We wanted to inform you that changes have been made to your MyVault account. 
+                If you did not make these changes, please access your account immediately to change your password.
+
+                Thank you,
+            
+                The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
             return redirect('my_profile')  
     else:
         form = ProfileUpdateForm(instance=profile)
