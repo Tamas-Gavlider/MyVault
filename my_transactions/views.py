@@ -197,14 +197,14 @@ def withdraw_fund(request):
                 status='Failed',
                 amount=None,  # Use None if the conversion failed
             )
-            return render(request, 'withdraw.html', {'error': 'Invalid amount entered.'})
+            return render(request, 'transactions.html', {'error': 'Invalid amount entered.'})
         
         profile = Profile.objects.get(user=request.user)
         balance = profile.balance
         if balance < amount:
-            return render(request, 'withdraw.html', {'error': 'Balance not sufficient'})
-        elif amount < 0 : 
-            return render(request, 'withdraw.html', {'error': 'Amoutn must be positive'})
+            return render(request, 'transactions.html', {'error': 'Balance not sufficient'})
+        elif amount <= 0 : 
+            return render(request, 'transactions.html', {'error': 'Minimum withdraw amount is $1'})
         # Deduct amount and save to profile
         profile.balance -= amount
         profile.save()
@@ -219,7 +219,7 @@ def withdraw_fund(request):
         
         return redirect('my_transactions')
 
-    return render(request, "withdraw.html")
+    return render(request, "transactions.html")
 
 @login_required
 def transactions_history(request):
