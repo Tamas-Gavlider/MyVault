@@ -96,8 +96,7 @@ body {
 }
 
 .page-link {
-    color: unset !important;
-    background-color: unset !important;
+    background-color: #6c757d !important;
 }
 
 @media (min-width: 965px) {

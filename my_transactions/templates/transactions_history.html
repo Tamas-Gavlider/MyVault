@@ -5,33 +5,53 @@
   <div class="row">
     <div class="col-12 text-center mx-auto">
       <div class="user-container rounded-3 mx-auto shadow p-3 ">
-        <form method="GET" action="{% url 'transactions_history' %}">
-          <div class="form-control">
-          <label for="date_from">Date From:</label>
-          <input type="date" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
-          <label for="date_to">Date To:</label>
-          <input type="date" id="date_to" name="date_to" value="{{ request.GET.date_to }}">
-          <label for="min_amount">Min Amount:</label>
-          <input type="number" step="0.01" id="min_amount" name="min_amount" value="{{ request.GET.min_amount }}">
-          <label for="max_amount">Max Amount:</label>
-          <input type="number" step="0.01" id="max_amount" name="max_amount" value="{{ request.GET.max_amount }}">
-          <label for="transaction_type">Transaction Type:</label>
-          <select id="transaction_type" name="transaction_type">
-            <option value="">All</option>
-            <option value="Deposit" {% if request.GET.transaction_type == 'Deposit' %}selected{% endif %}>Deposit</option>
-            <option value="Withdraw" {% if request.GET.transaction_type == 'Withdraw' %}selected{% endif %}>Withdraw
-            </option>
-            <option value="Sent" {% if request.GET.transaction_type == 'Sent' %}selected{% endif %}>Sent</option>
-            <option value="Received" {% if request.GET.transaction_type == 'Received' %}selected{% endif %}>Received
-            </option>
-          </select>
+        
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">
+          Filter
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="FilterModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="filterModalLabel">Filter</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="GET" action="{% url 'transactions_history' %}" class="d-flex flex-wrap align-content-center flex-column">
+          
+                  <label for="date_from">Date From:</label>
+                  <input type="date" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
+                  <label for="date_to">Date To:</label>
+                  <input type="date" id="date_to" name="date_to" value="{{ request.GET.date_to }}">
+                  <label for="min_amount">Min Amount:</label>
+                  <input type="number" step="0.01" id="min_amount" name="min_amount" value="{{ request.GET.min_amount }}">
+                  <label for="max_amount">Max Amount:</label>
+                  <input type="number" step="0.01" id="max_amount" name="max_amount" value="{{ request.GET.max_amount }}">
+                  <label for="transaction_type">Transaction Type:</label>
+                  <select id="transaction_type" name="transaction_type">
+                    <option value="">All</option>
+                    <option value="Deposit" {% if request.GET.transaction_type == 'Deposit' %}selected{% endif %}>Deposit</option>
+                    <option value="Withdraw" {% if request.GET.transaction_type == 'Withdraw' %}selected{% endif %}>Withdraw
+                    </option>
+                    <option value="Sent" {% if request.GET.transaction_type == 'Sent' %}selected{% endif %}>Sent</option>
+                    <option value="Received" {% if request.GET.transaction_type == 'Received' %}selected{% endif %}>Received
+                    </option>
+                  </select>
+                  <br>
+                  <div>
+                  <button type="submit" class="btn btn-secondary">Filter</button>
+                </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
-          <br>
-          <div>
-          <button type="submit" class="btn btn-secondary">Filter</button>
-        </div>
-        </form>
         <!-- Transactions Loop -->
+         <br>
         <div class="row">
         {% for transaction in page_obj.object_list %}
 
@@ -76,7 +96,7 @@
               <div class="modal-body">
                 <p>Transaction Type: {{ transaction.type }}</p>
                 <p>Transaction Status: {{ transaction.status }}</p>
-                <p>Amount: {{ transaction.amount }}</p>
+                <p>Amount: {{ transaction.amount }}USD</p>
                 <p>Transaction Date: {{ transaction.date }}</p>
               </div>
               {% endif %}
@@ -102,7 +122,7 @@
             {% if page_obj.has_next %}
             <li>
               <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}&{{ key }}={{ value }}{% endfor %}"
-                class="page-link btn-secondary button shadow mt-3 mb-3 btn">NEXT &raquo;</a>
+                class="page-link btn-secondary button  mt-3 mb-3 btn">NEXT &raquo;</a>
             </li>
             {% endif %}
           </ul>
