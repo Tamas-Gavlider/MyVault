@@ -38,6 +38,9 @@
             <li>
               <a class="nav-link active" aria-current="page" href="{% url 'faq' %}">FAQ</a>
             </li>
+            <li>
+              <a class="nav-link active" aria-current="page" href="{% url 'ask' %}">Ask</a>
+            </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'my_profile' %}">Profile</a>

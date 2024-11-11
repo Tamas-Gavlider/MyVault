@@ -22,6 +22,9 @@ def my_home(request):
 def faq(request):
     """A view to return the FAQ page and provide AI responses with MyVault context."""
     faqs = FAQ.objects.all()
+    return render(request, "faq.html", {'faqs': faqs})
+
+def ask(request):
     user_question_text = request.GET.get('question')
     ai_response = ""
     
@@ -37,7 +40,7 @@ def faq(request):
             # If no match, use generative model with added context
             prompt = (
                 "You are MyVault's virtual assistant, here to help users manage their finances. "
-                "MyVault allows users to send, receive, deposit, and withdraw money. "
+                "MyVault allows users to send, receive, deposit, and withdraw money on tesnet. Mainnet is under developemtn. Should go live by Q3 2025."
                 "Some actions, like accessing the transactions page, require private key validation. "
                 f"User Question: {user_question_text}\nAnswer:"
             )
@@ -55,5 +58,4 @@ def faq(request):
             question_text=user_question_text,
             date_asked=timezone.now()
         )
-
-    return render(request, "faq.html", {'faqs': faqs, 'ai_response': ai_response})
+    return render(request, 'ask.html', {'ai_response': ai_response})

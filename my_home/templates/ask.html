@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="user-container rounded-3 mx-auto shadow p-3 text-center">
+    <form method="get" action="{% url 'ask' %}">
+      <label for="question">Ask a question:</label>
+      <input type="text" name="question" id="question" required>
+      <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Ask</button>
+    </form>
+  </div>
+  {% if ai_response %}
+  <p>{{ ai_response |linebreaksbr }}</p>
+  {% endif %}
+
+  {% endblock %}
