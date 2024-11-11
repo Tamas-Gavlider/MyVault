@@ -15,69 +15,70 @@
         <div class="container text-center">
           <div class="row">
             <div class="col">
-                  <a href="{% url 'send_payment'%}" class="btn btn-secondary button shadow mt-3 mb-3">Send
-                    Payment</a>
-                  </div>
-                  <div class="col">
-                  <a href="{% url 'transactions_history' %}"
-                    class="btn btn-secondary button shadow mt-3 mb-3">History</a>
-                  </div>
-                  <div class="col">
-                    <form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}">
-                      {% csrf_token %}
-                      <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Withdraw</button>
-                      <input type="number" name="amount" id="amount" class="user-container rounded-3 shadow" placeholder="Amount in USD" required>
-                  </form>
-                </div>
-                <div class="col">
-                  <a href="{% url 'create_checkout_session' %}" id="top-up-link"
-                    class="btn btn-secondary button shadow mt-3 mb-3">Top
-                    Up</a>
-                    <br>
-                  <input type="number" id="top-up-amount" min="1" placeholder="Amount in USD" required
-                    class="user-container rounded-3 shadow">
-                  </div>
-                </div>
-              </div>
+              <a href="{% url 'send_payment'%}" class="btn btn-secondary button shadow mt-3 mb-3">Send
+                Payment</a>
+            </div>
+            <div class="col">
+              <a href="{% url 'transactions_history' %}" class="btn btn-secondary button shadow mt-3 mb-3">History</a>
+            </div>
+            <div class="col">
+              <form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Withdraw</button>
+                <input type="number" name="amount" id="amount" class="user-container rounded-3 shadow"
+                  placeholder="Amount in USD" required>
+              </form>
+            </div>
+           
+            <div class="col">
+              <a href="{% url 'create_checkout_session' %}" id="top-up-link"
+                class="btn btn-secondary button shadow mt-3 mb-3">Top
+                Up</a>
+              <br>
+              <input type="number" id="top-up-amount" min="1" placeholder="Amount in USD" required
+                class="user-container rounded-3 shadow">
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  {% endif %}
-  <script>
-    document.querySelector("#top-up-link").addEventListener("click", async (e) => {
-      e.preventDefault();
+</div>
+</div>
+</div>
+{% endif %}
+<script>
+  document.querySelector("#top-up-link").addEventListener("click", async (e) => {
+    e.preventDefault();
 
-      // Get the entered amount from the input field
-      const amountInput = document.querySelector("#top-up-amount").value;
+    // Get the entered amount from the input field
+    const amountInput = document.querySelector("#top-up-amount").value;
 
-      // Convert amount to cents (e.g., $20.00 -> 2000 cents for Stripe)
-      const amountInCents = parseInt(amountInput * 100);
+    // Convert amount to cents (e.g., $20.00 -> 2000 cents for Stripe)
+    const amountInCents = parseInt(amountInput * 100);
 
-      // Validate the amount
-      if (isNaN(amountInCents) || amountInCents <= 0) {
-        alert("Please enter a valid amount.");
-        return;
-      }
+    // Validate the amount
+    if (isNaN(amountInCents) || amountInCents <= 0) {
+      alert("Please enter a valid amount.");
+      return;
+    }
 
-      // Send the amount to the backend
-      const response = await fetch("{% url 'create_checkout_session' %}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": "{{ csrf_token }}"
-        },
-        body: JSON.stringify({ amount: amountInCents })  // Send the amount in cents
-      });
-
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;  // Redirect to the checkout session URL
-      } else {
-        alert("An error occurred: " + data.error);
-      }
+    // Send the amount to the backend
+    const response = await fetch("{% url 'create_checkout_session' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({ amount: amountInCents })  // Send the amount in cents
     });
-  </script>
-  {% endblock %}
+
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;  // Redirect to the checkout session URL
+    } else {
+      alert("An error occurred: " + data.error);
+    }
+  });
+</script>
+{% endblock %}
