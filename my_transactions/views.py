@@ -9,7 +9,7 @@ from my_profile.models import Profile
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import Transactions
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from datetime import datetime
 import stripe
 import json
