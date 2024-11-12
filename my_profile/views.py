@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.core.mail import send_mail
+from django.utils import timezone
 from .models import Profile
 from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
@@ -84,12 +85,14 @@ def update_profile(request):
 def delete_profile(request):
     if request.method == "POST":
         user_profile = get_object_or_404(Profile, user=request.user)
-        user = user_profile.user  
-        user_profile.delete() 
-        user.delete() 
-        print("User and profile deleted successfully.")
-        logout(request)  
+        user_profile.deletion_requested = True
+        user_profile.deletion_request_date = timezone.now()
+        user_profile.save()
+        print("Deletion request submitted and awaiting admin approval.")
+        logout(request)
+        
         return redirect('my_home')
+    
     return render(request, 'delete_profile.html')
     
 

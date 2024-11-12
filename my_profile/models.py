@@ -16,9 +16,17 @@ class Profile(models.Model):
     receiving_address = models.CharField(max_length=50, blank=True, null=True, unique=True)
     private_key = models.CharField(max_length=128, blank=True, null=True)
     suspended = models.BooleanField(default=False)
+    deletion_requested = models.BooleanField(default=False)
+    deletion_request_date = models.DateTimeField(null=True, blank=True)
     
     def __str__(self):
         return f'{self.user} - {self.sending_address} - {self.receiving_address}'
+    
+    def request_deletion(self):
+        """Method for user to request deletion."""
+        self.deletion_requested = True
+        self.deletion_request_date = timezone.now()
+        self.save()
     
     def generate_private_key(self):
         """
@@ -33,4 +41,11 @@ class Profile(models.Model):
     def validate_private_key(self, input_key):
         """Check if the input key matches the stored hashed private key."""
         return check_password(input_key, self.private_key)
-        
+    
+class DeletedProfileLog(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    deletion_date = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Deleted account: {self.username} on {self.deletion_date}"
