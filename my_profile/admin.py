@@ -13,6 +13,9 @@ class ProfileAdmin(admin.ModelAdmin):
         return queryset.exclude(user__isnull=True) 
 
     def approve_deletion_request(self, request, queryset):
+        """
+        View and approve/reject user deletion requests
+        """
         for profile in queryset:
             if profile.deletion_requested:
                 # Log the deletion in DeletedProfileLog

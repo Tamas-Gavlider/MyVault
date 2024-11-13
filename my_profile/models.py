@@ -1,8 +1,10 @@
+import secrets
+import string
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
-import secrets
-import string
+
 
 # Create your models here.
 
@@ -23,14 +25,16 @@ class Profile(models.Model):
         return f'{self.user} - {self.sending_address} - {self.receiving_address}'
     
     def request_deletion(self):
-        """Method for user to request deletion."""
+        """
+        Method for user to request deletion
+        """
         self.deletion_requested = True
         self.deletion_request_date = timezone.now()
         self.save()
     
     def generate_private_key(self):
         """
-        Generates the unique private key
+        Generates the unique private key using the secrets library
         """
         characters = string.ascii_letters + string.digits
         raw_key = ''.join(secrets.choice(characters) for i in range(30))
@@ -43,6 +47,9 @@ class Profile(models.Model):
         return check_password(input_key, self.private_key)
     
 class DeletedProfileLog(models.Model):
+    """
+    Keep the deleted users on file
+    """
     username = models.CharField(max_length=100)
     email = models.EmailField()
     deletion_date = models.DateTimeField(auto_now_add=True)

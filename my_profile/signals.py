@@ -7,6 +7,9 @@ from my_profile.models import Profile
 from my_vault import settings
 
 def send_login_email(email):
+    """
+    Sending email to user upon succesful login 
+    """
     try:
         send_mail(
             'Login Alert',
@@ -30,6 +33,9 @@ def send_login_email(email):
 
 @receiver(user_logged_in)
 def on_user_login(sender, request, user, **kwargs):
+    """
+    Sending the email if the user activates the notification email option
+    """
     try:
         profile = Profile.objects.get(user=user)
         if profile.notificationEmail == True:

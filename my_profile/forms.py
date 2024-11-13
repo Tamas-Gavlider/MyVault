@@ -3,6 +3,10 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 class ProfileUpdateForm(forms.ModelForm):
+    """
+    Form to enable/disable email notifications, login location on google maps 
+    and suspend account"
+    """
     class Meta:
         model = Profile
         fields = ['notificationEmail', 'showLocation','suspended']
@@ -13,6 +17,9 @@ class ProfileUpdateForm(forms.ModelForm):
         }
 
 class UserUpdateForm(forms.ModelForm):
+    """
+    Update user email - add first and last name of the user
+    """
     class Meta:
         model = User
         fields = ['email','first_name','last_name']

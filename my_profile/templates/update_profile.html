@@ -3,6 +3,7 @@
 {% url 'account_password_rest' as password_reset%}
 
 {% block content %}
+<!-- Update profile -->
 <div class="container text-center">
     <div class="row">
         <div class="col-12 text-center mx-auto">
@@ -10,6 +11,7 @@
             <div class="user-container rounded-3 mx-auto shadow mt-4 p-3">
                 <form method="post">
                     {% csrf_token %}
+                    <!-- Form 2 for user  email address -->
                     <div class="form-group mb-3">
                         {{form2.email}}
                     </div>
@@ -23,10 +25,12 @@
                         <input type="text" name="last_name" value="{{ form2.last_name.value|default:'' }}" placeholder="Last Name"
                             />
                     </div>
+                    <!-- Form for notificaiton emails, login location and suspension -->
                     <div class="form-group mb-3">
                         {{ form.as_p }}
                     </div>
                     <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Save Changes</button>
+                    <!-- Errors if the email already exists or invalid -->
                     {% for error in form2.email.errors %}
                     <div class="error">{{ error }}</div>
                     {% endfor %}

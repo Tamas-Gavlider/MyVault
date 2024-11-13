@@ -13,12 +13,18 @@ from django.conf import settings
 # Create your views here.
 
 def generate_unique_sending_address():
+    """
+    Generates the unique 20 digit sending address
+    """
     while True:
         address = secrets.token_hex(10)
         if not Profile.objects.filter(sending_address=address).exists():
             return address
 
 def generate_unique_receiving_address():
+    """
+    Generates the unique 20 digit receiving address
+    """
     while True:
         address = secrets.token_hex(10)
         if not Profile.objects.filter(receiving_address=address).exists():
@@ -26,6 +32,10 @@ def generate_unique_receiving_address():
 
 @login_required
 def my_profile(request):
+    """
+    Create the profile if not exist, with profile creation 
+    the private key, sending and receiving addresses will be generated as well.
+    """
     # Check if the profile exists for the current user, create one if not
     profile, created = Profile.objects.get_or_create(user=request.user)
     
@@ -46,8 +56,8 @@ def my_profile(request):
 @login_required
 def update_profile(request):
     """
-    Form activate/disable email notification and login location
-    Form is for changing the email address
+    Form activate/disable email notification, login location and suspend account
+    Form2 is for changing the user email address
     """
     profile = Profile.objects.get(user=request.user)
     
@@ -83,6 +93,9 @@ def update_profile(request):
 
 @login_required
 def delete_profile(request):
+    """
+    Submit profile deletion. Adming needs to review it and approve it
+    """
     if request.method == "POST":
         user_profile = get_object_or_404(Profile, user=request.user)
         user_profile.deletion_requested = True
