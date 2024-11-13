@@ -8,20 +8,20 @@ from my_vault import settings
 
 def send_login_email(email):
     """
-    Sending email to user upon succesful login 
+    Sending email to user upon succesful login.  
     """
     try:
         send_mail(
             'Login Alert',
             """
-            Hello,
+Hello,
 
-            You have successfully logged in to your MyVault account. If you did not perform this 
-            login, please access your account immediately to change your password.
+You have successfully logged in to your MyVault account. If you did not perform this 
+login, please access your account immediately to change your password.
 
-            Thank you,
+Thank you,
             
-            The MyVault Team
+The MyVault Team
             """,
             settings.DEFAULT_FROM_EMAIL,
             [email],
