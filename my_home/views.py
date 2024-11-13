@@ -13,7 +13,8 @@ common_questions = {
     "deposit money": "To deposit money, go to the transactions page and follow the Stripe deposit instructions.",
     "send money": "To send money to other users, go to the transactions page, where you can enter the recipient's unique address.",
     "receive money": "To receive money, provide your unique receiving address to the sender, which can be found in your profile.",
-    "support" : "To reach out the customer support, please send an email to myvaultbethekey@gmail.com"
+    "support" : "To reach out the customer support, please send an email to myvaultbethekey@gmail.com",
+    "delete" : "To request account deletion, go to the Profile tab. Once submitted, the request will require approval from the page admin. Please note: Deleting your account will result in the permanent loss of all funds associated with it.",
 }
 
 def my_home(request):

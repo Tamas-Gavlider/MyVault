@@ -10,7 +10,9 @@
     </form>
   </div>
   {% if ai_response %}
-  <p>{{ ai_response |linebreaksbr }}</p>
+  <div class="container">
+  <p class="fst-italic text-center">{{ ai_response |linebreaksbr }}</p>
+</div>
   {% endif %}
 
   {% endblock %}
