@@ -4,10 +4,11 @@ from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.utils import timezone
-from .models import Profile
+from .models import Profile, UserLocation
 from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
 from django.conf import settings
+import ipinfo
 
 
 # Create your views here.
@@ -107,12 +108,24 @@ def delete_profile(request):
         return redirect('my_home')
     
     return render(request, 'delete_profile.html')
-    
+
+def get_client_ip_address(request):
+    req_headers = request.META
+    x_forwarded_for_value = req_headers.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for_value:
+        ip_addr = x_forwarded_for_value.split(',')[-1].strip()
+    else:
+        ip_addr = req_headers.get('REMOTE_ADDR')
+    return ip_addr
 
 @login_required
 def location(request):
     api_key = settings.GOOGLE_API_KEY
-    return render(request, 'location.html', {'google_api_key': api_key})
+    access_token = settings.IP_TOKEN
+    ip_address = get_client_ip_address(request)
+    handler = ipinfo.getHandler(access_token)
+    details = handler.getDetails(ip_address)
+    return render(request, 'location.html', {'google_api_key': api_key, 'details':details})
 
 @login_required
 def validate_private_key(request):
