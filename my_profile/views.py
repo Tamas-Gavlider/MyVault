@@ -120,12 +120,15 @@ def get_client_ip_address(request):
 
 @login_required
 def location(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
     api_key = settings.GOOGLE_API_KEY
     access_token = settings.IP_TOKEN
     ip_address = get_client_ip_address(request)
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails(ip_address)
-    return render(request, 'location.html', {'google_api_key': api_key, 'details':details})
+    profile.last_login = details.city + ' ' + details.country_name
+    profile.save()
+    return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile})
 
 @login_required
 def validate_private_key(request):

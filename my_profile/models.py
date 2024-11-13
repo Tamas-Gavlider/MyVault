@@ -20,6 +20,7 @@ class Profile(models.Model):
     suspended = models.BooleanField(default=False)
     deletion_requested = models.BooleanField(default=False)
     deletion_request_date = models.DateTimeField(null=True, blank=True)
+    last_login = models.CharField(max_length=128, blank=True, null=True)
     
     def __str__(self):
         return f'{self.user} - {self.sending_address} - {self.receiving_address}'
