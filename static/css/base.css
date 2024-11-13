@@ -99,6 +99,10 @@ body {
     background-color: #6c757d !important;
 }
 
+.profile {
+    font-size: 300% !important;
+}
+
 @media (min-width: 965px) {
     .slogan-right {
         color: #333333  !important;
