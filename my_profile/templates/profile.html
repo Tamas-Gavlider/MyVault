@@ -19,26 +19,26 @@
     <div class="grid text-center" style="--bs-gap: .25rem 1rem;">
         <div class="user-container rounded-3 mx-auto shadow mt-4 p-3">
 
-            <h2> Username : {{user}}</h2>
+            <p class="fs-5"> Username : {{user}}</p>
 
 
-            <h2>Email Address: {{user.email}}</h2>
+            <p class="fs-5">Email : {{user.email}}</p>
 
-            <h2>Name: {{user.first_name}} {{user.last_name}}</h2>
+            <p class="fs-5">Name: {{user.first_name}} {{user.last_name}}</p>
          
-            <h2>Email Notifications :{% if profile.notificationEmail %}
+            <p class="fs-5">Email Notifications :{% if profile.notificationEmail %}
                 Active
                 {% else %}
                 Disabled
                 {%endif%}
-            </h2>
+            </p>
 
-            <h2>Logged in Locations: {% if profile.showLocation%}
+            <p class="fs-5">Logged in Locations: {% if profile.showLocation%}
                 <a href="{% url 'location' %}">Check Locations</a>
                 {% else %}
                 Disabled
                 {% endif %}
-            </h2>
+            </p>
             <div class="p-2 g-col-6 fs-1 profile">
                 <div class="container text-center">
                     <div class="row align-items-end">
