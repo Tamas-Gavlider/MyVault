@@ -5,11 +5,11 @@
   <div class="row">
     <div class="col-12 text-center mx-auto">
       <div class="user-container rounded-3 mx-auto shadow p-3 ">
-        
+        <!-- Filter button, it opens the modal with the filter options -->
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">
           Filter
         </button>
-        <!-- Modal -->
+        <!-- Modal for filter -->
         <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="FilterModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-        <!-- Transactions Loop -->
+        <!-- Transactions Loop, retrieve the transaction history -->
          <br>
         <div class="row">
         {% for transaction in page_obj.object_list %}
@@ -63,7 +63,7 @@
                 <div class="user-container rounded-3 mx-auto shadow p-3 ">
                 <p>Type: {{ transaction.type }}</p>
                 <p>Status: {{ transaction.status }}</p>
-                <!-- Button trigger modal -->
+                <!-- Button trigger modal to view the details of the transaction record -->
                 <button type="button" class="btn-secondary button shadow mt-3 mb-3 btn" data-bs-toggle="modal"
                   data-bs-target="#modal-{{ forloop.counter }}">
                   Details
@@ -74,7 +74,7 @@
           </div>
           </div>
         </div>
-        <!-- Modal -->
+        <!-- Modal for transacion details -->
         <div class="modal fade" id="modal-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog">
@@ -108,7 +108,7 @@
         </div>
         {% endfor %}
 
-        <!-- Pagination Navigation -->
+        <!-- Pagination Navigation 6 transaction/page -->
 
         <nav aria-label="Page navigation">
           <ul class="pagination justify-content-center">

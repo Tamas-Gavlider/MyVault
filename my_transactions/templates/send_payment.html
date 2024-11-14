@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<!-- Send payment to other users with the user receiving key -->
 <div class="container">
     <div class="row">
         <div class="col-12 text-center mx-auto">
@@ -15,9 +16,9 @@
                     <input type="text" name="sending_address" id="sending_address" placeholder="20-character nums/letters" required>
                 </div>
                 <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Send</button>
-
+                <!-- Error message if the address is not valid -->
                 {% if error %}
-                <p style="color: red;">{{ error }}</p>
+                <p>{{ error }}</p>
                 {% else %}
                 <p>{{message}}</p>
                 {% endif %}

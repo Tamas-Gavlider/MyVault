@@ -11,7 +11,7 @@ class TransactionsAdmin(admin.ModelAdmin):
         queryset = super().get_queryset(request)
         return queryset.all()
     
-    def high_value_transaction(self, request, extra_context=None):
+    def changelist_view(self, request, extra_context=None):
         """
         Check transactions over 25k and warn the admin
         """

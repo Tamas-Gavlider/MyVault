@@ -27,6 +27,9 @@ def payment_failed(request):
     return render(request, 'payment_failed.html')
 
 def create_checkout_session(request):
+    """
+    Session used for deposit with Stripe.
+    """
     if request.method == "POST":
         try:
             # Parse JSON body to retrieve amount
@@ -59,6 +62,10 @@ def create_checkout_session(request):
             return JsonResponse({'error': str(e)}, status=400)
         
 def payment_success(request):
+    """
+    If payment successful or failed the transaction will be saved to the transactions history.
+    User will be directed either to payment failed or payment success html
+    """
     profile = Profile.objects.get(user=request.user)
     
     amount = request.session.get('payment_amount', None)
@@ -93,6 +100,10 @@ def payment_success(request):
 
 @login_required
 def my_transactions(request):
+    """
+    User needs to validate the Private Key otherwise the page will be blank
+    From profile model the page returns the balance of the user
+    """
     is_validated = request.session.get('is_validated', False)
     user_transactions = Transactions.objects.filter(user=request.user)
     profile = Profile.objects.get(user=request.user)
@@ -109,6 +120,14 @@ def my_transactions(request):
 
 @login_required
 def send_payment(request):
+    """
+    Send a payment to other users. 
+    The receiver receiving address will be validated. If the address is not valid 
+    the sender will be warned. 
+    Standard validation applied. User must have available balance and
+    enter valid amount to make the transaction.
+    Transaction will be saved to the transaction history. 
+    """
     if request.method == 'POST':
         sending_address = request.POST.get('sending_address')
         amount = request.POST.get('sending_amount')
@@ -185,6 +204,11 @@ def send_payment(request):
 
 @login_required
 def withdraw_fund(request):
+    """
+    User enters the amount into the input and click on the withdraw button.
+    The amount will be deducted from the balance. 
+    This function is only for demonstration of the withdraws.
+    """
     if request.method == "POST":
         amount = request.POST.get("amount")
         try:
@@ -223,6 +247,11 @@ def withdraw_fund(request):
 
 @login_required
 def transactions_history(request):
+    """
+    History of every type of transactions whether completed or failed.
+    User can filter by date, amount and transaction type.
+    Maximum of 6 transactions will appear on 1 page. 
+    """
     transactions = Transactions.objects.filter(user=request.user).order_by('-date')
     
     date_from = request.GET.get('date_from')
