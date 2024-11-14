@@ -21,7 +21,6 @@
 
             <p class="fs-5"> Username : {{user}}</p>
 
-
             <p class="fs-5">Email : {{user.email}}</p>
 
             <p class="fs-5">Name: {{user.first_name}} {{user.last_name}}</p>
@@ -34,7 +33,7 @@
             </p>
 
             <p class="fs-5">Track Location: {% if profile.showLocation%}
-                <a href="{% url 'location' %}">Check Locations</a>
+                <a href="{% url 'location' %}" class="btn btn-secondary ">Check Locations</a>
                 {% else %}
                 Disabled
                 {% endif %}
