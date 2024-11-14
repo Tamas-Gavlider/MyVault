@@ -22,40 +22,9 @@ import json
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def payment_success(request):
-    send_mail(
-                'Transaction Alert',
-                """
-Hello,
-
-We're pleased to inform you that your recent top-up has been successfully processed. 
-Your MyVault account balance has been updated.
-
-Thank you,
-            
-The MyVault Team
-                """,
-                settings.DEFAULT_FROM_EMAIL,
-                [request.user.email],
-                fail_silently=False,
-            )
     return render(request, 'transactions/payment_success.html')
 
 def payment_failed(request):
-    send_mail(
-                'Transaction Alert',
-                """
-Hello,
-
-We wanted to let you know that your recent payment attempt was unsuccessful.
-
-Thank you,
-            
-The MyVault Team
-                """,
-                settings.DEFAULT_FROM_EMAIL,
-                [request.user.email],
-                fail_silently=False,
-            )
     return render(request, 'payment_failed.html')
 
 def create_checkout_session(request):
@@ -138,7 +107,22 @@ The MyVault Team
             status='Completed',
             amount=amount,
         )
+            send_mail(
+                'Transaction Alert',
+                f"""
+Hello,
 
+We're pleased to inform you that your recent top-up of {amount} USD has been successfully processed. 
+Your MyVault account balance has been updated.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
         del request.session['payment_amount']
         return render(request, 'payment_success.html')
 
