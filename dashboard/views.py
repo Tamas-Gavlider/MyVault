@@ -10,6 +10,10 @@ import pygal
 
 @login_required
 def dashboard(request):
+    """
+    Visualize the user monthly inflow/outflow on pie and bar charts.
+    It will reflect the sum for the current month. 
+    """
     today = datetime.today()
     
     # Get the start and end of the current month
