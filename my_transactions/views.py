@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.conf import settings
 from django.urls import reverse
 from django.db.models import Q
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from my_profile.models import Profile
@@ -21,9 +22,40 @@ import json
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def payment_success(request):
+    send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We're pleased to inform you that your recent top-up has been successfully processed. 
+Your MyVault account balance has been updated.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
     return render(request, 'transactions/payment_success.html')
 
 def payment_failed(request):
+    send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We wanted to let you know that your recent payment attempt was unsuccessful.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
     return render(request, 'payment_failed.html')
 
 def create_checkout_session(request):
@@ -77,6 +109,21 @@ def payment_success(request):
             amount=amount,
         )
         profile.save()
+        send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We wanted to let you know that your recent payment attempt was unsuccessful.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
         return render(request, 'payment_failed.html', {'error': 'Payment amount is not available.'})
 
     try:
@@ -150,6 +197,22 @@ def send_payment(request):
             receiving_profile.balance += amount
             sender_profile.save()
             receiving_profile.save()
+            if sender_profile.notificationEmail == True:
+                send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We’re pleased to inform you that your payment has been successfully sent.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
             # Log the transaction for the sender as "Sent"
             Transactions.objects.create(
                 user=request.user,
@@ -198,6 +261,22 @@ def send_payment(request):
                 sending_address= f"{sender_profile.user.first_name} {sender_profile.user.last_name}",  
                 receiving_address=receiving_profile.receiving_address,  
             )
+            if sender_profile.notificationEmail == True:
+                send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We wanted to let you know that your recent payment attempt was unsuccessful.
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
             return render(request, 'send_payment.html', {'error': 'Error processing payment: {}'.format(e)})
 
     return render(request, 'send_payment.html')
@@ -232,7 +311,22 @@ def withdraw_fund(request):
         # Deduct amount and save to profile
         profile.balance -= amount
         profile.save()
-        
+        if profile.notificationEmail == True:
+            send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We are pleased to inform you that your withdrawal has been successfully processed. 
+
+Thank you,
+            
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
         # Record the transaction
         Transactions.objects.create(
             user=request.user,
