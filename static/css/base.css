@@ -116,7 +116,7 @@ body {
         flex-wrap: wrap !important;
         justify-content: flex-start !important;
         align-content: center !important;
-        align-items: center !important;
+        align-items: flex-start !important;
     }
 }
 

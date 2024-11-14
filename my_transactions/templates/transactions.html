@@ -25,7 +25,7 @@
         </div>
         <div class="container text-center">
           <div class="row">
-            <div class="col">
+            <div class="col transaction-btns">
               <form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Withdraw</button>
@@ -33,7 +33,7 @@
                 <input type="number" name="amount" id="amount" class="user-container rounded-3 shadow"
                   placeholder="Amount in USD" required>
               </form>
-              <div class="col transaction-btns">
+              <div class="col">
                 <a href="{% url 'create_checkout_session' %}" id="top-up-link"
                   class="btn btn-secondary button shadow mt-3 mb-3">Top
                   Up</a>
