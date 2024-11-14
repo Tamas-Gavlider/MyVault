@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<!-- AI responses -->
 <div class="user-container rounded-3 mx-auto shadow p-3 text-center">
     <form method="get" action="{% url 'ask' %}">
       <label for="question">Ask a question:</label>
@@ -14,5 +14,4 @@
   <p class="fst-italic text-center">{{ ai_response |linebreaksbr }}</p>
 </div>
   {% endif %}
-
   {% endblock %}

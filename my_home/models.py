@@ -26,6 +26,9 @@ class FAQ(models.Model):
 
 
 class UserQuestion(models.Model):
+    """
+    User questions asked from AI
+    """
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     question_text = models.TextField()
     date_asked = models.DateTimeField(auto_now_add=True)

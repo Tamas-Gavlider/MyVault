@@ -12,8 +12,7 @@
       <div>
         <div class="accordion shadow" id="faqAccordion">
           {% for faq in faqs %}
-
-          <!-- FAQ Item -->
+          <!-- FAQ Items -->
           <div class="faq-card card">
             <div class="faq-card-header card-header shadow" id="faqHeading{{ faq.id }}" data-bs-toggle="collapse"
               data-bs-target="#faqCollapse{{ faq.id }}" aria-expanded="true" aria-controls="faqCollapse{{ faq.id }}"
@@ -31,11 +30,11 @@
             </div>
           </div>
           {% endfor %}
+          <!-- Link to direct the user to the ask html to ask questions from AI -->
           <a href="{% url 'ask' %}" class="btn-secondary button shadow mt-3 mb-3 btn">Didn't find the answer? Ask us a question!</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock content %}
