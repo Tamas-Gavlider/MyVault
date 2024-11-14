@@ -140,10 +140,11 @@ def location(request):
         ip_address = get_client_ip_address(request)
         handler = ipinfo.getHandler(access_token)
         details = handler.getDetails(ip_address)
-        profile.last_login = 'IP: ' + details.ip + ' -- City: ' + details.city + ' -- Country: ' + details.country_name
+        new_login_entry = f"{timezone.now()} - IP: {details.ip}, City: {details.city}, Country: {details.country_name}\n"
+        profile.last_login += new_login_entry
         profile.save()
         
-        return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile})
+        return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile,  'login_records': profile.last_login.splitlines()})
 
 @login_required
 def validate_private_key(request):
