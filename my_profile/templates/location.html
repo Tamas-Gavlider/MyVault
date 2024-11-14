@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}
-<h3>Previous Login History:</h3>
-<ul>
-    {% for record in login_records|slice:"-2:" %}  <!-- Exclude the last item -->
-        <li>{{ record }}</li>
+
+
+    {% for record in login_records|slice:"-2:-1" %}  <!-- Exclude the last item -->
+        <p class="text-center"> Last login location : {{ record }}</p>
     {% empty %}
-        <li>No previous login history available.</li>
+        <p>No previous login history available.</p>
     {% endfor %}
-</ul>
+
 
 <div id="demo">
 <div class="container">
-  <p>Current Location:</p>
+  {% for record in login_records|slice:"-1:" %}
+  <p class="text-center">Current Location: {{ record }}</p>
+  {% endfor %}
   <div id="map"></div>
 </div>
 

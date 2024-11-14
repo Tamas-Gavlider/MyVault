@@ -12,7 +12,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['notificationEmail', 'showLocation','suspended']
         labels = {
             'notificationEmail': 'Email notifications',
-            'showLocation':' Login location',
+            'showLocation':' Track location',
             'suspended':'Suspend'
         }
 
