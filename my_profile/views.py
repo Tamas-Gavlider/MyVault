@@ -110,25 +110,28 @@ def delete_profile(request):
     return render(request, 'delete_profile.html')
 
 def get_client_ip_address(request):
-    req_headers = request.META
-    x_forwarded_for_value = req_headers.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for_value:
-        ip_addr = x_forwarded_for_value.split(',')[-1].strip()
-    else:
-        ip_addr = req_headers.get('REMOTE_ADDR')
-    return ip_addr
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    if profile.showLocation == True:
+        req_headers = request.META
+        x_forwarded_for_value = req_headers.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for_value:
+            ip_addr = x_forwarded_for_value.split(',')[-1].strip()
+        else:
+            ip_addr = req_headers.get('REMOTE_ADDR')
+        return ip_addr
 
 @login_required
 def location(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
-    api_key = settings.GOOGLE_API_KEY
-    access_token = settings.IP_TOKEN
-    ip_address = get_client_ip_address(request)
-    handler = ipinfo.getHandler(access_token)
-    details = handler.getDetails(ip_address)
-    profile.last_login = details.city + ' ' + details.country_name
-    profile.save()
-    return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile})
+    if profile.showLocation == True:
+        api_key = settings.GOOGLE_API_KEY
+        access_token = settings.IP_TOKEN
+        ip_address = get_client_ip_address(request)
+        handler = ipinfo.getHandler(access_token)
+        details = handler.getDetails(ip_address)
+        profile.last_login = 'IP: ' + details.ip + ' -- City: ' + details.city + ' -- Country: ' + details.country_name
+        profile.save()
+        return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile})
 
 @login_required
 def validate_private_key(request):

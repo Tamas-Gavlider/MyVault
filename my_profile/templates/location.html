@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}
+<div class="text-center">
+    <p>Last login location: {{profile.last_login}}</p>
+    </div>
+
 <div id="demo">
 <div class="container">
+  <p>Current Location:</p>
   <div id="map"></div>
 </div>
-<div class="text-center">
-<p>{{profile.last_login}}</p>
-</div>
+
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLxwwsCAQfKfLW9G5HVGRHs3hX1HoLgxY&callback=initMap"
