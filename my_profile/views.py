@@ -72,14 +72,14 @@ def update_profile(request):
                 send_mail(
                 'Account Changes Alert',
                 """
-                Hello,
+Hello,
 
-                We wanted to inform you that changes have been made to your MyVault account. 
-                If you did not make these changes, please access your account immediately to change your password.
+We wanted to inform you that changes have been made to your MyVault account. 
+If you did not make these changes, please access your account immediately to change your password.
 
-                Thank you,
+Thank you,
             
-                The MyVault Team
+The MyVault Team
                 """,
                 settings.DEFAULT_FROM_EMAIL,
                 [request.user.email],
