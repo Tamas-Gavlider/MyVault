@@ -200,10 +200,10 @@ def send_payment(request):
             if sender_profile.notificationEmail == True:
                 send_mail(
                 'Transaction Alert',
-                """
+                f"""
 Hello,
 
-We’re pleased to inform you that your payment has been successfully sent.
+We’re pleased to inform you that your payment of {amount} USD has been successfully sent to {receiving_profile.receiving_address}.
 
 Thank you,
             
@@ -264,10 +264,10 @@ The MyVault Team
             if sender_profile.notificationEmail == True:
                 send_mail(
                 'Transaction Alert',
-                """
+                f"""
 Hello,
 
-We wanted to let you know that your recent payment attempt was unsuccessful.
+We wanted to let you know that your recent payment attempt of {amount} USD to {receiving_profile.receiving_address} was unsuccessful.
 
 Thank you,
             
@@ -314,10 +314,10 @@ def withdraw_fund(request):
         if profile.notificationEmail == True:
             send_mail(
                 'Transaction Alert',
-                """
+                f"""
 Hello,
 
-We are pleased to inform you that your withdrawal has been successfully processed. 
+We are pleased to inform you that your withdrawal of {amount} USD has been successfully processed. 
 
 Thank you,
             
