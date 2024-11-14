@@ -109,8 +109,14 @@ def delete_profile(request):
     
     return render(request, 'delete_profile.html')
 
+@login_required
 def get_client_ip_address(request):
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    """
+    Get the IP address of the logged in user.
+    It will be executed if the user activate it from the profile 
+    by setting the showLocation to True
+    """
+    profile = Profile.objects.get(user=request.user)
     if profile.showLocation == True:
         req_headers = request.META
         x_forwarded_for_value = req_headers.get('HTTP_X_FORWARDED_FOR')
@@ -122,7 +128,12 @@ def get_client_ip_address(request):
 
 @login_required
 def location(request):
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    """
+    With the Ipinfo API we obtain the user details.
+    The estimated current location will be reflected on the Google Maps
+    and above the Google Maps the previous logged in location 
+    """
+    profile = Profile.objects.get(user=request.user)
     if profile.showLocation == True:
         api_key = settings.GOOGLE_API_KEY
         access_token = settings.IP_TOKEN
@@ -131,6 +142,7 @@ def location(request):
         details = handler.getDetails(ip_address)
         profile.last_login = 'IP: ' + details.ip + ' -- City: ' + details.city + ' -- Country: ' + details.country_name
         profile.save()
+        
         return render(request, 'location.html', {'google_api_key': api_key, 'details':details, 'profile':profile})
 
 @login_required
