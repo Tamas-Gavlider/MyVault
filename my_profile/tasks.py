@@ -2,6 +2,7 @@ from background_task import background
 from django.core.mail import send_mail
 from django.conf import settings
 
+
 @background(schedule=10)
 def send_login_email(user_email):
     subject = 'Login Notification'
