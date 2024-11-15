@@ -109,14 +109,4 @@ body {
     }
 }
 
-@media (min-width: 992px) {
-    .transaction-btns {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        justify-content: flex-start !important;
-        align-content: center !important;
-        align-items: flex-start !important;
-    }
-}
 
