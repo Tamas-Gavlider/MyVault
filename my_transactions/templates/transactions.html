@@ -27,7 +27,7 @@
         </div>
         <div class="container text-center">
           <div class="row">
-            <div class="col d-lg-flex d-xl-flex d-xxl-flex d-md-flex flex-row justify-content-start align-items-start flex-wrap align-content-center">
+            <div class="col gap-2 d-lg-flex d-xl-flex p-2 d-xxl-flex d-md-flex flex-row justify-content-start align-items-start flex-wrap align-content-center">
               <form id="withdraw-form" method="POST" action="{% url 'withdraw_fund' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Withdraw</button>
