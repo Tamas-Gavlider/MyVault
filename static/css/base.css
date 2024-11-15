@@ -10,7 +10,7 @@ body {
 
 /* Home page background img */
 .bg-img {
-    background-image: url('/static/images/background.jpg') !important;
+    background-image: url('/static/images/background.webp') !important;
     height: 500px;
     width: 100%;
     background-size: cover;
