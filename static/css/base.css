@@ -10,11 +10,11 @@ body {
 
 /* Home page background img */
 .bg-img {
-    background-image: url('../static/images/background.webp') !important;
+    background-image: url('/static/images/background.webp') !important;
     height: 500px;
     width: 100%;
-    background-size: cover;
-    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
     
 }
 
