@@ -107,7 +107,7 @@ The MyVault Team
             status='Completed',
             amount=amount,
         )
-            send_mail(
+        send_mail(
                 'Transaction Alert',
                 f"""
 Hello,
