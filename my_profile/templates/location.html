@@ -4,7 +4,7 @@
 
 
     {% for record in login_records|slice:"-2:-1" %}  <!-- Exclude the last item -->
-        <p class="text-center"> Last login location : {{ record }}</p>
+        <p class="text-center px-2"> Last login location : {{ record }}</p>
     {% empty %}
         <p>No previous login history available.</p>
     {% endfor %}
