@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class FAQ(models.Model):
     """
     Model representing Frequently Asked Questions (FAQs).
@@ -29,7 +30,8 @@ class UserQuestion(models.Model):
     """
     User questions asked from AI
     """
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,
+                             null=True, blank=True)
     question_text = models.TextField()
     date_asked = models.DateTimeField(auto_now_add=True)
 
