@@ -16,7 +16,7 @@ def send_login_email(email):
             """
 Hello,
 
-You have successfully logged in to your MyVault account. If you did not perform this 
+You have successfully logged in to your MyVault account. If you did not perform this
 login, please access your account immediately to change your password.
 
 Thank you,
