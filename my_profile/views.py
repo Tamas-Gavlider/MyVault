@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.core.mail import send_mail
-from django.utils import timezone
+from time import gmtime, strftime
 from .models import Profile
 from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
@@ -152,15 +152,19 @@ def location(request):
         ip_address = get_client_ip_address(request)
         handler = ipinfo.getHandler(access_token)
         details = handler.getDetails(ip_address)
-        new_login_entry = f"{timezone.now()} - IP: {details.ip},/n"
-        " City: {details.city}, Country: {details.country_name}\n"
+        new_login_entry = f"{strftime("%Y-%m-%d %H:%M:%S", gmtime())} - IP: {details.ip} - City: {details.city} - Country: {details.country_name},"
         profile.last_login += new_login_entry
-        profile.save()
+        login_records = profile.last_login.strip().split(',')
+        previous_login = login_records[-2] if len(login_records) > 1 else None
+        if new_login_entry not in profile.last_login.splitlines():
+            profile.last_login += f"\n{new_login_entry}"
+            profile.save()
 
         return render(request, 'location.html',
                       {'google_api_key': api_key, 'details': details,
                        'profile': profile,
-                       'login_records': profile.last_login.splitlines()})
+                       'previous_login': previous_login,
+                       'details':details})
 
 
 @login_required

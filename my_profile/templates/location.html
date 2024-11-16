@@ -2,19 +2,23 @@
 {% load static %}
 {% block content%}
 
+{% if previous_login %}
+<div class="text-center px-2">
+  <h3>Last Login Location:</h3>
+ <p>{{ previous_login }}</p>
+{% else %}
+    <p>No previous login history available.</p>
+  </div>
+{% endif %}
 
-    {% for record in login_records|slice:"-2:-1" %}  <!-- Exclude the last item -->
-        <p class="text-center px-2"> Last login location : {{ record }}</p>
-    {% empty %}
-        <p>No previous login history available.</p>
-    {% endfor %}
-
+<div class="text-center px-2">
+  <h3>Current Location:</h3>
+<p>IP: {{details.ip}} - City: {{details.city}} - Country: {{details.country_name}}</p>
+</div>
 
 <div id="demo">
 <div class="container">
-  {% for record in login_records|slice:"-1:" %}
-  <p class="text-center">Current Location: {{ record }}</p>
-  {% endfor %}
+ 
   <div id="map"></div>
 </div>
 

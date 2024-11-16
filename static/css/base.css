@@ -58,9 +58,9 @@ body {
 
 /* Style for Google Maps */
 #map {
-    height: 500px;  /* Set a fixed height */
+    height: 350px;  /* Set a fixed height */
     width: 100%;   /* Full width */
-    margin-top: 100px;
+    margin-top: 30px;
 }
   
 .custom-map-control-button {
