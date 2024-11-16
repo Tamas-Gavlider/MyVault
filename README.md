@@ -8,6 +8,7 @@ The live deployed site can be found [here](https://my-vault-cb8eb703ab63.herokua
 
 ## Agile Development
 
+User stories were prioritized using MoSCoW.
 The Agile process emphasizes incremental development and user-focused delivery. The following flowchart outlines how key application features and workflows, such as user validation, transaction handling, and account management, were prioritized and developed across sprints:<br>
 ![flowchart](/docs/screenshots/project-4.png)<br>
 This workflow guided the sprint planning and ensured seamless integration of essential features.
@@ -36,22 +37,53 @@ The Nanum Myeongjo font, available via Google Fonts, is a sophisticated serif ty
 
 ### Features
 
-All pages feature a fully responsive navbar that transforms into a hamburger menu on smaller screens and a [favicon](/static/images/android-chrome-192x192.png) in the browser tab.
+All pages feature a fully responsive navbar that transforms into a hamburger menu on smaller screens and a [favicon](/static/images/android-chrome-192x192.png) in the browser tab.<br>
 Navbar if user logged in
+![Logged in](/docs/screenshots/home-logged-in.png)
 
 Navbar is user logged out/not registered
+![Logged out](/docs/screenshots/home-logged-out.png)
 
 #### Home
+
+![Backgorund](/docs/screenshots/home-page-bg.png)
 
 #### FAQ
 
 #### Ask
 
+![Ask page](/docs/screenshots/ask-page.png)
+
 #### Profile
+
+![Profile](/docs/screenshots/profile.png)
+Account suspended
+![Suspended](/docs/screenshots/suspended-account.png)
+
+#### Update Profile
+Update profile
+![Update profile](/docs/screenshots/update-profile.png)
+
+#### Validate private key/Unlock accounr
+Validate secret private key
+![Validate PK](/docs/screenshots/validate-private-key.png)
 
 #### Dashboard
 
+Pie chart
+![Pie](/docs/screenshots/dashboard-chart-one.png)
+Bar chart
+![Bar](/docs/screenshots/dashboard-chart-2.png)
+
 #### Transactions
+
+![Transactions](/docs/screenshots/transactions.png)
+
+#### Top up
+
+#### Send payment
+
+#### Transactions history
 
 #### Future Implementations
 
