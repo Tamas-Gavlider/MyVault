@@ -32,6 +32,7 @@ grpcio-status==1.67.1
 gunicorn==23.0.0
 httplib2==0.22.0
 IP2Location==8.10.4
+ipinfo==5.1.1
 joblib==1.4.2
 kiwisolver==1.4.7
 lazy-object-proxy==1.10.0
