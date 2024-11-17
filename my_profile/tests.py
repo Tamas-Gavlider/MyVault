@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from my_profile.models import Profile, DeletedProfileLog
 from django.utils import timezone
+import sys
 
 # Create your tests here.
 
