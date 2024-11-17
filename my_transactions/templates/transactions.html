@@ -32,6 +32,9 @@
                 {% csrf_token %}
                 <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Withdraw</button>
                 <br>
+                  {% if error %}
+                <p>{{error}}</p>
+                  {% endif %}
                 <div class="col-auto">
                 <input type="number" name="amount" id="amount" class="user-container rounded-3 shadow"
                   placeholder="Amount in USD" required>

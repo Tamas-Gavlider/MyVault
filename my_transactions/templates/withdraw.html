@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+<div class="container" id="signup">
+    <div class="row">
+        <div class="col-12 text-center mx-auto">
+            <h1>Withdrawal Failed!</h1>
+            <p>Your withdrawal could not be processed.</p>
+            {% if error %}
+            <p>{{error}}</p>
+            {% endif %}
+            <a href="{% url 'my_transactions' %}" class="btn btn-secondary">Back to Transactions</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
