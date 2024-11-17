@@ -21,8 +21,6 @@ class Profile(models.Model):
                                          null=True, unique=True)
     private_key = models.CharField(max_length=128, blank=True, null=True)
     suspended = models.BooleanField(default=False)
-    deletion_requested = models.BooleanField(default=False)
-    deletion_request_date = models.DateTimeField(null=True, blank=True)
     last_login = models.TextField(blank=True, default='')
 
     def __str__(self):

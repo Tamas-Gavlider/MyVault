@@ -4,7 +4,9 @@ from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from time import gmtime, strftime
-from .models import Profile
+import datetime
+import pytz
+from .models import Profile, DeletedProfileLog
 from .forms import ProfileUpdateForm, UserUpdateForm
 import secrets
 from django.conf import settings
@@ -110,9 +112,17 @@ def delete_profile(request):
     if request.method == "POST":
         user_profile = get_object_or_404(Profile, user=request.user)
         user_profile.deletion_requested = True
-        user_profile.deletion_request_date = timezone.now()
+        user_profile.deletion_request_date = datetime.datetime.now(pytz.utc)
         user_profile.save()
-        print("Deletion request submitted and awaiting admin approval.")
+        
+        DeletedProfileLog.objects.create(
+            username=request.user.username,
+            email=request.user.email,
+            deletion_date=datetime.datetime.now(pytz.utc)
+        )
+        
+        user = request.user
+        user.delete()
         logout(request)
 
         return redirect('my_home')

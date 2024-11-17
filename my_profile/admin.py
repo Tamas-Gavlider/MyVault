@@ -4,29 +4,13 @@ from .models import Profile, DeletedProfileLog
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'balance', 'sending_address', 'receiving_address', 'deletion_requested', 'deletion_request_date', 'suspended')
-    list_filter = ('deletion_requested', 'suspended')
-    actions = ['approve_deletion_request']
+    list_display = ('user', 'balance', 'sending_address', 'receiving_address', 'suspended')
+    list_filter = ('user','suspended')
     
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.exclude(user__isnull=True) 
 
-    def approve_deletion_request(self, request, queryset):
-        """
-        View and approve/reject user deletion requests
-        """
-        for profile in queryset:
-            if profile.deletion_requested:
-                # Log the deletion in DeletedProfileLog
-                DeletedProfileLog.objects.create(
-                    username=profile.user.username,
-                    email=profile.user.email
-                )
-                # Delete the profile and user
-                profile.user.delete()
-                profile.delete()
-    approve_deletion_request.short_description = "Approve and delete selected profiles"
 
 class DeletedProfileLogAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'deletion_date')
