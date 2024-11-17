@@ -266,6 +266,10 @@ The MyVault Team
     return render(request, 'send_payment.html')
 
 @login_required
+def withdraw_success(request):
+    return render(request, 'withdraw_success.html')
+
+@login_required
 def withdraw_fund(request):
     """
     User enters the amount into the input and click on the withdraw button.
@@ -319,7 +323,7 @@ The MyVault Team
             amount=amount,
         )
         
-        return redirect('my_transactions')
+        return redirect('withdraw_success')
 
     return render(request, "transactions.html")
 
