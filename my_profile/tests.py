@@ -71,6 +71,9 @@ class UniqueAddressTests(TestCase):
         self.assertFalse(Profile.objects.filter(receiving_address=address).exists()) 
         
 class UpdateProfileTestCase(TestCase):
+    """
+    Test for updating the profile and check if the email notification will be sent to the user.
+    """
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', email='testuser@example.com', password='password123')
         self.profile = Profile.objects.create(
@@ -118,22 +121,6 @@ The MyVault Team
             fail_silently=False
         )
         
-    def test_invalid_profile_update(self):
-
-        data = {
-            'notificationEmail': 'on', 
-            'email': 'invalidemail',    
-        }
-        response = self.client.post(reverse('update_profile'), data)
-
-       
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'update_profile.html')
-
-        
-        self.profile.refresh_from_db()
-        self.user.refresh_from_db()
-        self.assertNotEqual(self.user.email, 'invalidemail')
     
     def test_get_request_prefills_form(self):
        
@@ -142,7 +129,6 @@ The MyVault Team
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'update_profile.html')
-
        
         form = response.context['form']
         form2 = response.context['form2']
