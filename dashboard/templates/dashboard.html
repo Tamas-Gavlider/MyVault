@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <div class="container">
   {{ chart_svg|safe }}
 </div>
@@ -8,5 +9,11 @@
 <div class="container">
   {{ chart_horizontal|safe }}
 </div>
+<br>
+<div class="container">
+  {{ chart_total|safe }}
+</div>
+
+
 
 {% endblock %}

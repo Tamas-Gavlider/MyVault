@@ -29,37 +29,47 @@ def dashboard(request):
 
     profile = Profile.objects.get(user=request.user)
     balance = profile.balance
-    totalWithdraw = 0
-    totalSent = 0
-    totalDeposit = 0
-    totalReceived = 0
+    total_inflow = 0
+    total_outflow = 0
+    total_withdraw = 0
+    total_sent = 0
+    total_deposit = 0
+    total_received = 0
     bar_chart = pygal.Pie()
     for transaction in transactions:
         if transaction.type == 'Withdraw':
-            totalWithdraw += transaction.amount
+            total_withdraw += transaction.amount
+            total_outflow += 1
         elif transaction.type == 'Deposit':
-            totalDeposit += transaction.amount
+            total_deposit += transaction.amount
+            total_inflow += 1
         elif transaction.type == 'Sent':
-            totalSent += transaction.amount
+            total_sent += transaction.amount
+            total_outflow += 1
         elif transaction.type == 'Received':
-            totalReceived += transaction.amount
-    bar_chart.add('Withdraw', totalWithdraw)
-    bar_chart.add('Deposit', totalDeposit)
-    bar_chart.add('Sent', totalSent)
-    bar_chart.add('Received', totalReceived)
+            total_received += transaction.amount
+            total_inflow +=1
+    bar_chart.add('Withdraw', total_withdraw)
+    bar_chart.add('Deposit', total_deposit)
+    bar_chart.add('Sent', total_sent)
+    bar_chart.add('Received', total_received)
     chart_svg = bar_chart.render().decode('utf-8')
     bar_chart = pygal.HorizontalBar()
     current_month = datetime.now().strftime("%B")
     bar_chart.title = f'Account movements for {current_month} (in USD)'
-    bar_chart.add('Deposit', totalDeposit)
-    bar_chart.add('Withdraw', totalWithdraw)
-    bar_chart.add('Sent', totalSent)
-    bar_chart.add('Received', totalReceived)
+    bar_chart.add('Deposit', total_deposit)
+    bar_chart.add('Withdraw', total_withdraw)
+    bar_chart.add('Sent', total_sent)
+    bar_chart.add('Received', total_received)
     chart_horizontal = bar_chart.render().decode('utf-8')
-
+    bar_chart_2 = pygal.Pie()
+    bar_chart_2.add('Money Inflow', total_inflow)
+    bar_chart_2.add('Money Outflow', total_outflow)
+    chart_total = bar_chart_2.render().decode('utf-8')
     return render(request, 'dashboard.html', {
         'transactions': transactions,
         'profile': profile,
         'chart_svg': chart_svg,
         'chart_horizontal': chart_horizontal,
+        'chart_total':chart_total,
     })
