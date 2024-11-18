@@ -285,20 +285,31 @@ def withdraw_fund(request):
         try:
             amount = Decimal(amount)
         except (TypeError, ValueError):
-            # Record the failed transaction with amount as None, or you can set it to 0
             Transactions.objects.create(
                 user=request.user,
                 transaction_type='Withdraw',
                 status='Failed',
-                amount=None,  # Use None if the conversion failed
+                amount= 0, 
             )
             return render(request, 'withdraw.html', {'error': 'Invalid amount entered.'})
         
         profile = Profile.objects.get(user=request.user)
         balance = profile.balance
         if balance < amount:
+            Transactions.objects.create(
+            user=request.user,
+            type='Withdraw',
+            status='Failed',
+            amount=amount,
+        )
             return render(request, 'withdraw.html', {'error': 'Balance not sufficient'})
         elif amount <= 0 : 
+            Transactions.objects.create(
+            user=request.user,
+            type='Withdraw',
+            status='Failed',
+            amount=amount,
+        )
             return render(request, 'withdraw.html', {'error': 'Minimum withdraw amount is $1'})
         # Deduct amount and save to profile
         profile.balance -= amount
