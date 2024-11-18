@@ -21,6 +21,16 @@ User Stories were tracked throughout the project as [GitHub issues](https://gith
 
 ## Design
 
+### Structure
+
+The ERD represents the database structure for the application.
+ - Profile - Stores user-specific details such as balance, notification preferences, and unique sending/receiving addresses. Each profile is linked to a user account via a Foreign Key.
+ - Transactions - Tracks all financial activities, including deposits, withdrawals, and transfers between users, with fields for transaction type, status, and amounts.
+ - Deleted profile - Maintains a record of deleted user profiles, preserving details like username, email, and deletion date for audit purposes.
+ - User questions - Captures questions submitted by users in the FAQ section, including the question text and submission date.
+
+![Models](/docs/screenshots/erd.png)
+
 ### Colour Scheme
 
 ![colour](/docs/screenshots/colout%20palette.png)
@@ -100,6 +110,7 @@ Bar chart
 - Google Fonts - Library of free and open-source web fonts.
 - Heroku - Used to deploy the project for hosting and managing the live application.
 - Favicon.io - To create Favicon.
+- [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
 
 ## Deployment & Local Development
 
