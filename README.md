@@ -101,18 +101,36 @@ Bar chart
 
 - HTML - Markup language for creating web pages.
 - CSS - Stylesheet language for styling the appearance of web pages.
-- Bootstrap - CSS framework for creating responsive and modern web designs.
+- Bootstrap - A framework for building responsive, mobile-first sites.
 - Python - The programming language used for the project.
-- Django - The web framework used to build the application.
+- Django - A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+- Djano Allauth - Used for authentication, registration & account management.
+- gunicorn - a Python WSGI HTTP Server
+- dj_databsae_url - allows us to utilise the DATABASE_URL variable
+- psycopg2 - a postgres database adapter which allow us to connect with a postgres database
 - PostgreSQL - The database used to store transactions data, user information, and other relevant data for the application.
-- JavaScript - for Stripe and Google Maps
+- Google Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
+- JavaScript - for Stripe and Google Maps.
 - GitHub - Web-based platform for version control and collaboration on software projects.
 - Google Fonts - Library of free and open-source web fonts.
 - Heroku - Used to deploy the project for hosting and managing the live application.
 - Favicon.io - To create Favicon.
 - [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
+- Stripe - for payment system
+
+### Stripe
+
+Stripe for the website is currently in developer mode, which allows us to be able to process test payments to check the function of the site.
+
+| Type               | Card No                | Expiry               | CVC         | ZIP        |
+|--------------------|------------------------|----------------------|-------------|------------|
+| Success            | Visa 4242 4242 4242 4242 | A date in the future  | Any 3 digits | Any 5 digits |
+| Require authorisation | 4000 0027 6000 3184  | A date in the future  | Any 3 digits | Any 5 digits |
+| Declined           | 4000 0000 0000 0002    | A date in the future  | Any 3 digits | Any 5 digits |
 
 ## Deployment & Local Development
+
+The project is deployed using Heroku. To deploy the project:
 
 ### Local Deployment
 
