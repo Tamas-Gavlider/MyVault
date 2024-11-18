@@ -1,7 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
 from my_profile.models import Profile, DeletedProfileLog
+from my_profile.forms import ProfileUpdateForm, UserUpdateForm
+from unittest.mock import patch
+from django.conf import settings
 from django.utils import timezone
 from .views import generate_unique_sending_address, generate_unique_receiving_address
 import sys
@@ -66,3 +69,83 @@ class UniqueAddressTests(TestCase):
         address = generate_unique_receiving_address()
         self.assertEqual(len(address), 20)  
         self.assertFalse(Profile.objects.filter(receiving_address=address).exists()) 
+        
+class UpdateProfileTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', email='testuser@example.com', password='password123')
+        self.profile = Profile.objects.create(
+            user=self.user,
+            notificationEmail=True,
+            showLocation=False,
+            suspended=False
+        )
+        self.client = Client()
+        self.client.login(username='testuser', password='password123')
+        
+    @patch('my_profile.views.send_mail')
+    def test_successful_profile_update(self, mock_send_mail):
+        data = {
+            'notificationEmail': 'on',  
+            'showLocation': 'on',    
+            'email': 'newemail@example.com'
+        }
+        response = self.client.post(reverse('update_profile'), data)
+        
+        self.assertRedirects(response, reverse('my_profile'))
+
+        self.profile.refresh_from_db()
+        self.user.refresh_from_db()
+
+        self.assertTrue(self.profile.notificationEmail)
+        self.assertTrue(self.profile.showLocation)
+        self.assertEqual(self.user.email, 'newemail@example.com')
+        mock_send_mail.assert_called_once_with(
+            'Account Changes Alert',
+            """
+Hello,
+
+We wanted to inform you that changes have been made to your MyVault account.
+
+If you did not make these changes, please access your account immediately
+ to change your password.
+
+Thank you,
+
+The MyVault Team
+                """,
+            settings.DEFAULT_FROM_EMAIL,
+            ['newemail@example.com'],
+            fail_silently=False
+        )
+        
+    def test_invalid_profile_update(self):
+
+        data = {
+            'notificationEmail': 'on', 
+            'email': 'invalidemail',    
+        }
+        response = self.client.post(reverse('update_profile'), data)
+
+       
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_profile.html')
+
+        
+        self.profile.refresh_from_db()
+        self.user.refresh_from_db()
+        self.assertNotEqual(self.user.email, 'invalidemail')
+    
+    def test_get_request_prefills_form(self):
+       
+        response = self.client.get(reverse('update_profile'))
+
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_profile.html')
+
+       
+        form = response.context['form']
+        form2 = response.context['form2']
+        self.assertTrue(form.instance.notificationEmail)
+        self.assertFalse(form.instance.showLocation)
+        self.assertEqual(form2.instance.email, 'testuser@example.com')
