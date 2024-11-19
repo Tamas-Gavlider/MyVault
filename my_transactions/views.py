@@ -265,8 +265,8 @@ The MyVault Team
                 status='Failed',
                 amount=amount,
                 transaction_note=note,
-                sending_address=f"{sender_profile.user.first_name}/n"
-                                f" {sender_profile.user.last_name}",
+                sending_address=(f"{sender_profile.user.first_name}"
+                                f" {sender_profile.user.last_name}"),
                 receiving_address=receiving_profile.receiving_address,
             )
             if sender_profile.notificationEmail:
