@@ -94,14 +94,14 @@
                   <p>Note by Sender: {{transaction.transaction_note}}</p>
                   <p>Sent by: {{ transaction.sending_address }}</p>
                   <p>Receiving Address: {{ transaction.receiving_address }}</p>
-                  <p>Amount: {{ transaction.amount }}</p>
-                  <p>{{ transaction.date }}</p>
+                  <p>Amount: {{ transaction.amount }} USD</p>
+                  <p>Transaction Date{{ transaction.date }}</p>
                 </div>
                 {% else %}
                 <div class="modal-body">
                   <p>Transaction Type: {{ transaction.type }}</p>
                   <p>Transaction Status: {{ transaction.status }}</p>
-                  <p>Amount: {{ transaction.amount }}USD</p>
+                  <p>Amount: {{ transaction.amount }} USD</p>
                   <p>Transaction Date: {{ transaction.date }}</p>
                 </div>
                 {% endif %}

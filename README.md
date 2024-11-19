@@ -42,6 +42,7 @@ The ERD represents the database structure for the application. Due to the data b
 - #E1F4F3 (Soft Aqua): This soft, refreshing color adds a subtle touch of warmth and energy to the interface. It symbolizes trust and innovation, complementing the darker and lighter tones to create a cohesive, elegant, and approachable design.
 - #706C61: This muted, earthy tone adds depth and warmth to the overall design, creating a subtle contrast against the darker #333333 and the bright #FFFFFF. Its neutral yet sophisticated appearance evokes stability, reliability, and professionalism. It serves as a grounding element, tying the color palette together and softening the overall visual experience.
 This color palette was chosen to achieve a clean, minimalistic, and modern aesthetic, emphasizing usability and professionalism.
+- #00FFFF: color was used on the V letter on the navbar due to contrast errors in Wave.
 
 ### Typography
 
@@ -58,45 +59,149 @@ Navbar is user logged out/not registered
 
 #### Home
 
+The home page of MyVault features a sleek design to leave a lasting impression on first-time visitors. At the top, the navigation bar provides easy access to key sections of the app. The background showcases a captivating image of a door with a key, symbolizing security and empowerment. The slogan "Be the Key" is prominently displayed on the right, while "Be Your Vault" appears on the left, reinforcing the app’s theme of personal responsibility and financial security.
+
+At the bottom, the footer includes the tagline "Great Wealth, Greater Responsibility," emphasizing MyVault's focus on managing and safeguarding your finances responsibly.
+
 ![Backgorund](/docs/screenshots/home-page-bg.png)
 
 #### FAQ
 
+The FAQ page provides answers to the 10 most frequently asked questions about MyVault.
+![FAQ](/docs/screenshots/faq.png)
+Users can click on a question to expand and view its detailed answer. 
+![faq-example](/docs/screenshots/faq-question.png)
+If users don’t find the information they need or require further assistance, a button at the bottom of the page directs them to the Ask page, where they can submit their queries for personalized support.
+![faq-btn](/docs/screenshots/faq-btn-ask.png)
+
 #### Ask
 
+The Ask page in MyVault leverages the Gemini API to provide instant answers to user queries. To streamline the process, the page includes predefined prompts to guide users in framing their questions. All submitted questions are logged and stored, ensuring they are accessible for review and management via the admin panel.
 ![Ask page](/docs/screenshots/ask-page.png)
 
 #### Profile
 
+The Profile page is the first destination for users after registration or login. For new users, their private key will be displayed on this page with a clear warning to store it securely, as it cannot be recovered later. 
+![Private-key](/docs/screenshots/secret-private-key.png)
+The page also displays user details such as username and email address. By default, features like email notifications and location tracking are enabled, but users can conveniently manage these settings from the Edit Profile page.
+The Profile page also provides users with essential account management options. Users can:
+- Delete their profile if they wish to close their account permanently.
+- Reset their password for enhanced security.
+- Validate their private key, a mandatory step to access the Transactions section.
+
+
+Every time a user logs in, private key validation is required to ensure secure access to transaction-related features. Without validation, transactions will remain inaccessible.
 ![Profile](/docs/screenshots/profile.png)
-Account suspended
+If an account is suspended by the user or admin, it can only be unlocked using the private key. While the account is in a suspended state, all other buttons and functionalities on the Profile page are disabled, ensuring that no changes or actions can be performed until the account is reactivated.
 ![Suspended](/docs/screenshots/suspended-account.png)
 
 #### Update Profile
-Update profile
+
+The Edit Profile page allows users to manage and update their account details conveniently. Users can:
+
+ - Change their email address.
+ - Add their first name and last name.
+ - Enable or disable email notifications and location tracking.
+ - Suspend their account if needed.
+
+
+These options ensure users have full control over their account preferences and settings.
 ![Update profile](/docs/screenshots/update-profile.png)
 
-#### Validate private key/Unlock accounr
-Validate secret private key
+#### Validate private key/Unlock account
+The Validate Key and Unlock Account functionalities in MyVault use the same underlying logic for security and access control:
+
+- Validate Key: When the user clicks the Validate Key button, it ensures that the private key is correctly validated. Once validated, the user gains access to sensitive sections, such as the Transactions and Dashboard pages, which require this validation for security.
+
+- Unlock Account: The Unlock Account functionality works in a similar way. It removes the suspension from the account by validating the user's private key, restoring access to all features and functionalities that were previously disabled due to the suspension.
+
+
+In both cases, the user must provide the private key to proceed. This ensures that only the rightful account holder can access and manage their sensitive information.
 ![Validate PK](/docs/screenshots/validate-private-key.png)
 
 #### Dashboard
-
-Pie chart
+The Dashboard provides users with a comprehensive overview of their financial activity, featuring three insightful charts.
+The first pie chart visualizes the distribution of the user’s transactions, breaking them down by type—Withdrawals, Deposits, Sent, and Received. It helps users understand their transaction habits at a glance.
 ![Pie](/docs/screenshots/dashboard-chart-one.png)
-Bar chart
+The bar chart displays the total number of transactions for the current month. This gives users a clear view of their activity over time, helping them track trends and patterns in their transactions.
 ![Bar](/docs/screenshots/dashboard-chart-2.png)
-
+The third chart shows the total sum of inflows (deposits and money received) versus outflows (withdrawals and money sent) for the current month. It provides a quick overview of the user's financial balance for the month, highlighting any surplus or deficit.
+![pie chart](/docs/screenshots/dashboard-chart-3.png)
 #### Transactions
+The Transactions page is designed to ensure that sensitive financial data is protected.
+Private Key Validation: After login, if the user's private key is not validated, the transaction page will remain empty, preventing access to any sensitive information.
+![Transaction no validation](/docs/screenshots/transaction-no-validation.png)
+If the account is suspended, a clear and informative message displayed to the user, explaining the situation and the steps they need to take.
+![Transaction suspension](/docs/screenshots/transaction-suspended.png)
+Access After Validation: Once the private key is validated, the user gains full access to the transaction features:
+- Balance: The user's current balance will be displayed.
+- Sending and Receiving Addresses: The unique addresses for sending and receiving money will be shown.
+- Action Buttons: Users will have the ability to perform actions such as:
+   - Withdraw funds.
+   - Top up their balance.
+   - Send money to other users.
+- Transaction History: Users can check their transaction history, giving them insights into past deposits, withdrawals, and transfers.
+
 
 ![Transactions](/docs/screenshots/transactions.png)
 
 #### Top up
 
+For the Top Up process, users can follow these steps:
+
+- Enter Amount: The user needs to enter the desired top-up amount on the Transactions page.
+- Click on Top Up Button: After entering the amount, the user clicks the Top Up button to proceed.
+- Redirect to Checkout Page: Upon clicking the top-up button, the user is redirected to the Checkout page.
+- Enter Card and User Details: On the Checkout page, the user will need to enter their card details and user information to complete the transaction.
+- Stripe Testnet: The payment system is powered by Stripe, but only the testnet environment is used, meaning no real payments will be processed. This allows users to simulate transactions for testing purposes without any actual financial transfer.
+
+
+This process ensures that users can top up their accounts securely while using Stripe's test environment for validation and testing purposes.
+If the payment is successful, a confirmation message will be displayed to the user.<br>
+![topup](/docs/screenshots/checkout.gif)
 #### Send payment
+
+The Send Payment form in MyVault includes validation to ensure secure and accurate transactions. Here’s how it works:
+
+- Input Fields:
+
+  - Amount: The user specifies the amount they wish to send.
+  - Optional Note: An optional note can be added (e.g., "For dinner").
+  - Receiver's Unique Address: The user enters the recipient's unique address.
+- Validation Checks:
+
+  - Receiver Address: If the address is invalid or does not exist, an error message will appear.
+  - Sufficient Balance: If the entered amount exceeds the user's current balance, an error message will be displayed.
+
+If all validations are passed, the payment will be processed, and the user will be redirected to the Transactions page.
+This ensures that users can only send valid payments within their account limits, enhancing security and preventing errors.
+
+![form](/docs/screenshots/send-payment.gif)
 
 #### Transactions history
 
+The Transaction History page provides a user-friendly interface for reviewing financial activities, featuring pagination and advanced filtering options:
+
+- Users can see all their Completed and Failed transactions.
+- Each entry includes details such as the transaction type (e.g., Deposit, Withdraw, Sent, Received), amount, date, and status.
+- 6 records per page, allowing users to navigate through their history without overwhelming the interface.
+![Transactions history](/docs/screenshots/transactions-history.png)
+- Users can move between pages using Next and Previous buttons or jump to specific pages.
+- Users can filter transactions based on a specified range of amounts.
+- Transactions can be filtered within a specific date range to focus on relevant periods.
+- Users can refine results by selecting a specific type of transaction:
+  - Withdraw
+  - Deposit
+  - Sent
+  - Received
+
+![filter](/docs/screenshots/history-filter.png)
+When viewing details of a Sent transaction, the sender's unique address (only visible to the sender).
+![sender view](/docs/screenshots/sent-history.png)
+When viewing details of a Received transaction, the receiver can see the name of the sender for clarity.
+![receiver view](/docs/screenshots/received-history.png)
+The Pending status is part of the transaction model but will only be implemented and visible after integrating the testnet environment. This will allow users to track transactions that are awaiting confirmation.
+This design ensures transparency and keeps users informed about the status of their financial activities, with room for future expansion to include pending transactions once the testnet is fully utilized.
 #### Future Implementations
 
 ## Technologies, Languages, and Programs used
