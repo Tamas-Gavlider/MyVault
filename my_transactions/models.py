@@ -9,28 +9,27 @@ from decimal import Decimal
 class Transactions(models.Model):
     TRANSACTIONS_STATUS = [
         ('Pending', 'Pending'),
-        ('Completed','Completed'),
-        ('Failed','Failed'),
-        ('Cancelled','Cancelled')
+        ('Completed', 'Completed'),
+        ('Failed', 'Failed'),
+        ('Cancelled', 'Cancelled')
     ]
-    
+
     TRANSACTION_TYPE = [
-        ('Withdraw','Withdraw'),
-        ('Deposit','Deposit'),
-        ('Sent','Sent'),
-        ('Received','Received')
+        ('Withdraw', 'Withdraw'),
+        ('Deposit', 'Deposit'),
+        ('Sent', 'Sent'),
+        ('Received', 'Received')
     ]
-    
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+                             blank=True)
     type = models.CharField(max_length=50, choices=TRANSACTION_TYPE)
-    status = models.CharField(max_length=50, choices=TRANSACTIONS_STATUS, default='Pending')
+    status = models.CharField(max_length=50, choices=TRANSACTIONS_STATUS,
+                              default='Pending')
     date = models.DateTimeField(auto_now_add=True)
     sending_address = models.CharField(max_length=50, blank=True, null=True)
     receiving_address = models.CharField(max_length=50, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    
-    
-    
+
     def __str__(self):
-        return f'Amount: {self.amount} - {self.type} - {self.status} - {self.date}'
-        
+        return f'Amount: {self.amount} -{self.type}-{self.status}-{self.date}'

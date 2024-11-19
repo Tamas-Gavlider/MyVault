@@ -3,12 +3,13 @@ import os
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from my_profile.models import Profile 
+from my_profile.models import Profile
 from my_vault import settings
+
 
 def send_login_email(email):
     """
-    Sending email to user upon succesful login.  
+    Sending email to user upon succesful login.
     """
     try:
         send_mail(
@@ -16,11 +17,12 @@ def send_login_email(email):
             """
 Hello,
 
-You have successfully logged in to your MyVault account. If you did not perform this
-login, please access your account immediately to change your password.
+You have successfully logged in to your MyVault account.
+If you did not perform this login,
+please access your account immediately to change your password.
 
 Thank you,
-            
+
 The MyVault Team
             """,
             settings.DEFAULT_FROM_EMAIL,
@@ -31,6 +33,7 @@ The MyVault Team
     except Exception as e:
         logger.error(f"Failed to send email to {email}: {e}")
 
+
 @receiver(user_logged_in)
 def on_user_login(sender, request, user, **kwargs):
     """
@@ -38,10 +41,10 @@ def on_user_login(sender, request, user, **kwargs):
     """
     try:
         profile = Profile.objects.get(user=user)
-        if profile.notificationEmail == True:
+        if profile.notificationEmail:
             send_login_email(user.email)
     except Profile.DoesNotExist:
         print("Profile not found for user.")
-        
-logger = logging.getLogger(__name__)
 
+
+logger = logging.getLogger(__name__)

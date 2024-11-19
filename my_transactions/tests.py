@@ -9,13 +9,15 @@ import sys
 
 # Create your tests here.
 
+
 class TransactionTestCase(TestCase):
     """
     Testing the failed and completed transactions based on their type.
     Starting balance set to 1000.
     """
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='testpassword')
         self.profile = Profile.objects.create(user=self.user, balance=1000.00)
         self.client.login(username='testuser', password='testpassword')
 
@@ -29,15 +31,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Completed'
         )
-        
+
         self.assertEqual(transaction.type, 'Deposit')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Completed')
         self.profile.balance += transaction.amount
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1500.00) 
-        
+        self.assertEqual(self.profile.balance, 1500.00)
+
     def test_create_transaction_withdraw(self):
         """
         The test should return the balance decreased by the deposit amount.
@@ -48,15 +50,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Completed'
         )
-        
+
         self.assertEqual(transaction.type, 'Withdraw')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Completed')
         self.profile.balance -= transaction.amount
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 500.00) 
-        
+        self.assertEqual(self.profile.balance, 500.00)
+
     def test_create_transaction_received(self):
         """
         The test should return the balance increased by the received amount.
@@ -67,15 +69,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Completed'
         )
-        
+
         self.assertEqual(transaction.type, 'Received')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Completed')
         self.profile.balance += transaction.amount
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1500.00) 
-        
+        self.assertEqual(self.profile.balance, 1500.00)
+
     def test_create_transaction_sent(self):
         """
         The test should return the balance decreased by the sent amount.
@@ -86,15 +88,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Completed'
         )
-        
+
         self.assertEqual(transaction.type, 'Sent')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Completed')
         self.profile.balance -= transaction.amount
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 500.00) 
-        
+        self.assertEqual(self.profile.balance, 500.00)
+
     def test_create_withdraw_failed(self):
         transaction = Transactions.objects.create(
             user=self.user,
@@ -102,15 +104,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Failed'
         )
-        
+
         self.assertEqual(transaction.type, 'Withdraw')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Failed')
-        
+
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1000.00) 
-    
+        self.assertEqual(self.profile.balance, 1000.00)
+
     def test_create_deposit_failed(self):
         """
         Test should return the unchanged balance since the transaction failed
@@ -121,15 +123,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Failed'
         )
-        
+
         self.assertEqual(transaction.type, 'Deposit')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Failed')
-        
+
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1000.00) 
-    
+        self.assertEqual(self.profile.balance, 1000.00)
+
     def test_create_send_failed(self):
         """
         Test should return the unchanged balance since the transaction failed
@@ -140,15 +142,15 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Failed'
         )
-        
+
         self.assertEqual(transaction.type, 'Sent')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Failed')
-        
+
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1000.00) 
-    
+        self.assertEqual(self.profile.balance, 1000.00)
+
     def test_create_receiving_failed(self):
         """
         Test should return the unchanged balance since the transaction failed
@@ -159,11 +161,11 @@ class TransactionTestCase(TestCase):
             amount=500.00,
             status='Failed'
         )
-        
+
         self.assertEqual(transaction.type, 'Received')
         self.assertEqual(transaction.amount, 500.00)
         self.assertEqual(transaction.status, 'Failed')
-        
+
         self.profile.save()
 
-        self.assertEqual(self.profile.balance, 1000.00) 
+        self.assertEqual(self.profile.balance, 1000.00)

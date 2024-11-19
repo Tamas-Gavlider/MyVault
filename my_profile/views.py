@@ -114,13 +114,12 @@ def delete_profile(request):
         user_profile.deletion_requested = True
         user_profile.deletion_request_date = datetime.datetime.now(pytz.utc)
         user_profile.save()
-        
         DeletedProfileLog.objects.create(
             username=request.user.username,
             email=request.user.email,
             deletion_date=datetime.datetime.now(pytz.utc)
         )
-        
+
         user = request.user
         user.delete()
         logout(request)
@@ -162,7 +161,10 @@ def location(request):
         ip_address = get_client_ip_address(request)
         handler = ipinfo.getHandler(access_token)
         details = handler.getDetails(ip_address)
-        new_login_entry = f"{strftime("%Y-%m-%d %H:%M:%S", gmtime())} - IP: {details.ip} - City: {details.city} - Country: {details.country_name},"
+        new_login_entry = (
+            f"{strftime(" %Y - %m - %d %H: %M: %S ", gmtime())}"
+            f"- IP: {details.ip} - City: {details.city}"
+            f" - Country: {details.country_name}, ")
         profile.last_login += new_login_entry
         login_records = profile.last_login.strip().split(',')
         previous_login = login_records[-2] if len(login_records) > 1 else None
@@ -174,7 +176,7 @@ def location(request):
                       {'google_api_key': api_key, 'details': details,
                        'profile': profile,
                        'previous_login': previous_login,
-                       'details':details})
+                       'details': details})
 
 
 @login_required
@@ -198,3 +200,4 @@ def validate_private_key(request):
                           {'message': message, 'status': 'error'})
 
     return render(request, 'validate_key.html')
+

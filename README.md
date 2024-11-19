@@ -15,15 +15,17 @@ This workflow guided the sprint planning and ensured seamless integration of ess
 
 ## User Experience(UX)
 
-User Stories were tracked throughout the project as [GitHub issues](https://github.com/users/Tamas-Gavlider/projects/5/views/1).
+### Project Goals
 
 ### User Stories
+
+User Stories were tracked throughout the project as [GitHub issues](https://github.com/users/Tamas-Gavlider/projects/5/views/1).
 
 ## Design
 
 ### Structure
 
-The ERD represents the database structure for the application.
+The ERD represents the database structure for the application. Due to the data being used for the project I have opted to use a relational database as this will best suit my requirements.
  - Profile - Stores user-specific details such as balance, notification preferences, and unique sending/receiving addresses. Each profile is linked to a user account via a Foreign Key.
  - Transactions - Tracks all financial activities, including deposits, withdrawals, and transfers between users, with fields for transaction type, status, and amounts.
  - Deleted profile - Maintains a record of deleted user profiles, preserving details like username, email, and deletion date for audit purposes.
@@ -151,15 +153,52 @@ The following issues were raised during my mid project meeting with my mentor:
 - Change the sender details transactions details. It should show the name of the sender instead of their sending address. 
 - Notify user if changes made on the account.
 
-#### W3C Validator
+#### HTML
 
-#### JavaScript Validator
+[W3C](https://validator.w3.org/) was used to validate the HTML on all pages of the site. It was also used to validate the CSS. As the site is created with Django and utilises Django templating language within the HTML, I have checked the HTML by inspecting the page source and then running this through the validator.
 
-#### Lighthouse
+#### CSS
+
+[W3C](https://validator.w3.org/) was used to validate the CSS.
+
+#### JavaScript
+
+[JS Hint](https://jshint.com/) was used to validate the JavaScript.
+
+#### Python
+
+[Code Institute Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python.
+
+#### Lighthouse 
+
+I have used Googles Lighthouse testing to test the performance, accessibility, best practices and SEO of the site.
 
 #### Wave
 
+WAVE(Web Accessibility Evaluation Tool) allows developers to create content that is more accessible to users with disabilities. It does this by identifying accessibility and WGAC errors.
+
+#### Automated testing
+
+Automated testing for this project was carried out with [Django TestCase](https://docs.djangoproject.com/en/4.1/topics/testing/overview/). I would write a test, run the test and fix any issues raised before running the test again to confirm it passed. When a test passed I committed it to GitHub.
+
+#### Manual Testing
+
 #### Full Testing
+
+Full testing was performed on the following devices:
+- Mobile:
+  - Iphone 11
+  - Iphone 13
+- Laptop: 
+  - Macbook Pro 2019 13 inch screen
+  - Mackbook Pro 2014 15 inch screen
+
+Testing was also performed using the following browsers:
+- Chrome
+- FireFox
+- Safari
+
+#### Bugs
 
 ## Credits
 
