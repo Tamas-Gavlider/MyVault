@@ -36,7 +36,7 @@ body {
 /* Style for logo letter V overlap the M */
 #logoV {
     left: 5.6px !important;
-    color: #706c61 !important;
+    color: #00FFFF !important;
     font-weight: bold;
 }
 
@@ -107,9 +107,7 @@ body {
     .slogan-right {
         color: #333333  !important;
     }
-    body {
-        font-size: x-large !important;
-    }
+    
 }
 
 
