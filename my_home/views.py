@@ -11,26 +11,26 @@ genai.configure(api_key=os.getenv("GEMINI_API"))
 # Common questions for AI
 
 common_questions = {
-    "withdraw money": "To withdraw money, go to the transactions page./n"
-    " You need to validate your private key on the profile page/n"
+    "withdraw money": "To withdraw money, go to the transactions page."
+    " You need to validate your private key on the profile page"
     " to access transactions.",
-    "deposit money": "To deposit money, go to the transactions page/n"
+    "deposit money": "To deposit money, go to the transactions page"
     " and follow the Stripe deposit instructions.",
-    "send money": "To send money to other users, go to the transactions/n"
+    "send money": "To send money to other users, go to the transactions"
     " page, where you can enter the recipient's unique address.",
-    "receive money": "To receive money, provide your unique receiving/n"
+    "receive money": "To receive money, provide your unique receiving"
     " address to the sender, which can be found in your profile.",
-    "support": "To reach out the customer support, please send an/n"
+    "support": "To reach out the customer support, please send an"
     " email to myvaultbethekey@gmail.com",
-    "delete": "To request account deletion, go to the Profile tab./n"
-    " Once submitted, the request will require approval from the page/n"
-    " admin. Please note: Deleting your account will result in the/n"
+    "delete": "To request account deletion, go to the Profile tab."
+    " Once submitted, the request will require approval from the page"
+    " admin. Please note: Deleting your account will result in the"
     " permanent loss of all funds associated with it.",
-    "suspend": "You can temporarily suspend your account from the/n"
-    " profile page. During suspension, all functions will be disabled/n"
+    "suspend": "You can temporarily suspend your account from the"
+    " profile page. During suspension, all functions will be disabled"
     " until the account is reactivated with your private key.",
-    "location": "You have the option to enable location tracking./n"
-    " If activated, you’ll be able to view your last login location/n"
+    "location": "You have the option to enable location tracking."
+    " If activated, you’ll be able to view your last login location"
     " and current login location on Google Maps."
 }
 
@@ -63,12 +63,12 @@ def ask(request):
         else:
             # If no match, use generative model with added context
             prompt = (
-                "You are MyVault's virtual assistant, here to help/n"
+                "You are MyVault's virtual assistant, here to help"
                 " users manage their finances. "
-                "MyVault allows users to send, receive, deposit,/n"
-                " and withdraw money on tesnet. Mainnet is under/n"
+                "MyVault allows users to send, receive, deposit,"
+                " and withdraw money on tesnet. Mainnet is under"
                 " development. Should go live by Q3 2025."
-                "Some actions, like accessing the transactions page,/n"
+                "Some actions, like accessing the transactions page,"
                 " require private key validation."
                 f"User Question: {user_question_text}\nAnswer:"
             )

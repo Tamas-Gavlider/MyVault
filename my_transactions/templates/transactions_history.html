@@ -19,7 +19,6 @@
               </div>
               <div class="modal-body">
                 <form method="GET" action="{% url 'transactions_history' %}" class="d-flex flex-wrap align-content-center flex-column">
-          
                   <label for="date_from">Date From:</label>
                   <input type="date" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
                   <label for="date_to">Date To:</label>
@@ -54,7 +53,6 @@
          <br>
         <div class="row">
         {% for transaction in page_obj.object_list %}
-
         <div class="col-md-4 col-lg-4 mb-4 sm-4"> 
         <div class="p-2 g-col-6">
           <div class="container text-center">

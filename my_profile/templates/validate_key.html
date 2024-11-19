@@ -4,22 +4,23 @@
 {%block content %}
 <!-- Private key validation -->
 <div id="pk_validation">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center mx-auto">
-          {% if not is_validated %}
-          <form method="POST" action="{% url 'validate_key' %}">
-            {% csrf_token %}
-            <label for="private_key">Enter your private key:</label>
-            <input type="text" name="private_key" id="private_key" required>
-            <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Validate</button>
-          </form>
-          <div id="response">
-            {{ message }}
-          </div>
-          {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mx-auto">
+        {% if not is_validated %}
+        <form method="POST" action="{% url 'validate_key' %}">
+          {% csrf_token %}
+          <label for="private_key">Enter your private key:</label>
+          <input type="text" name="private_key" id="private_key" required>
+          <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Validate</button>
+        </form>
+        <div id="response">
+          {{ message }}
         </div>
+        {% endif %}
       </div>
     </div>
+  </div>
+</div>
 
 {% endblock %}
