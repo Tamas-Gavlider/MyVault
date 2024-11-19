@@ -13,8 +13,8 @@ body {
     background-image: url('/static/images/background.webp') !important;
     height: 500px;
     width: 100%;
-    background-size: cover;
-    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
     
 }
 
@@ -58,9 +58,9 @@ body {
 
 /* Style for Google Maps */
 #map {
-    height: 500px;  /* Set a fixed height */
+    height: 350px;  /* Set a fixed height */
     width: 100%;   /* Full width */
-    margin-top: 100px;
+    margin-top: 30px;
 }
   
 .custom-map-control-button {
@@ -106,6 +106,9 @@ body {
 @media (min-width: 965px) {
     .slogan-right {
         color: #333333  !important;
+    }
+    body {
+        font-size: x-large !important;
     }
 }
 

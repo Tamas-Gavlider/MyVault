@@ -107,6 +107,9 @@ body {
     .slogan-right {
         color: #333333  !important;
     }
+    body {
+        font-size: x-large !important;
+    }
 }
 
 
