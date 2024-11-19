@@ -173,6 +173,7 @@ def send_payment(request):
     """
     if request.method == 'POST':
         sending_address = request.POST.get('sending_address')
+        note = request.POST.get('note')
         amount = request.POST.get('sending_amount')
 
         receiving_profile = Profile.objects.filter(
@@ -219,6 +220,7 @@ The MyVault Team
                 user=request.user,
                 type='Sent',
                 status='Completed',
+                transaction_note=note,
                 amount=amount,
                 sending_address=sender_profile.sending_address,
                 receiving_address=receiving_profile.receiving_address,
@@ -230,6 +232,7 @@ The MyVault Team
                 type='Received',
                 status='Completed',
                 amount=amount,
+                transaction_note=note,
                 sending_address=f"{sender_profile.user.first_name}/n"
                 f" {sender_profile.user.last_name}",
                 receiving_address=receiving_profile.receiving_address,
@@ -250,6 +253,7 @@ The MyVault Team
                 type='Sent',
                 status='Failed',
                 amount=amount,
+                transaction_note=note,
                 sending_address=sender_profile.sending_address,
                 receiving_address=receiving_profile.receiving_address,
             )
@@ -260,6 +264,7 @@ The MyVault Team
                 type='Received',
                 status='Failed',
                 amount=amount,
+                transaction_note=note,
                 sending_address=f"{sender_profile.user.first_name}/n"
                                 f" {sender_profile.user.last_name}",
                 receiving_address=receiving_profile.receiving_address,

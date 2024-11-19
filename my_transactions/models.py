@@ -30,6 +30,7 @@ class Transactions(models.Model):
     sending_address = models.CharField(max_length=50, blank=True, null=True)
     receiving_address = models.CharField(max_length=50, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_note = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f'Amount: {self.amount} -{self.type}-{self.status}-{self.date}'

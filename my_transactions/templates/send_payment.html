@@ -5,16 +5,24 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center mx-auto">
-            <form id="send-payment" method="POST" action="{% url 'send_payment' %}">
+            <form id="send-payment" method="POST" action="{% url 'send_payment' %}" class="d-flex flex-column mb-3 align-items-center align-self-center">
                 {% csrf_token %}
                 <div class="form-group mb-3">
                     <label for="sending_amount">Amount</label>
-                    <input type="number" name="sending_amount" id="sending_amount" required>
+                    <br>
+                    <input type="number" name="sending_amount" id="sending_amount" placeholder="Amount in USD">
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group p-3 mb-3">
+                    <label for="note">Note</label>
+                    <br>
+                    <input type="text" name="note" id="note" placeholder="Optional/Max 50 characters">
+                </div>
+                    <div class="form-group mb-3">
                     <label for="sending_address">Address</label>
+                    <br>
                     <input type="text" name="sending_address" id="sending_address" placeholder="20-character nums/letters" required>
                 </div>
+                
                 <button type="submit" class="btn btn-secondary button shadow mt-3 mb-3">Send</button>
                 <!-- Error message if the address is not valid -->
                 {% if error %}
