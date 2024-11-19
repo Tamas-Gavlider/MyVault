@@ -39,16 +39,16 @@ def dashboard(request):
     for transaction in transactions:
         if transaction.type == 'Withdraw':
             total_withdraw += transaction.amount
-            total_outflow += 1
+            total_outflow += transaction.amount
         elif transaction.type == 'Deposit':
             total_deposit += transaction.amount
-            total_inflow += 1
+            total_inflow += transaction.amount
         elif transaction.type == 'Sent':
             total_sent += transaction.amount
-            total_outflow += 1
+            total_outflow += transaction.amount
         elif transaction.type == 'Received':
             total_received += transaction.amount
-            total_inflow +=1
+            total_inflow += transaction.amount
     bar_chart.add('Withdraw', total_withdraw)
     bar_chart.add('Deposit', total_deposit)
     bar_chart.add('Sent', total_sent)
@@ -63,6 +63,7 @@ def dashboard(request):
     bar_chart.add('Received', total_received)
     chart_horizontal = bar_chart.render().decode('utf-8')
     bar_chart_2 = pygal.Pie()
+    bar_chart_2.title = f'Cash flow in USD for {current_month}'
     bar_chart_2.add('Money Inflow', total_inflow)
     bar_chart_2.add('Money Outflow', total_outflow)
     chart_total = bar_chart_2.render().decode('utf-8')
@@ -71,5 +72,5 @@ def dashboard(request):
         'profile': profile,
         'chart_svg': chart_svg,
         'chart_horizontal': chart_horizontal,
-        'chart_total':chart_total,
+        'chart_total': chart_total,
     })
