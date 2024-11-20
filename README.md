@@ -110,6 +110,7 @@ These options ensure users have full control over their account preferences and 
 
 #### Delete Profile
 
+Users can delete their profile; however, all funds will be forfeited upon deletion. A warning message will be displayed to inform users of this outcome before they confirm the deletion.
 
 #### Validate private key/Unlock account
 The Validate Key and Unlock Account functionalities in MyVault use the same underlying logic for security and access control:
@@ -183,7 +184,7 @@ This ensures that users can only send valid payments within their account limits
 
 #### Withdraw
 
-
+The user enters an amount and clicks the withdraw button. Since the page operates on a testnet, this function will simply deduct the withdrawal amount from the user's balance. Validation ensures that the withdrawal amount does not exceed the available balance and that the remaining balance is at least $1 USD. After the user clicks the withdraw button, they are redirected to either a withdraw success page or a withdraw failed page, depending on the outcome of the transaction.
 
 #### Transactions history
 
