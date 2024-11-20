@@ -15,6 +15,7 @@ def dashboard(request):
     Visualize the user monthly inflow/outflow on pie and bar charts.
     It will reflect the sum for the current month.
     """
+    is_validated = request.session.get('is_validated', False)
     today = datetime.today()
 
     # Get the start and end of the current month
@@ -73,4 +74,5 @@ def dashboard(request):
         'chart_svg': chart_svg,
         'chart_horizontal': chart_horizontal,
         'chart_total': chart_total,
+        'is_validated': is_validated
     })

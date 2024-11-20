@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+{% if profile.suspended%}
+<div id="transactions-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mx-auto">
+        <p>Your account has been suspended. You cannot access your transactions or perform any actions at this time.</p>
+        <p>To reactivate your account, please validate your private key to unlock it.</p>
+        <div class="col">
+          <a href="{% url 'validate_key' %}" class="btn btn-secondary ">Validate Key</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<!-- If private key validated from profile.html the user will have access to transaction details -->
+{% if is_validated %}
 <div class="container">
   {{ chart_svg|safe }}
 </div>
@@ -14,6 +30,7 @@
   {{ chart_total|safe }}
 </div>
 
-
+{% endif %}
+{% endif %}
 
 {% endblock %}

@@ -387,3 +387,5 @@ For the last login time format I reffered to [StackOverFlow](https://stackoverfl
 [Gemini API](https://ai.google.dev/gemini-api/docs) documentation for the AI responses.
 
 [Google Maps API](https://developers.google.com/maps/documentation) for the map on the location page.
+
+[W3Schools](https://www.w3schools.com/) to review how certain libraries function and for Django tutorials.
