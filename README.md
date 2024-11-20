@@ -6,6 +6,50 @@ It offers features like sending and receiving money with unique addresses, depos
 
 The live deployed site can be found [here](https://my-vault-cb8eb703ab63.herokuapp.com/)
 
+## Contents
+
+- [Agile Development](#agile-development)
+- [User Experience(UX)](#user-experienceux)
+  - [Project Goals](#project-goals)
+  - [User Stories](#user-stories)
+- [Design](#design)
+  - [Structure](#structure)
+  - [Colour Scheme](#colour-scheme)
+  - [Typography](#typography)
+  - [Features](#features)
+    - [Home](#home)
+    - [FAQ](#faq)
+    - [Ask](#ask)
+    - [Profile](#profile)
+    - [Update Profile](#update-profile)
+    - [Delete Profile](#delete-profile)
+    - [Validate private key/Unlock account](#validate-private-keyunlock-account)
+    - [Dashboard](#dashboard)
+    - [Transactions](#transactions)
+    - [Top Up](#top-up)
+    - [Send Payment](#send-payment)
+    - [Withdraw](#withdraw)
+    - [Transactions History](#transactions-history)
+    - [Future Implementation](#future-implementations)
+- [Technologies, Languages, and Programs used](#technologies-languages-and-programs-used)
+  - [Stripe](#stripe)
+- [Deployment & Local Development](#deployment--local-development)
+  - [Local Deployment](#local-deployment)
+  - [Testing](#testing)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+    - [Python](#python)
+    - [Lighthouse](#lighthouse)
+    - [Wave](#wave)
+    - [Automated Testing](#automated-testing)
+    - [Manual Testing](#manual-testing)
+    - [Full Testing](#full-testing)
+    - [Bugs](#bugs)
+- [Credits](#credits)
+  - [Media](#media)
+  - [Content](#content)
+
 ## Agile Development
 
 User stories were prioritized using MoSCoW.
@@ -16,6 +60,8 @@ This workflow guided the sprint planning and ensured seamless integration of ess
 ## User Experience(UX)
 
 ### Project Goals
+
+The primary goals of the app is to ensure robust security and provide a seamless and secure platform for handling payments. With features like private key authentication, unique addresses for sending and receiving funds, the app prioritizes user privacy and control. Additionally, the app facilitates transparent financial management by offering a detailed transaction history and the app empowers users to keep track of their finances through interactive charts and visual insights, promoting better financial management.
 
 ### User Stories
 
@@ -149,7 +195,7 @@ Access After Validation: Once the private key is validated, the user gains full 
 
 ![Transactions](/docs/screenshots/transactions.png)
 
-#### Top up
+#### Top Up
 
 For the Top Up process, users can follow these steps:
 
@@ -163,7 +209,8 @@ For the Top Up process, users can follow these steps:
 This process ensures that users can top up their accounts securely while using Stripe's test environment for validation and testing purposes.
 If the payment is successful, a confirmation message will be displayed to the user.<br>
 ![topup](/docs/screenshots/checkout.gif)
-#### Send payment
+
+#### Send Payment
 
 The Send Payment form in MyVault includes validation to ensure secure and accurate transactions. Here’s how it works:
 
@@ -391,6 +438,7 @@ Testing was also performed using the following browsers:
 The background image was downloaded from [Pexels](https://www.pexels.com/).
 <br>
 The favicon logo was created on [FreeLogoDesign](https://www.freelogodesign.org/)
+<br>
 All screenshots used in this README file were taken by myself.
 
 ### Content
