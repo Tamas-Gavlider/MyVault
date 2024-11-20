@@ -318,7 +318,7 @@ The following issues were raised during my mid project meeting with my mentor:
 [W3C](https://validator.w3.org/) was used to validate the HTML on all pages of the site. It was also used to validate the CSS. As the site is created with Django and utilises Django templating language within the HTML, I have checked the HTML by inspecting the page source and then running this through the validator.
 
 |   Page   |   Result   |   Evidence   |
-|----------|------------|--------------|
+| ---------- | :------------:| --------:|
 |   Home   |  No error  |[home](/docs/testing/w3c/home.png)    |
 |  Login   |  No error  |[login](/docs/testing/w3c/login.png)  |
 |  Logout  |  No error  |[logout](/docs/testing/w3c/logout.png)|
@@ -350,7 +350,7 @@ The following issues were raised during my mid project meeting with my mentor:
 [Code Institute Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python files.
 
 | File      |   Result     |              Screenshot     |
-|-----------|----------------------|------------------------|
+|-----------|:----------------------:|------------------------:|
 | my-home-models.py     |   Pass            |        [home-models](/docs/testing/pep8/my-home-models.png)       
 | my-home-views.py      |   Pass            |        [home-views](/docs/testing/pep8/my-home-views.png)  
 | my-home-admin.py      |   Pass            |        [home-admin](/docs/testing/pep8/my-home-admin.png)   
@@ -376,7 +376,7 @@ The following issues were raised during my mid project meeting with my mentor:
 I have used Googles Lighthouse testing to test the performance, accessibility, best practices and SEO of the site.
 
 | Page      |   Mobile/Desktop     |              Score     |
-|-----------|----------------------|------------------------|
+|-----------|:----------------------:|:------------------------:|
 | Home      |   Mobile             |        ![home-mobile](/docs/testing/lighthouse/home-mobile.png)       
 | Home      |   Desktop            |        ![home-mobile](/docs/testing/lighthouse/home-desktop.png)      
 | Profile   |   Mobile             |        ![home-mobile](/docs/testing/lighthouse/profile-mobile.png) 
@@ -405,16 +405,16 @@ I have used Googles Lighthouse testing to test the performance, accessibility, b
 WAVE(Web Accessibility Evaluation Tool) allows developers to create content that is more accessible to users with disabilities. It does this by identifying accessibility and WGAC errors.
 
 | Page    |  Result      |  Evidence |
-|---------|--------------|-----------|
+|---------|--------------| -----------|
 | Home    |  No erros    | [home](/docs/testing/wave/home-wave.png)             |
 | Login   |  No errors   | [login](/docs/testing/wave/login-wave.png)           |
 | Logout  |              |         |
 | Register|  No errors   | [register](/docs/testing/wave/register-wave.png)     |
 | FAQ     |  No errors   | [faq](/docs/testing/wave/faq-wave.png)               |
 | Ask     |  No errors   |  [ask](/docs/testing/wave/ask-wave.png)              |
-| Profile   |          |         |
+| Profile   |  No errors | [profile](/docs/testing/wave/profile-wave.png)       |
 | Edit profile    |          |         |
-| Delete profile   |          |         |
+| Delete profile   |   No errors     |  [delete profile](/docs/testing/wave/delete-profile.png)       |
 | Reset Password   |          |         |
 | Validate Key  |          |         |
 | Location   |          |         |
