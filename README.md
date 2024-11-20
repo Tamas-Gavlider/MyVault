@@ -317,8 +317,9 @@ The following issues were raised during my mid project meeting with my mentor:
 
 [W3C](https://validator.w3.org/) was used to validate the HTML on all pages of the site. It was also used to validate the CSS. As the site is created with Django and utilises Django templating language within the HTML, I have checked the HTML by inspecting the page source and then running this through the validator.
 
-##### Home page
-![home](/docs/testing/w3c/home-page.png)
+|   Page   |   Result   |   Evidence   |
+|----------|------------|--------------|
+|   Home   |  No error  |[home](/docs/testing/w3c/home.png)|
 
 #### CSS
 
