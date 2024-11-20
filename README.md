@@ -224,7 +224,7 @@ This design ensures transparency and keeps users informed about the status of th
 - psycopg2 - a postgres database adapter which allow us to connect with a postgres database
 - PostgreSQL - The database used to store transactions data, user information, and other relevant data for the application.
 - Google Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
-- JavaScript - for Google Maps.
+- JavaScript - for Stripe and Google Maps.
 - GitHub - Web-based platform for version control and collaboration on software projects.
 - Google Fonts - Library of free and open-source web fonts.
 - Heroku - Used to deploy the project for hosting and managing the live application.
