@@ -319,7 +319,21 @@ The following issues were raised during my mid project meeting with my mentor:
 
 |   Page   |   Result   |   Evidence   |
 |----------|------------|--------------|
-|   Home   |  No error  |[home](/docs/testing/w3c/home.png)|
+|   Home   |  No error  |[home](/docs/testing/w3c/home.png)    |
+|  Login   |  No error  |[login](/docs/testing/w3c/login.png)  |
+|  Logout  |  No error  |[logout](/docs/testing/w3c/logout.png)|
+|  Register|  No error  |[signup](/docs/testing/w3c/signup.png)|
+|   FAQ    |  No error  |[faq](/docs/testing/w3c/faq.png)    |
+|   ASK    |  No error  | [ask](/docs/testing/w3c/ask.png) |
+|  Profile |  No error  |[profile](/docs/testing/w3c/profile.png)    |
+|  Delete Profile |  No error  | [delete profile](/docs/testing/w3c/delete-profile.png) |
+|  Update Profile |  No error  |  [update profile](/docs/testing/w3c/update-profile.png) |
+|  Location |  No error  | [location](/docs/testing/w3c/location.png) |
+|  Validate Key |  No error  |[validate key](/docs/testing/w3c/validate-key.png)    |
+|  Dashboard |  No error  | [dashboard](/docs/testing/w3c/dashboard.png) |
+|  Transactions |  No error  | [transactions](/docs/testing/w3c/transactions.png) |
+|  Transaction History |  No error  |[transaction history](/docs/testing/w3c/transaction-history.png)    |
+|  Send Payment |  No error  | [send payment](/docs/testing/w3c/send-payment.png) |
 
 #### CSS
 
