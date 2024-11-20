@@ -162,7 +162,7 @@ def location(request):
         handler = ipinfo.getHandler(access_token)
         details = handler.getDetails(ip_address)
         new_login_entry = (
-            f"{strftime(" %Y - %m - %d %H: %M: %S ", gmtime())}"
+            f"{strftime('%Y-%m-%d %H:%M:%S', gmtime())}"
             f"- IP: {details.ip} - City: {details.city}"
             f" - Country: {details.country_name}, ")
         profile.last_login += new_login_entry

@@ -108,6 +108,9 @@ The Edit Profile page allows users to manage and update their account details co
 These options ensure users have full control over their account preferences and settings.
 ![Update profile](/docs/screenshots/update-profile.png)
 
+#### Delete Profile
+
+
 #### Validate private key/Unlock account
 The Validate Key and Unlock Account functionalities in MyVault use the same underlying logic for security and access control:
 
@@ -178,6 +181,10 @@ This ensures that users can only send valid payments within their account limits
 
 ![form](/docs/screenshots/send-payment.gif)
 
+#### Withdraw
+
+
+
 #### Transactions history
 
 The Transaction History page provides a user-friendly interface for reviewing financial activities, featuring pagination and advanced filtering options:
@@ -211,20 +218,19 @@ This design ensures transparency and keeps users informed about the status of th
 - Bootstrap - A framework for building responsive, mobile-first sites.
 - Python - The programming language used for the project.
 - Django - A high-level Python web framework that encourages rapid development and clean, pragmatic design.
-- Djano Allauth - Used for authentication, registration & account management.
+- Djano Allauth - Used for authentication, registration, login & password reset.
 - gunicorn - a Python WSGI HTTP Server
-- dj_databsae_url - allows us to utilise the DATABASE_URL variable
 - psycopg2 - a postgres database adapter which allow us to connect with a postgres database
 - PostgreSQL - The database used to store transactions data, user information, and other relevant data for the application.
 - Google Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
-- JavaScript - for Stripe and Google Maps.
+- JavaScript - for Google Maps.
 - GitHub - Web-based platform for version control and collaboration on software projects.
 - Google Fonts - Library of free and open-source web fonts.
 - Heroku - Used to deploy the project for hosting and managing the live application.
 - Favicon.io - To create Favicon.
 - [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
 - [FreeConvert](https://www.freeconvert.com/convert/video-to-gif) - to convert screenrecordings to GIF
-- Stripe - for payment system.
+- Stripe - used for implementing test payments to showcase how the page will function when it goes live.
 
 ### Stripe
 
@@ -254,7 +260,7 @@ This repository can be cloned and run locally with the following steps:
 I have used Chrome Developer tool while building the web page and troubleshoot any issues immediately.<br>
 The following issues were raised during my mid project meeting with my mentor:
 
-- The private key validation was coded with JavaScript. But it is betterto be done with Python.
+- The private key validation was coded with JavaScript. But it is better to be done with Python.
 - The project kanban board issues were not visible by other users on GitHub. The user story template was connected to other project, so I had to delete and readd the issues with the correct repo.
 - Change the sender details transactions details. It should show the name of the sender instead of their sending address. 
 - Notify user if changes made on the account.
@@ -275,9 +281,30 @@ The following issues were raised during my mid project meeting with my mentor:
 
 [JS Hint](https://jshint.com/) was used to validate the JavaScript.
 
+
 #### Python
 
-[Code Institute Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python.
+[Code Institute Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python files.
+
+| File      |   Result     |              Screenshot     |
+|-----------|----------------------|------------------------|
+| my-home-models.py     |   Pass            |        [pep8](/docs/testing/pep8/my-home-models.png)       
+| my-home-views.py      |   Pass            |        [pep8](/docs/testing/pep8/my-home-views.png)  
+| my-home-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/my-home-admin.png)   
+| my-profile-models.py  |   Pass            |       [pep8](/docs/testing/pep8/my-profile-models.png)       
+| my-profile-signals.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-signals.png)  
+| my-profile-tests.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-tests.png)   
+| my-profile-urls.py     |   Pass            |        [pep8](/docs/testing/pep8/my-profile-urls.png)       
+| my-profile-views.py    |   Pass         |        [pep8](/docs/testing/pep8/my-profile-views.png)  
+| my-profile-form.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-form.png)
+| my-profile-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-admin.png)  
+| my-transactions-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-admin.png) 
+| my-transactions-models.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-models.png) 
+| my-transactions-tests.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-test.png) 
+| my-transactions-urls.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-urls.png) 
+| my-transactions-views.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-views.png) 
+| dashboard-views.py      |   Pass            |        [pep8](/docs/testing/pep8/dashboard-views.png) 
+| dashboard-urls.py      |   Pass            |        [pep8](/docs/testing/pep8/dashboard-url.png) 
 
 #### Lighthouse 
 
@@ -314,7 +341,7 @@ WAVE(Web Accessibility Evaluation Tool) allows developers to create content that
 
 #### Automated testing
 
-Automated testing for this project was carried out with [Django TestCase](https://docs.djangoproject.com/en/4.1/topics/testing/overview/). I would write a test, run the test and fix any issues raised before running the test again to confirm it passed. When a test passed I committed it to GitHub.
+Automated testing for this project was carried out with [Django TestCase](https://docs.djangoproject.com/en/4.1/topics/testing/overview/).
 
 #### Manual Testing
 
