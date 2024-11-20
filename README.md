@@ -289,23 +289,25 @@ The following issues were raised during my mid project meeting with my mentor:
 
 | File      |   Result     |              Screenshot     |
 |-----------|----------------------|------------------------|
-| my-home-models.py     |   Pass            |        [pep8](/docs/testing/pep8/my-home-models.png)       
-| my-home-views.py      |   Pass            |        [pep8](/docs/testing/pep8/my-home-views.png)  
-| my-home-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/my-home-admin.png)   
-| my-profile-models.py  |   Pass            |       [pep8](/docs/testing/pep8/my-profile-models.png)       
-| my-profile-signals.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-signals.png)  
-| my-profile-tests.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-tests.png)   
-| my-profile-urls.py     |   Pass            |        [pep8](/docs/testing/pep8/my-profile-urls.png)       
-| my-profile-views.py    |   Pass         |        [pep8](/docs/testing/pep8/my-profile-views.png)  
-| my-profile-form.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-form.png)
-| my-profile-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/my-profile-admin.png)  
-| my-transactions-admin.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-admin.png) 
-| my-transactions-models.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-models.png) 
-| my-transactions-tests.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-test.png) 
-| my-transactions-urls.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-urls.png) 
-| my-transactions-views.py      |   Pass            |        [pep8](/docs/testing/pep8/transactions-views.png) 
-| dashboard-views.py      |   Pass            |        [pep8](/docs/testing/pep8/dashboard-views.png) 
-| dashboard-urls.py      |   Pass            |        [pep8](/docs/testing/pep8/dashboard-url.png) 
+| my-home-models.py     |   Pass            |        [home-models](/docs/testing/pep8/my-home-models.png)       
+| my-home-views.py      |   Pass            |        [home-views](/docs/testing/pep8/my-home-views.png)  
+| my-home-admin.py      |   Pass            |        [home-admin](/docs/testing/pep8/my-home-admin.png)   
+| my-profile-models.py  |   Pass            |       [profile-models](/docs/testing/pep8/my-profile-models.png)       
+| my-profile-signals.py      |   Pass            |        [profile-signals](/docs/testing/pep8/my-profile-signals.png)  
+| my-profile-tests.py      |   Pass            |        [profile-tests](/docs/testing/pep8/my-profile-tests.png)   
+| my-profile-urls.py     |   Pass            |        [profile-urls](/docs/testing/pep8/my-profile-urls.png)       
+| my-profile-views.py    |   Pass         |        [profile-views](/docs/testing/pep8/my-profile-views.png)  
+| my-profile-form.py      |   Pass            |        [profile-form](/docs/testing/pep8/my-profile-form.png)
+| my-profile-admin.py      |   Pass            |        [profile-admin](/docs/testing/pep8/my-profile-admin.png)  
+| my-transactions-admin.py      |   Pass            |        [transaction-admin](/docs/testing/pep8/transactions-admin.png) 
+| my-transactions-models.py      |   Pass            |        [transaction-models](/docs/testing/pep8/transactions-models.png) 
+| my-transactions-tests.py      |   Pass            |        [transaction-test](/docs/testing/pep8/transactions-test.png) 
+| my-transactions-urls.py      |   Pass            |        [transaction-urls](/docs/testing/pep8/transactions-urls.png) 
+| my-transactions-views.py      |   Pass            |        [transaction-views](/docs/testing/pep8/transactions-views.png) 
+| dashboard-views.py      |   Pass            |        [dashboard-views](/docs/testing/pep8/dashboard-views.png) 
+| dashboard-urls.py      |   Pass            |        [dashboard-urls](/docs/testing/pep8/dashboard-url.png) 
+| dashboard-admin.py      |   Pass            |        [dashboard-admin](/docs/testing/pep8/dashboard-admin.png) 
+
 
 #### Lighthouse 
 
