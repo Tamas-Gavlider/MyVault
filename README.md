@@ -223,7 +223,8 @@ This design ensures transparency and keeps users informed about the status of th
 - Heroku - Used to deploy the project for hosting and managing the live application.
 - Favicon.io - To create Favicon.
 - [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
-- Stripe - for payment system
+- [FreeConvert](https://www.freeconvert.com/convert/video-to-gif) - to convert screenrecordings to GIF
+- Stripe - for payment system.
 
 ### Stripe
 
@@ -262,9 +263,13 @@ The following issues were raised during my mid project meeting with my mentor:
 
 [W3C](https://validator.w3.org/) was used to validate the HTML on all pages of the site. It was also used to validate the CSS. As the site is created with Django and utilises Django templating language within the HTML, I have checked the HTML by inspecting the page source and then running this through the validator.
 
+##### Home page
+![home](/docs/testing/w3c/home-page.png)
+
 #### CSS
 
 [W3C](https://validator.w3.org/) was used to validate the CSS.
+![css](/docs/testing/w3c/css-validator.png)
 
 #### JavaScript
 
@@ -277,6 +282,31 @@ The following issues were raised during my mid project meeting with my mentor:
 #### Lighthouse 
 
 I have used Googles Lighthouse testing to test the performance, accessibility, best practices and SEO of the site.
+
+| Page      |   Mobile/Desktop     |              Score     |
+|-----------|----------------------|------------------------|
+| Home      |   Mobile             |        ![home-mobile](/docs/testing/lighthouse/home-mobile.png)       
+| Home      |   Desktop            |        ![home-mobile](/docs/testing/lighthouse/home-desktop.png)      
+| Profile   |   Mobile             |        ![home-mobile](/docs/testing/lighthouse/profile-mobile.png) 
+| Profile   |   Desktop            |        ![home-mobile](/docs/testing/lighthouse/profile-desktop.png)    
+| Edit-Profile   |   Mobile        |        ![home-mobile](/docs/testing/lighthouse/edit-profile-mobile.png)    
+| Edit-Profile   |   Desktop       |        ![home-mobile](/docs/testing/lighthouse/edit-profile-desktop.png)   
+| Delete-Profile   |   Mobile      |        ![home-mobile](/docs/testing/lighthouse/delete-profile-mobile.png)    
+| Delete-Profile   |   Desktop     |        ![home-mobile](/docs/testing/lighthouse/delete-profile-desktop.png)   
+| Validate Pk   |   Mobile         |        ![home-mobile](/docs/testing/lighthouse/validate-pk-mobile.png)    
+| Validate Pk   |   Desktop        |        ![home-mobile](/docs/testing/lighthouse/validate-pk-desktop.png)   
+| Location  |   Desktop            |        ![home-mobile](/docs/testing/lighthouse/location-desktop.png)    
+| FAQ   |          Desktop         |        ![home-mobile](/docs/testing/lighthouse/faq-desktop.png)   
+| FAQ   |          Mobile          |        ![home-mobile](/docs/testing/lighthouse/faq-mobile.png) 
+| Ask   |          Desktop         |        ![home-mobile](/docs/testing/lighthouse/ask-desktop.png)   
+| Ask   |          Mobile          |        ![home-mobile](/docs/testing/lighthouse/ask-mobile.png) 
+| Dashboard   |         Desktop    |        ![home-mobile](/docs/testing/lighthouse/dashboard-desktop.png)   
+| Dashboard   |         Mobile     |        ![home-mobile](/docs/testing/lighthouse/dashboard-mobile.png) 
+| Transaction   |       Desktop    |        ![home-mobile](/docs/testing/lighthouse/transaction-desktop.png)   
+| Transaction   |       Mobile     |        ![home-mobile](/docs/testing/lighthouse/transaction-mobile.png) 
+| Transaction History   |Desktop   |        ![home-mobile](/docs/testing/lighthouse/history-desktop.png)  
+| Transaction History  | Mobile    |        ![home-mobile](/docs/testing/lighthouse/history-mobile.png) 
+
 
 #### Wave
 
