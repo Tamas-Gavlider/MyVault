@@ -342,6 +342,25 @@ I have used Googles Lighthouse testing to test the performance, accessibility, b
 
 WAVE(Web Accessibility Evaluation Tool) allows developers to create content that is more accessible to users with disabilities. It does this by identifying accessibility and WGAC errors.
 
+| Page    |  Result      |  Evidence |
+|---------|--------------|-----------|
+| Home    |  No erros    | [home](/docs/testing/wave/home-wave.png)             |
+| Login   |  No errors   | [login](/docs/testing/wave/login-wave.png)           |
+| Logout  |              |         |
+| Register|  No errors   | [register](/docs/testing/wave/register-wave.png)     |
+| FAQ     |  No errors   | [faq](/docs/testing/wave/faq-wave.png)               |
+| Ask     |  No errors   |  [ask](/docs/testing/wave/ask-wave.png)              |
+| Profile   |          |         |
+| Edit profile    |          |         |
+| Delete profile   |          |         |
+| Reset Password   |          |         |
+| Validate Key  |          |         |
+| Location   |          |         |
+| Dashboard   |          |         |
+| Transactions   |          |         |
+| Send payment   |          |         |
+| History   |          |         |
+
 #### Automated testing
 
 Automated testing for this project was carried out with [Django TestCase](https://docs.djangoproject.com/en/4.1/topics/testing/overview/).
