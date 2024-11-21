@@ -322,10 +322,25 @@ The project is deployed using Heroku. To deploy the project:
    -- web: gunicorn my_vault.wsgi -- 
    10. Add the Heroku app and localhost (which will allow GitPod to still work) to ALLOWED_HOSTS = [] in settings.py:<br>
    ![hosts](/docs/screenshots/allowed-host.png)
-   11. Save, add, commit and push the changes to GitHub. 
-   12. To enable automatic deploys on Heroku, go to the deploy tab and click the connect to GitHub button in the deployment method section. Search for the projects repository and then click connect. Click enable automatic deploys at the bottom of the page.
-
-
+   11. Install whitenoise. It will allow your Heroku app to serve its own static files without relying on any external file hosting services like a content delivery network (CDN). Then add it to the requirements.txt.
+   <br>
+   -- pip3 install whitenoise~=5.3.0 -- 
+   <br>
+   The WhiteNoise middleware must be placed directly after the Django SecurityMiddleware in settings.py<br>
+   -- 'whitenoise.middleware.WhiteNoiseMiddleware', --
+   12. Add the following path to settings.py<br>
+     -- STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') --
+   13. Collect static files -- python3 manage.py collectstatic -- and add a runtime.txt file to your app's root directory. Check your Python version and copy the runtime closest to the one used in your IDE.
+   [Supported runtimes](https://devcenter.heroku.com/articles/python-support#specifying-a-python-version)
+   14. Save, add, commit and push the changes to GitHub. 
+   15. To enable automatic deploys on Heroku, go to the deploy tab and click the connect to GitHub button in the deployment method section. Search for the projects repository and then click connect. Click enable automatic deploys at the bottom of the page.
+4. Django automatically sets a secret key when you create your project, however we shouldn't use this default key in our deployed version. We can use a random key generator to create a new SECRET_KEY which we can then add to our Heroku config vars.
+5. The following entries must be added to the Heroku config vars:
+  - EMAIL_HOST_USER and EMAIL_HOST_PASS for email notifications
+  - GEMINI_API_KEY for AI functionality
+  - Google Maps API key for map integration
+  - IP_TOKEN for the IPInfo API to retrieve user IP addresses and login details
+  - Stripe publishable and secret keys for payment processing
 
 ### Local Deployment
 
