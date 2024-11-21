@@ -39,6 +39,7 @@
                 <p>{{error}}</p>
                 {% endif %}
                 <div class="col-auto">
+                  <label for="amount" class="visually-hidden">Amount</label>
                   <input type="number" name="amount" id="amount" class="user-container rounded-3 shadow"
                     placeholder="Amount in USD" required min=1>
                 </div>
@@ -48,6 +49,7 @@
                   class="btn btn-secondary button shadow mt-3 mb-3">Top
                   Up</a>
                 <br>
+                <label for="top-up-amount" class="visually-hidden">Top Up</label>
                 <input type="number" id="top-up-amount" min="1" placeholder="Amount in USD" required
                   class="user-container rounded-3 shadow">
               </div>
