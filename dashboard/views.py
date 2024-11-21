@@ -38,18 +38,19 @@ def dashboard(request):
     total_received = 0
     bar_chart = pygal.Pie()
     for transaction in transactions:
-        if transaction.type == 'Withdraw':
-            total_withdraw += transaction.amount
-            total_outflow += transaction.amount
-        elif transaction.type == 'Deposit':
-            total_deposit += transaction.amount
-            total_inflow += transaction.amount
-        elif transaction.type == 'Sent':
-            total_sent += transaction.amount
-            total_outflow += transaction.amount
-        elif transaction.type == 'Received':
-            total_received += transaction.amount
-            total_inflow += transaction.amount
+        if transaction.status == 'Completed':
+            if transaction.type == 'Withdraw':
+                total_withdraw += transaction.amount
+                total_outflow += transaction.amount
+            elif transaction.type == 'Deposit':
+                total_deposit += transaction.amount
+                total_inflow += transaction.amount
+            elif transaction.type == 'Sent':
+                total_sent += transaction.amount
+                total_outflow += transaction.amount
+            elif transaction.type == 'Received':
+                total_received += transaction.amount
+                total_inflow += transaction.amount
     bar_chart.add('Withdraw', total_withdraw)
     bar_chart.add('Deposit', total_deposit)
     bar_chart.add('Sent', total_sent)

@@ -136,8 +136,10 @@ The Profile page also provides users with essential account management options. 
 - Validate their private key, a mandatory step to access the Transactions section.
 
 
-Every time a user logs in, private key validation is required to ensure secure access to transaction-related features. Without validation, transactions will remain inaccessible.
-![Profile](/docs/screenshots/profile.png)
+Every time a user logs in, private key validation is required to ensure secure access to transaction-related features. Without validation, the features will remain inaccessible.
+![Profile](/docs/screenshots/profile-not-validated.png)
+Validated profile:<br>
+![Valid-Profile](/docs/screenshots/profile-validated.png)
 If an account is suspended by the user or admin, it can only be unlocked using the private key. While the account is in a suspended state, all other buttons and functionalities on the Profile page are disabled, ensuring that no changes or actions can be performed until the account is reactivated.
 ![Suspended](/docs/screenshots/suspended-account.png)
 
@@ -171,6 +173,8 @@ In both cases, the user must provide the private key to proceed. This ensures th
 
 #### Dashboard
 The Dashboard provides users with a comprehensive overview of their financial activity, featuring three insightful charts.
+Page before validation:
+![Dashboard](/docs/screenshots/dashboard-not%20validated.png)
 The first pie chart visualizes the distribution of the user’s transactions, breaking them down by type—Withdrawals, Deposits, Sent, and Received. It helps users understand their transaction habits at a glance.
 ![Pie](/docs/screenshots/dashboard-chart-one.png)
 The bar chart displays the total number of transactions for the current month. This gives users a clear view of their activity over time, helping them track trends and patterns in their transactions.
@@ -180,7 +184,7 @@ The third chart shows the total sum of inflows (deposits and money received) ver
 #### Transactions
 The Transactions page is designed to ensure that sensitive financial data is protected.
 Private Key Validation: After login, if the user's private key is not validated, the transaction page will remain empty, preventing access to any sensitive information.
-![Transaction no validation](/docs/screenshots/transaction-no-validation.png)
+![Transaction no validation](/docs/screenshots/transactions-not-validated.png)
 If the account is suspended, a clear and informative message displayed to the user, explaining the situation and the steps they need to take.
 ![Transaction suspension](/docs/screenshots/transaction-suspended.png)
 Access After Validation: Once the private key is validated, the user gains full access to the transaction features:

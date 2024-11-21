@@ -343,13 +343,14 @@ def withdraw_fund(request):
             )
             return render(request, 'withdraw.html', {'error':
                           'Minimum withdraw amount is $1'})
-        # Deduct amount and save to profile
-        profile.balance -= amount
-        profile.save()
-        if profile.notificationEmail:
-            send_mail(
-                'Transaction Alert',
-                f"""
+        else:
+            # Deduct amount and save to profile
+            profile.balance -= amount
+            profile.save()
+            if profile.notificationEmail:
+                send_mail(
+                    'Transaction Alert',
+                    f"""
 Hello,
 
 We are pleased to inform you that your withdrawal of {amount} USD
@@ -359,19 +360,19 @@ Thank you,
 
 The MyVault Team
                 """,
-                settings.DEFAULT_FROM_EMAIL,
-                [request.user.email],
-                fail_silently=False,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [request.user.email],
+                    fail_silently=False,
+                )
+            # Record the transaction
+            Transactions.objects.create(
+                user=request.user,
+                type='Withdraw',
+                status='Completed',
+                amount=amount,
             )
-        # Record the transaction
-        Transactions.objects.create(
-            user=request.user,
-            type='Withdraw',
-            status='Completed',
-            amount=amount,
-        )
 
-        return redirect('withdraw_success')
+            return redirect('withdraw_success')
 
     return render(request, "transactions.html")
 
