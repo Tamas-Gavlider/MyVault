@@ -62,18 +62,28 @@
                         </div>
                         {% else %}
                         <!-- Working buttons if account is unlocked/not suspended -->
+                         <!-- Buttons before the pk validation when user logs in -->
+                         {% if is_validated %}
                         <div class="col">
-                            <a href="{% url 'update_profile' %}" class="btn btn-secondary ">Edit Profile</a>
+                            <a href="{% url 'update_profile' %}" class="btn btn-secondary">Edit Profile</a>
                         </div>
                         <div class="col">
-                            <a href="{% url 'delete_profile' %}" class="btn btn-secondary ">Delete Profile</a>
+                            <a href="{% url 'delete_profile' %}" class="btn btn-secondary">Delete Profile</a>
                         </div>
+                        <div class="col">
+                            <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'validate_key' %}" class="btn btn-secondary">Validate Key</a>
+                        </div>
+                        {% else %}
                         <div class="col">
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary ">Reset Password</a>
                         </div>
                         <div class="col">
                             <a href="{% url 'validate_key' %}" class="btn btn-secondary ">Validate Key</a>
                         </div>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </div>

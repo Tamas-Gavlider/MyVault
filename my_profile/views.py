@@ -44,7 +44,7 @@ def my_profile(request):
     """
     # Check if the profile exists for the current user, create one if not
     profile, created = Profile.objects.get_or_create(user=request.user)
-
+    
     # Create the unique sending, receiving address and the private key
     if not profile.sending_address:
         profile.sending_address = generate_unique_sending_address()
@@ -56,9 +56,10 @@ def my_profile(request):
     if not profile.private_key:
         profile.generate_private_key()
         raw_key = profile.raw_key
+    is_validated = request.session.get('is_validated', False)
 
     return render(request, 'profile.html', {"profile": profile,
-                  "raw_key": raw_key if created else None})
+                  "raw_key": raw_key if created else None, 'is_validated':is_validated})
 
 
 @login_required
