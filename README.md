@@ -276,7 +276,7 @@ This design ensures transparency and keeps users informed about the status of th
 - Google Fonts - Library of free and open-source web fonts.
 - Heroku - Used to deploy the project for hosting and managing the live application.
 - Favicon.io - To create Favicon.
-- [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
+- [DBDiagram](https://dbdiagram.io/d) - To create ER Diagram
 - [FreeConvert](https://www.freeconvert.com/convert/video-to-gif) - to convert screenrecordings to GIF
 - Stripe - used for implementing test payments to showcase how the page will function when it goes live.
 - Google Maps API: Used for tracking and displaying the user's location based on their IP address, enhancing features like login location tracking and visualization on a map.

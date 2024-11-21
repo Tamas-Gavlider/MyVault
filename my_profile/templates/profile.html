@@ -53,9 +53,6 @@
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary disabled">Reset
                                 Password</a>
                         </div>
-                        <div class="col">
-                            <a href="{% url 'validate_key' %}" class="btn btn-secondary disabled">Validate Key</a>
-                        </div>
                         <br>
                         <div class="col">
                             <a href="{% url 'validate_key' %}" class="btn btn-secondary">Unlock Account</a>
@@ -73,9 +70,6 @@
                         <div class="col">
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
                         </div>
-                        <div class="col">
-                            <a href="{% url 'validate_key' %}" class="btn btn-secondary">Validate Key</a>
-                        </div>
                         {% else %}
                         <div class="col">
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary ">Reset Password</a>
@@ -92,15 +86,4 @@
     </div>
 </div>
 
-<script>
-    const toastTrigger = document.getElementById('liveToastBtn')
-    const toastLiveExample = document.getElementById('liveToast')
-
-    if (toastTrigger) {
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-        toastTrigger.addEventListener('click', () => {
-            toastBootstrap.show()
-        })
-    }
-</script>
 {% endblock content %}
