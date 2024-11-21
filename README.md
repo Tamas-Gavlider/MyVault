@@ -320,6 +320,12 @@ The project is deployed using Heroku. To deploy the project:
    -- pip3 install gunicorn -- 
    9. Create a Procfile in the root directory. This tells Heroku to create a web dyno which runs gunicorn and serves our django app. Add the following to the file:<br>
    -- web: gunicorn my_vault.wsgi -- 
+   10. Add the Heroku app and localhost (which will allow GitPod to still work) to ALLOWED_HOSTS = [] in settings.py:<br>
+   ![hosts](/docs/screenshots/allowed-host.png)
+   11. Save, add, commit and push the changes to GitHub. 
+   12. To enable automatic deploys on Heroku, go to the deploy tab and click the connect to GitHub button in the deployment method section. Search for the projects repository and then click connect. Click enable automatic deploys at the bottom of the page.
+
+
 
 ### Local Deployment
 
