@@ -279,7 +279,10 @@ This design ensures transparency and keeps users informed about the status of th
 - [SmartDraw](https://www.smartdraw.com/entity-relationship-diagram/er-diagram-tool.htm) - To create ER Diagram
 - [FreeConvert](https://www.freeconvert.com/convert/video-to-gif) - to convert screenrecordings to GIF
 - Stripe - used for implementing test payments to showcase how the page will function when it goes live.
-
+- Google Maps API: Used for tracking and displaying the user's location based on their IP address, enhancing features like login location tracking and visualization on a map.
+- IpInfo: Used to obtain the user's IP address and retrieve location details (e.g., city, region, country) for features like login location tracking.
+- Gemini API: An AI API integrated into the "Ask" page, enabling the application to answer user questions dynamically.
+[Toolsaday](https://toolsaday.com/writing/faq-generator) - to generate FAQ questions.
 ### Stripe
 
 Stripe for the website is currently in developer mode, which allows us to be able to process test payments to check the function of the site.
@@ -293,6 +296,30 @@ Stripe for the website is currently in developer mode, which allows us to be abl
 ## Deployment & Local Development
 
 The project is deployed using Heroku. To deploy the project:
+
+1. Create a live database - The database used in this project was provided by Code Institute.
+2. Heroku app setup:
+   1. From the Heroku dashboard, click the new button in the top right corner and select create new app.
+   2. Give your app a name (this must be unique), select the region that is closest to you and then click the create app button bottom left.
+   3. Open the settings tab and create a new config var of DATABASE_URL and paste the database URL(the value should not have quotation marks around it).
+3. Prepare for deployment in GitPod:
+   1. Install dj_database_url and psycopg2 (they are both needed for connecting to the external database you've just set up)<br>
+   -- pip3 install dj-database-url==2.2.0 psycopg2 -- 
+   2. Update your requirements.txt file with the installed packages.<br>
+   -- pip3 freeze --local > requirements.txt --
+   3. In settings.py underneath import os, add -- import dj_database_url --.
+   4. To prevent your database URL from being misused, you can store it in the env.py file and add this file to .gitignore to keep it secure. Using the os library, you can then retrieve the database URL in your code instead of directly including it in settings.py.
+   ![database](/docs/screenshots/settings-ss.png)
+   5. In the terminal, run the show migrations command to confirm connection to the external database.<br>
+   -- python3 manage.py runserver --
+   6. If you have to the database correctly, you can now run migrations to migrate the models to the new database.<br>
+   -- python3 manage.py migrate -- 
+   7. Create a superuser for the new database.<br>
+   -- python3 manage.py createsuperuser -- 
+   8. Install gunicorn which will act as our webserver and freeze this to the requirements.txt file.<br>
+   -- pip3 install gunicorn -- 
+   9. Create a Procfile in the root directory. This tells Heroku to create a web dyno which runs gunicorn and serves our django app. Add the following to the file:<br>
+   -- web: gunicorn my_vault.wsgi -- 
 
 ### Local Deployment
 
@@ -319,31 +346,26 @@ The following issues were raised during my mid project meeting with my mentor:
 
 |   Page   |   Result   |   Evidence   |
 | ---------- | :------------:| --------:|
-|   Home   |  No error  |[home](/docs/testing/w3c/home.png)    |
-|  Login   |  No error  |[login](/docs/testing/w3c/login.png)  |
-|  Logout  |  No error  |[logout](/docs/testing/w3c/logout.png)|
-|  Register|  No error  |[signup](/docs/testing/w3c/signup.png)|
-|   FAQ    |  No error  |[faq](/docs/testing/w3c/faq.png)    |
-|   ASK    |  No error  | [ask](/docs/testing/w3c/ask.png) |
-|  Profile |  No error  |[profile](/docs/testing/w3c/profile.png)    |
-|  Delete Profile |  No error  | [delete profile](/docs/testing/w3c/delete-profile.png) |
-|  Update Profile |  No error  |  [update profile](/docs/testing/w3c/update-profile.png) |
-|  Location |  No error  | [location](/docs/testing/w3c/location.png) |
-|  Validate Key |  No error  |[validate key](/docs/testing/w3c/validate-key.png)    |
-|  Dashboard |  No error  | [dashboard](/docs/testing/w3c/dashboard.png) |
-|  Transactions |  No error  | [transactions](/docs/testing/w3c/transactions.png) |
-|  Transaction History |  No error  |[transaction history](/docs/testing/w3c/transaction-history.png)    |
+|   Home   |  No error  |     [home](/docs/testing/w3c/home.png)                        |
+|  Login   |  No error  |     [login](/docs/testing/w3c/login.png)                      |
+|  Logout  |  No error  |     [logout](/docs/testing/w3c/logout.png)                    |
+|  Register|  No error  |     [signup](/docs/testing/w3c/signup.png)                    |
+|   FAQ    |  No error  |     [faq](/docs/testing/w3c/faq.png)                          |
+|   ASK    |  No error  |     [ask](/docs/testing/w3c/ask.png)                          |
+|  Profile |  No error  |     [profile](/docs/testing/w3c/profile.png)                  |
+|  Delete Profile |  No error | [delete profile](/docs/testing/w3c/delete-profile.png)  |
+|  Update Profile |  No error | [update profile](/docs/testing/w3c/update-profile.png)  |
+|  Location       |  No error | [location](/docs/testing/w3c/location.png)              |
+|  Validate Key |  No error  |[validate key](/docs/testing/w3c/validate-key.png)        |
+|  Dashboard |  No error  |   [dashboard](/docs/testing/w3c/dashboard.png)              |
+|  Transactions |  No error  | [transactions](/docs/testing/w3c/transactions.png)       |
+|  Transaction History |  No error  |[transaction history](/docs/testing/w3c/transaction-history.png)  |
 |  Send Payment |  No error  | [send payment](/docs/testing/w3c/send-payment.png) |
 
 #### CSS
 
 [W3C](https://validator.w3.org/) was used to validate the CSS.
 ![css](/docs/testing/w3c/css-validator.png)
-
-#### JavaScript
-
-[JS Hint](https://jshint.com/) was used to validate the JavaScript.
-
 
 #### Python
 
