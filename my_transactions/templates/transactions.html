@@ -3,8 +3,7 @@
 {% block content %}
 
 <!-- If account suspended this message will appear -->
-{% if profile.suspended%}
-<div id="transactions-main">
+{% if profile.suspended %}
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mx-auto">
@@ -16,7 +15,6 @@
       </div>
     </div>
   </div>
-</div>
 {% else %}
 <!-- If private key validated from profile.html the user will have access to transaction details -->
 {% if is_validated %}
@@ -69,6 +67,18 @@
   </div>
 </div>
 </div>
+</div>
+{% else %}
+<!-- Message if the private key not validated -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mx-auto">
+      <p>Please validate your private key to access the transactions.</p>
+      <div class="col">
+        <a href="{% url 'validate_key' %}" class="btn btn-secondary ">Validate Key</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endif %}
 {% endif %}
