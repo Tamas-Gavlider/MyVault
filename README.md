@@ -408,20 +408,20 @@ WAVE(Web Accessibility Evaluation Tool) allows developers to create content that
 |---------|--------------| -----------|
 | Home    |  No erros    | [home](/docs/testing/wave/home-wave.png)             |
 | Login   |  No errors   | [login](/docs/testing/wave/login-wave.png)           |
-| Logout  |              |         |
+| Logout  |  No errors   | [logout](/docs/testing/wave/logout-wave.png)         |
 | Register|  No errors   | [register](/docs/testing/wave/register-wave.png)     |
 | FAQ     |  No errors   | [faq](/docs/testing/wave/faq-wave.png)               |
 | Ask     |  No errors   |  [ask](/docs/testing/wave/ask-wave.png)              |
 | Profile   |  No errors | [profile](/docs/testing/wave/profile-wave.png)       |
-| Edit profile    |          |         |
+| Update profile    | No errors   | [update profile](/docs/testing/wave/update-profile-wave.png)        |
 | Delete profile   |   No errors     |  [delete profile](/docs/testing/wave/delete-profile.png)       |
-| Reset Password   |          |         |
-| Validate Key  |          |         |
-| Location   |          |         |
-| Dashboard   |          |         |
-| Transactions   |          |         |
-| Send payment   |          |         |
-| History   |          |         |
+| Reset Password   |   No errors       |  [password reset](/docs/testing/wave/pwd-reset-wave.png)       |
+| Validate Key  |   No errors       |   [validate key](/docs/testing/wave/validate-key-wave.png)     |
+| Location   |   No errors       |   [location](/docs/testing/wave/location-wave.png)     |
+| Dashboard   |  No errors       |   [dashboard](/docs/testing/wave/dashboard-wave.png)    |
+| Transactions   |   No errors       | [transactions](/docs/testing/wave/transactions-wave.png)        |
+| Send payment   |  No errors        | [send payment](/docs/testing/wave/send-payment-wave.png)        |
+| Transactions History   |   No errors       | [transactions history](/docs/testing/wave/transactions-history-wave.png)        |
 
 #### Automated testing
 
