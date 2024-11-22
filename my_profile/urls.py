@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import (update_profile, location, delete_profile,
-                   validate_private_key)
+                    validate_private_key)
 
 urlpatterns = [
     path('', views.my_profile, name='my_profile'),

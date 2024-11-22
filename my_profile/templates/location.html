@@ -3,6 +3,7 @@
 {% block content%}
 
 {% if previous_login %}
+<!-- Shows the last login details of the user date/time/IP address/city/country-->
 <div class="text-center px-2">
   <h3>Last Login Location:</h3>
  <p>{{ previous_login }}</p>
@@ -10,7 +11,7 @@
     <p>No previous login history available.</p>
   </div>
 {% endif %}
-
+<!-- Current location of the user -->
 <div class="text-center px-2">
   <h3>Current Location:</h3>
 <p>IP: {{details.ip}} - City: {{details.city}} - Country: {{details.country_name}}</p>

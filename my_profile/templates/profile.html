@@ -58,8 +58,7 @@
                             <a href="{% url 'validate_key' %}" class="btn btn-secondary">Unlock Account</a>
                         </div>
                         {% else %}
-                        <!-- Working buttons if account is unlocked/not suspended -->
-                         <!-- Buttons before the pk validation when user logs in -->
+                        <!-- Working buttons if account is not suspended -->
                          {% if is_validated %}
                         <div class="col">
                             <a href="{% url 'update_profile' %}" class="btn btn-secondary">Edit Profile</a>
@@ -71,6 +70,7 @@
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary">Reset Password</a>
                         </div>
                         {% else %}
+                        <!-- Buttons before the pk validation when user logs in -->
                         <div class="col">
                             <a href="{% url 'account_reset_password' %}" class="btn btn-secondary ">Reset Password</a>
                         </div>

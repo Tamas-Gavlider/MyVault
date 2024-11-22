@@ -11,7 +11,7 @@
             <div class="user-container rounded-3 mx-auto shadow mt-4 p-3">
                 <form method="post">
                     {% csrf_token %}
-                    <!-- Form 2 for user  email address -->
+                    <!-- Form 2 for user  email address, first name and last name -->
                     <div class="form-group mb-3">
                        <p class="visually-hidden">{{ form2.email.label_tag }}</p>
                         {{form2.email}}
