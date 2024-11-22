@@ -72,8 +72,8 @@ User Stories were tracked throughout the project as [GitHub issues](https://gith
 ### Structure
 
 The ERD represents the database structure for the application. Due to the data being used for the project I have opted to use a relational database as this will best suit my requirements.
- - Profile - Stores user-specific details such as balance, notification preferences, and unique sending/receiving addresses. Each profile is linked to a user account via a Foreign Key.
- - Transactions - Tracks all financial activities, including deposits, withdrawals, and transfers between users, with fields for transaction type, status, and amounts.
+ - Profile - Stores user-specific details such as balance, notification preferences, and unique sending/receiving addresses. The model has full CRUD (Create, Read, Update, Delete) functionality to manage user information securely and efficiently.Each profile is linked to a user account via a Foreign Key.
+ - Transactions - Tracks all financial activities, including deposits, withdrawals, and transfers between users, with fields for transaction type, status, and amounts. The model is designed for integrity and security. Even if a Profile is deleted, related transaction records are retained for compliance and audit purposes.
  - Deleted profile - Maintains a record of deleted user profiles, preserving details like username, email, and deletion date for audit purposes.
  - User questions - Captures questions submitted by users in the FAQ section, including the question text and submission date.
 
