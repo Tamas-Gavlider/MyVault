@@ -159,11 +159,12 @@ These options ensure users have full control over their account preferences and 
 #### Delete Profile
 
 Users can delete their profile; however, all funds will be forfeited upon deletion. A warning message will be displayed to inform users of this outcome before they confirm the deletion.
+![delete](/docs/screenshots/delete-profile.png)
 
 #### Validate private key/Unlock account
 The Validate Key and Unlock Account functionalities in MyVault use the same underlying logic for security and access control:
 
-- Validate Key: When the user clicks the Validate Key button, it ensures that the private key is correctly validated. Once validated, the user gains access to sensitive sections, such as the Transactions and Dashboard pages, which require this validation for security.
+- Validate Key: When the user clicks the Validate Key button, it ensures that the private key is correctly validated. Once validated, the user gains access to sensitive sections, such as the Transactions and Dashboard pages, account deletion and profile update, which require this validation for security.
 
 - Unlock Account: The Unlock Account functionality works in a similar way. It removes the suspension from the account by validating the user's private key, restoring access to all features and functionalities that were previously disabled due to the suspension.
 
@@ -262,6 +263,10 @@ When viewing details of a Received transaction, the receiver can see the name of
 The Pending status is part of the transaction model but will only be implemented and visible after integrating the testnet environment. This will allow users to track transactions that are awaiting confirmation.
 This design ensures transparency and keeps users informed about the status of their financial activities, with room for future expansion to include pending transactions once the testnet is fully utilized.
 #### Future Implementations
+- Real Payments and Withdrawals: Enable live payment and withdrawal functionalities using Stripe.
+- Historical Charts: Introduce a historical view to the charts, allowing users to compare transactions across different months.
+- Profile Picture Upload: Add functionality for users to upload a profile picture, which will be displayed in the transaction history.
+- Payment Requests: Allow users to request payments from others. When a payment request is made, a notification message will appear on the profile of the recipient.
 
 ## Technologies, Languages, and Programs used
 
@@ -272,7 +277,7 @@ This design ensures transparency and keeps users informed about the status of th
 - Django - A high-level Python web framework that encourages rapid development and clean, pragmatic design.
 - Djano Allauth - Used for authentication, registration, login & password reset.
 - gunicorn - a Python WSGI HTTP Server
-- psycopg2 - a postgres database adapter which allow us to connect with a postgres database
+- psycopg2 - allow us to connect with a postgres database
 - PostgreSQL - The database used to store transactions data, user information, and other relevant data for the application.
 - Google Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
 - JavaScript - for Stripe and Google Maps.
