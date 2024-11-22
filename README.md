@@ -413,6 +413,8 @@ The following issues were raised during my mid project meeting with my mentor:
 | my-profile-views.py    |   Pass         |        [profile-views](/docs/testing/pep8/my-profile-views.png)  
 | my-profile-form.py      |   Pass            |        [profile-form](/docs/testing/pep8/my-profile-form.png)
 | my-profile-admin.py      |   Pass            |        [profile-admin](/docs/testing/pep8/my-profile-admin.png)  
+| my-profile-tasks.py      |   Pass            |        [profile-tasks](/docs/testing/pep8/profile-tasks.png) 
+| my-profile-app.py      |   Pass            |        [profile-app](/docs/testing/pep8/profile-app.png)  
 | my-transactions-admin.py      |   Pass            |        [transaction-admin](/docs/testing/pep8/transactions-admin.png) 
 | my-transactions-models.py      |   Pass            |        [transaction-models](/docs/testing/pep8/transactions-models.png) 
 | my-transactions-tests.py      |   Pass            |        [transaction-test](/docs/testing/pep8/transactions-test.png) 

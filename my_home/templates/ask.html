@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- AI responses -->
+<!-- Input for questions -->
 <div class="user-container rounded-3 mx-auto shadow p-3 text-center">
   <form method="get" action="{% url 'ask' %}">
     <label for="question">Ask a question:</label>
@@ -9,6 +9,7 @@
     <button type="submit" class="btn-secondary button shadow mt-3 mb-3 btn">Ask</button>
   </form>
 </div>
+<!-- AI responses -->
 {% if ai_response %}
 <div class="container">
   <p class="fst-italic text-center">{{ ai_response |linebreaksbr }}</p>
