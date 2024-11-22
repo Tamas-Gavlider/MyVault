@@ -291,7 +291,7 @@ This design ensures transparency and keeps users informed about the status of th
 - Google Maps API: Used for tracking and displaying the user's location based on their IP address, enhancing features like login location tracking and visualization on a map.
 - IpInfo: Used to obtain the user's IP address and retrieve location details (e.g., city, region, country) for features like login location tracking.
 - Gemini API: An AI API integrated into the "Ask" page, enabling the application to answer user questions dynamically.
-[Toolsaday](https://toolsaday.com/writing/faq-generator) - to generate FAQ questions.
+- [Toolsaday](https://toolsaday.com/writing/faq-generator) - to generate FAQ questions.
 ### Stripe
 
 Stripe for the website is currently in developer mode, which allows us to be able to process test payments to check the function of the site.
@@ -478,6 +478,11 @@ WAVE(Web Accessibility Evaluation Tool) allows developers to create content that
 #### Automated testing
 
 Automated testing for this project was carried out with [Django TestCase](https://docs.djangoproject.com/en/4.1/topics/testing/overview/).
+
+Tranasctions:
+![Transaction](/docs/testing/automated_testing/transaction-app-test.png)
+Profile:
+![Profile](/docs/testing/automated_testing/profile-app-test.png)
 
 #### Manual Testing
 

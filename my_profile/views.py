@@ -44,7 +44,7 @@ def my_profile(request):
     """
     # Check if the profile exists for the current user, create one if not
     profile, created = Profile.objects.get_or_create(user=request.user)
-    
+
     # Create the unique sending, receiving address and the private key
     if not profile.sending_address:
         profile.sending_address = generate_unique_sending_address()
@@ -59,7 +59,8 @@ def my_profile(request):
     is_validated = request.session.get('is_validated', False)
 
     return render(request, 'profile.html', {"profile": profile,
-                  "raw_key": raw_key if created else None, 'is_validated':is_validated})
+                  "raw_key": raw_key if created else None,
+                                            'is_validated': is_validated})
 
 
 @login_required
@@ -67,7 +68,7 @@ def update_profile(request):
     """
     Form activate/disable email notification, login location
     and suspend account
-    Form2 is for changing the user email address
+    Form2 is for changing the user email address,add/change first/last name
     """
     profile = Profile.objects.get(user=request.user)
 
@@ -108,7 +109,8 @@ The MyVault Team
 @login_required
 def delete_profile(request):
     """
-    Submit profile deletion. Adming needs to review it and approve it
+    Delete the profile. It will record the time of the delete request
+    and will add the deleted profile to the log which is visible by admin.
     """
     if request.method == "POST":
         user_profile = get_object_or_404(Profile, user=request.user)
@@ -163,7 +165,7 @@ def location(request):
         handler = ipinfo.getHandler(access_token)
         details = handler.getDetails(ip_address)
         new_login_entry = (
-            f"{strftime('%Y-%m-%d %H:%M:%S', gmtime())}"
+            f"{strftime('%Y-%m-%d - %H:%M:%S', gmtime())}"
             f"- IP: {details.ip} - City: {details.city}"
             f" - Country: {details.country_name}, ")
         profile.last_login += new_login_entry
@@ -201,4 +203,3 @@ def validate_private_key(request):
                           {'message': message, 'status': 'error'})
 
     return render(request, 'validate_key.html')
-
