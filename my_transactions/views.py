@@ -266,7 +266,7 @@ The MyVault Team
                 amount=amount,
                 transaction_note=note,
                 sending_address=(f"{sender_profile.user.first_name}"
-                                f" {sender_profile.user.last_name}"),
+                                 f" {sender_profile.user.last_name}"),
                 receiving_address=receiving_profile.receiving_address,
             )
             if sender_profile.notificationEmail:

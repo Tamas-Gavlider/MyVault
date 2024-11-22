@@ -406,6 +406,7 @@ The following issues were raised during my mid project meeting with my mentor:
 | my-home-models.py     |   Pass            |        [home-models](/docs/testing/pep8/my-home-models.png)       
 | my-home-views.py      |   Pass            |        [home-views](/docs/testing/pep8/my-home-views.png)  
 | my-home-admin.py      |   Pass            |        [home-admin](/docs/testing/pep8/my-home-admin.png)   
+| my-home-urls.py      |   Pass            |        [home-urls](/docs/testing/pep8/my-home-urls.png)   
 | my-profile-models.py  |   Pass            |       [profile-models](/docs/testing/pep8/my-profile-models.png)       
 | my-profile-signals.py      |   Pass            |        [profile-signals](/docs/testing/pep8/my-profile-signals.png)  
 | my-profile-tests.py      |   Pass            |        [profile-tests](/docs/testing/pep8/my-profile-tests.png)   
@@ -422,7 +423,7 @@ The following issues were raised during my mid project meeting with my mentor:
 | my-transactions-views.py      |   Pass            |        [transaction-views](/docs/testing/pep8/transactions-views.png) 
 | dashboard-views.py      |   Pass            |        [dashboard-views](/docs/testing/pep8/dashboard-views.png) 
 | dashboard-urls.py      |   Pass            |        [dashboard-urls](/docs/testing/pep8/dashboard-url.png) 
-| dashboard-admin.py      |   Pass            |        [dashboard-admin](/docs/testing/pep8/dashboard-admin.png) 
+
 
 
 #### Lighthouse 
