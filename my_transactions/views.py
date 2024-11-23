@@ -161,6 +161,9 @@ def my_transactions(request):
 # Sending/Receiving payments between users
 
 
+def payment_sent(request):
+    return render(request, 'payment_sent.html')
+
 @login_required
 def send_payment(request):
     """
@@ -193,7 +196,8 @@ def send_payment(request):
             if sender_profile.balance < amount:
                 return render(request, 'send_payment.html', {'error':
                               'Insufficient balance'})
-
+            if sending_address == sender_profile.receiving_address:
+                return render(request, 'send_payment.html', {'error': 'You cannot send money to your own address.'})
             sender_profile.balance -= amount
             receiving_profile.balance += amount
             sender_profile.save()
@@ -244,7 +248,7 @@ The MyVault Team
                 'amount': amount
             }
 
-            return redirect('my_transactions')
+            return redirect('payment_sent')
 
         except Exception as e:
             # Log the failed transaction for the sender as "Sent"
