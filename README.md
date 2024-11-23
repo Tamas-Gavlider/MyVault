@@ -124,6 +124,8 @@ If users don’t find the information they need or require further assistance, a
 
 The Ask page in MyVault leverages the Gemini API to provide instant answers to user queries. To streamline the process, the page includes predefined prompts to guide users in framing their questions. All submitted questions are logged and stored, ensuring they are accessible for review and management via the admin panel.
 ![Ask page](/docs/screenshots/ask-page.png)
+Questions asked by users visible in admin panel:
+![admin-panel](/docs/screenshots/questions-admin-panel.png)
 
 #### Profile
 
@@ -171,6 +173,8 @@ Email notifications:
 
 Users can delete their profile; however, all funds will be forfeited upon deletion. A warning message will be displayed to inform users of this outcome before they confirm the deletion.
 ![delete](/docs/screenshots/delete-profile.png)
+Deleted users visible in admin panel:
+![panel](/docs/screenshots/deleted-profile-admin-panel.png)
 
 #### Validate private key/Unlock account
 The Validate Key and Unlock Account functionalities in MyVault use the same underlying logic for security and access control:
@@ -226,6 +230,10 @@ This process ensures that users can top up their accounts securely while using S
 If the payment is successful, a confirmation message will be displayed to the user.<br>
 ![topup](/docs/screenshots/checkout.gif)
 
+A link has been added to the page to direct the user back to the transactions.
+![success](/docs/screenshots/top-up-success.png)
+![failed](/docs/screenshots/top-up-failed.png)
+
 #### Send Payment
 
 The Send Payment form in MyVault includes validation to ensure secure and accurate transactions. Here’s how it works:
@@ -244,6 +252,7 @@ If all validations are passed, the payment will be processed, and the user will 
 This ensures that users can only send valid payments within their account limits, enhancing security and preventing errors.
 
 ![form](/docs/screenshots/send-payment.gif)
+![sent](/docs/screenshots/payment-sent.png)
 
 #### Withdraw
 
@@ -464,6 +473,14 @@ I have used Googles Lighthouse testing to test the performance, accessibility, b
 | Transaction   |       Mobile     |        ![home-mobile](/docs/testing/lighthouse/transaction-mobile.png) 
 | Transaction History   |Desktop   |        ![home-mobile](/docs/testing/lighthouse/history-desktop.png)  
 | Transaction History  | Mobile    |        ![home-mobile](/docs/testing/lighthouse/history-mobile.png) 
+| Top Up confirmation  | Mobile    |        ![home-mobile](/docs/testing/lighthouse/top-up-confirmation-mobile.png) 
+| Top Up confirmation  | Desktop   |       ![home-mobile](/docs/testing/lighthouse/top-up-confirmation-desktop.png) 
+| Withdraw Success     | Mobile    |       ![home-mobile](/docs/testing/lighthouse/withdraw-success-mobile.png) 
+| Withdraw Success     | Desktop   |       ![home-mobile](/docs/testing/lighthouse/withdraw-success-desktop.png) 
+| Payment sent         | Mobile    |       ![home-mobile](/docs/testing/lighthouse/payment-sent-mobile.png) 
+| Payment sent         | Desktop   |       ![home-mobile](/docs/testing/lighthouse/payment-sent-desktop.png) 
+| Withdraw Failed.     | N/A       |    Page could not be tested. After the test was started page refreshed and asked for the private key validation
+
 
 
 #### Wave
@@ -488,6 +505,12 @@ WAVE(Web Accessibility Evaluation Tool) allows developers to create content that
 | Transactions   |   No errors       | [transactions](/docs/testing/wave/transactions-wave.png)        |
 | Send payment   |  No errors        | [send payment](/docs/testing/wave/send-payment-wave.png)        |
 | Transactions History   |   No errors       | [transactions history](/docs/testing/wave/transactions-history-wave.png)        |
+| Top Up success   |  No errors        | [top up success](/docs/testing/wave/top-up-successful-wave.png)        |
+| Top Up failed   |  No errors        | [top up failed](/docs/testing/wave/top-up-failed-wave.png)        |
+| Payment sent   |  No errors        | [sent payment](/docs/testing/wave/payment-sent-wave.png)        |
+| Withdrawal failed   |  No errors        | [withdraw failed](/docs/testing/wave/withdrawal-failed-wave.png)        |
+| Withdrawal success   |  No errors        | [withdraw success](/docs/testing/wave/withdraw-successful-wave.png)        |
+
 
 #### Automated testing
 
@@ -499,6 +522,11 @@ Profile:
 ![Profile](/docs/testing/automated_testing/profile-app-test.png)
 
 #### Manual Testing
+
+- All buttons, anchor tags, and forms were thoroughly tested to verify that they performed the expected actions.
+- Responsiveness: The application was tested on multiple screen sizes (e.g., mobile,and desktop) to confirm that the layout adapts correctly and elements adjust according to the screen size.
+- Edge Case Scenarios: Manual testing was performed for edge cases such as entering invalid data, exceeding input limits, and checking system behavior under unusual conditions (e.g., withdrawal amounts greater than the balance).
+- User Flow: Testing ensured that the user flow was seamless and intuitive, including actions such as logging in, making payments, sending funds, and updating account details.
 
 #### Full Testing
 
@@ -517,6 +545,29 @@ Testing was also performed using the following browsers:
 
 #### Bugs
 
+Bugs were tracked throughout the project as [GitHub issues](https://github.com/users/Tamas-Gavlider/projects/5/views/1).
+The following bugs were identified during the testing:
+1. Login Location:<br>
+  - Issue: The last login location was not displaying the correct data.
+  - Cause: Improper Python code design that violated PEP8 guidelines by using double quotes instead of single quotes within an f-string.
+  - Fix: Replaced double quotes with single quotes in the f-string to resolve the issue.
+2. Stripe Template:<br>
+  - Issue: After adding styling to the payment process HTML, the transaction submitted correctly, but the user was redirected to a blank page instead of a success or failure confirmation. Additionally, the payment amount was not added to the account balance.
+  - Cause: Possible compatibility issues with the styled template.
+  - Fix: Implemented a different Stripe template designed specifically for the testnet, using a template provided directly by Stripe.
+3. Send Payment:<br>
+  - Issue: Users were able to send funds to their own receiving address, causing the balance to increase without deducting the sent amount.
+  - Cause: Lack of validation.
+  - Fix: Added validation to compare the sender’s receiving address with the receiver’s receiving address. Transactions to the same address are now blocked.
+4. App Crash on Withdrawals:<br>
+  - Issue: The application crashed if the withdrawal amount exceeded 10 digits.
+  - Cause: Lack of input validation for extremely large amounts.
+  - Fix: Instead of adding a max attribute to the input element, which would affect responsiveness and input size, I implemented backend validation. If a user enters an amount exceeding the allowed limit, they are redirected to a withdrawal failure page with an error message.
+5. Email Notification:<br>
+  - Issue: Automated emails were not sent, even though the email address and password were correctly configured. The terminal displayed an "email and password mismatch" error.
+  - Cause: Security restrictions in Google prevented the use of the email credentials directly.
+  - Fix: Resolved the issue by generating and using an app-specific password in Google for email authentication. This allowed the system to send emails successfully.
+
 ## Credits
 
 ### Media
@@ -533,7 +584,11 @@ FAQ questions were generated by [Toolsaday](https://toolsaday.com/writing/faq-ge
 
 For the location tracker I referred to [IPinfo](https://github.com/ipinfo/python/blob/master/README.md).
 
-For the last login time format I reffered to [StackOverFlow](https://stackoverflow.com/questions/415511/how-do-i-get-the-current-time-in-python).
+For the last login time format I referred to [StackOverFlow](https://stackoverflow.com/questions/415511/how-do-i-get-the-current-time-in-python).
+
+For implementing the hash private key I referred to [StackOverFlow article](https://stackoverflow.com/questions/25098466/how-to-store-django-hashed-password-without-the-user-object).
+
+For keeping the users/transactions history list after deletion I referred to [article](https://forum.djangoproject.com/t/how-to-save-user-name-after-deleting-user-for-any-report-which-is-generated-by-user/2067).
 
 [Stripe API](https://docs.stripe.com/checkout/quickstart) documentation to implement the test payments.
 
@@ -544,3 +599,5 @@ For the last login time format I reffered to [StackOverFlow](https://stackoverfl
 [Google Maps API](https://developers.google.com/maps/documentation) for the map on the location page.
 
 [W3Schools](https://www.w3schools.com/) to review how certain libraries function and for Django tutorials.
+
+Additionally, I utilized the Blog project from Code Institute to grasp basic functionalities and logic, applying these concepts to my own projects.
