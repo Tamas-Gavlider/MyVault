@@ -156,6 +156,17 @@ The Edit Profile page allows users to manage and update their account details co
 These options ensure users have full control over their account preferences and settings.
 ![Update profile](/docs/screenshots/update-profile.png)
 
+Email notifications:
+
+| Type    |  Example    |
+|---------|-------------|
+| Login   | [login](/docs/email-notification/login-email.png)  |
+| Payment | [payment](/docs/email-notification/payment-email.png) |
+| Changes | [profile changes](/docs/email-notification/profile-change-email.png) |
+| Password reset | [password reset](/docs/email-notification/pwd-reset-email.png) |
+| Top Up  | [top-up](/docs/email-notification/top-up-email.png) |
+| Withdraw | [withdraw](/docs/email-notification/withdraw-email.png)
+
 #### Delete Profile
 
 Users can delete their profile; however, all funds will be forfeited upon deletion. A warning message will be displayed to inform users of this outcome before they confirm the deletion.
