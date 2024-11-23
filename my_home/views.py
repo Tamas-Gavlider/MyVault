@@ -31,7 +31,18 @@ common_questions = {
     " until the account is reactivated with your private key.",
     "location": "You have the option to enable location tracking."
     " If activated, you’ll be able to view your last login location"
-    " and current login location on Google Maps."
+    " and current login location on Google Maps.",
+    "private key": "The private key cannot be recovered. As stated during"
+                   " registration, if you lose your private key, it cannot be"
+                   " retrieved, and you will lose access"
+                   " to your funds, including the ability to withdraw them."
+                   " For any further assistance,"
+                   " please feel free to contact our support team.",
+    "register": "Please be aware that we are currently operating in a testnet"
+                " environment. While this is only a testing phase,"
+                " registration is still required to help us enhance our"
+                " services and identify any issues that may arise during the"
+                " registration process."
 }
 
 
