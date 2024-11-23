@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from my_profile.models import Profile
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
 from .models import Transactions
 from decimal import Decimal, InvalidOperation
@@ -320,6 +320,9 @@ def withdraw_fund(request):
         amount = request.POST.get("amount")
         try:
             amount = Decimal(amount)
+            if amount >= Decimal('99999999.99'):
+                return render(request, 'withdraw.html', {'error':
+                          'Invalid amount: exceeds the allowed limit'})
         except (TypeError, ValueError):
             Transactions.objects.create(
                 user=request.user,
