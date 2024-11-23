@@ -164,6 +164,7 @@ def my_transactions(request):
 def payment_sent(request):
     return render(request, 'payment_sent.html')
 
+
 @login_required
 def send_payment(request):
     """
@@ -196,8 +197,10 @@ def send_payment(request):
             if sender_profile.balance < amount:
                 return render(request, 'send_payment.html', {'error':
                               'Insufficient balance'})
+            own_address = 'You cannot send money to your own address.'
             if sending_address == sender_profile.receiving_address:
-                return render(request, 'send_payment.html', {'error': 'You cannot send money to your own address.'})
+                return render(request, 'send_payment.html',
+                              {'error': own_address})
             sender_profile.balance -= amount
             receiving_profile.balance += amount
             sender_profile.save()
