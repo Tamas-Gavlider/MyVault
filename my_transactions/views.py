@@ -322,7 +322,7 @@ def withdraw_fund(request):
             amount = Decimal(amount)
             if amount >= Decimal('99999999.99'):
                 return render(request, 'withdraw.html', {'error':
-                          'Invalid amount: exceeds the allowed limit'})
+                              'Invalid amount: exceeds the allowed limit'})
         except (TypeError, ValueError):
             Transactions.objects.create(
                 user=request.user,
