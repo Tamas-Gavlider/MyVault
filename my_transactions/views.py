@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.utils.dateparse import parse_datetime
 from django.conf import settings
 from django.urls import reverse
 from django.db.models import Q
@@ -397,25 +398,44 @@ def transactions_history(request):
     transactions = Transactions.objects.filter(
                     user=request.user).order_by('-date')
 
-    date_from = request.GET.get('date_from')
-    date_to = request.GET.get('date_to')
-    min_amount = request.GET.get('min_amount')
-    max_amount = request.GET.get('max_amount')
-    transaction_type = request.GET.get('transaction_type')
+    date_from = request.GET.get('date_from', '').strip()
+    date_to = request.GET.get('date_to', '').strip()
+    min_amount = request.GET.get('min_amount', '').strip()
+    max_amount = request.GET.get('max_amount', '').strip()
+    transaction_type = request.GET.get('transaction_type', '').strip()
 
-    if date_from:
-        transactions = transactions.filter(date__gte=date_from)
-    if date_to:
-        transactions = transactions.filter(date__lte=date_to)
-    if min_amount:
-        transactions = transactions.filter(amount__gte=min_amount)
-    if max_amount:
-        transactions = transactions.filter(amount__lte=max_amount)
+    # Validate and filter by date range
+    try:
+        if date_from:
+            parsed_date_from = parse_datetime(date_from)
+            if not parsed_date_from:
+                raise ValueError("Invalid date_from format")
+            transactions = transactions.filter(date__gte=parsed_date_from)
+
+        if date_to:
+            parsed_date_to = parse_datetime(date_to)
+            if not parsed_date_to:
+                raise ValueError("Invalid date_to format")
+            transactions = transactions.filter(date__lte=parsed_date_to)
+    except ValueError as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
+    try:
+        if min_amount:
+            min_amount = float(min_amount)
+            transactions = transactions.filter(amount__gte=min_amount)
+        if max_amount:
+            max_amount = float(max_amount)
+            transactions = transactions.filter(amount__lte=max_amount)
+    except ValueError:
+        return JsonResponse({'error': 'Invalid amount format. Please provide numeric values.'}, status=400)
+
     if transaction_type:
         transactions = transactions.filter(type=transaction_type)
 
+    # Paginate results
     paginator = Paginator(transactions, 6)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'transactions_history.html', {'page_obj': page_obj})
