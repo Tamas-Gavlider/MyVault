@@ -36,7 +36,7 @@ def dashboard(request):
     total_sent = 0
     total_deposit = 0
     total_received = 0
-    bar_chart = pygal.Pie()
+    bar_chart = pygal.Pie(legend_at_bottom = True)
     for transaction in transactions:
         if transaction.status == 'Completed':
             if transaction.type == 'Withdraw':
@@ -51,23 +51,24 @@ def dashboard(request):
             elif transaction.type == 'Received':
                 total_received += transaction.amount
                 total_inflow += transaction.amount
-    bar_chart.add('Withdraw', total_withdraw)
-    bar_chart.add('Deposit', total_deposit)
-    bar_chart.add('Sent', total_sent)
-    bar_chart.add('Received', total_received)
+    bar_chart.add(f'Withdraw: {total_withdraw} USD', total_withdraw)
+    bar_chart.add(f'Deposit: {total_deposit} USD', total_deposit)
+    bar_chart.add(f'Sent: {total_sent} USD', total_sent)
+    bar_chart.add(f'Received: {total_received} USD', total_received)
     chart_svg = bar_chart.render().decode('utf-8')
-    bar_chart = pygal.HorizontalBar()
+    bar_chart = pygal.HorizontalBar(legend_at_bottom = True)
     current_month = datetime.now().strftime("%B")
     bar_chart.title = f'Account movements for {current_month} (in USD)'
-    bar_chart.add('Deposit', total_deposit)
-    bar_chart.add('Withdraw', total_withdraw)
-    bar_chart.add('Sent', total_sent)
-    bar_chart.add('Received', total_received)
+    bar_chart.add(f'Withdraw: {total_withdraw} USD', total_withdraw)
+    bar_chart.add(f'Deposit: {total_deposit} USD', total_deposit)
+    bar_chart.add(f'Sent: {total_sent} USD', total_sent)
+    bar_chart.add(f'Received: {total_received} USD', total_received)
     chart_horizontal = bar_chart.render().decode('utf-8')
-    bar_chart_2 = pygal.Pie()
+    # Thirds chart will reflect the total of inflows and outflows
+    bar_chart_2 = pygal.Pie(legend_at_bottom = True)
     bar_chart_2.title = f'Cash flow in USD for {current_month}'
-    bar_chart_2.add('Money Inflow', total_inflow)
-    bar_chart_2.add('Money Outflow', total_outflow)
+    bar_chart_2.add(f'Money Inflow: {total_inflow}', total_inflow)
+    bar_chart_2.add(f'Money Outflow: {total_outflow}', total_outflow)
     chart_total = bar_chart_2.render().decode('utf-8')
     return render(request, 'dashboard.html', {
         'transactions': transactions,

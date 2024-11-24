@@ -46,6 +46,7 @@ The live deployed site can be found [here](https://my-vault-cb8eb703ab63.herokua
     - [Manual Testing](#manual-testing)
     - [Full Testing](#full-testing)
     - [Bugs](#bugs)
+    - [Known Bugs](#known-bugs)
 - [Credits](#credits)
   - [Media](#media)
   - [Content](#content)
@@ -567,9 +568,12 @@ Full testing was performed on the following devices:
 - Mobile:
   - Iphone 11
   - Iphone 13
+  - Iphone 6s
 - Laptop: 
   - Macbook Pro 2019 13 inch screen
   - Mackbook Pro 2014 15 inch screen
+- Desktop:
+  - iMac 2013 21.5 inch
 
 Testing was also performed using the following browsers:
 - Chrome
@@ -604,6 +608,13 @@ The following bugs were identified during the testing:
 - Issue: Filtering transactions by date (date_from and date_to) caused a ValidationError when the date parameters included trailing spaces or were in an invalid format. The error message indicated the value must be in the format YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ].
 - Cause: The view did not validate the input date parameters before applying them as filters to the Transactions queryset.
 - Fix: Stripping any trailing or leading spaces from the date input values and using django.utils.dateparse.parse_datetime to validate and parse the date strings.
+
+#### Known Bugs
+
+During manual testing, the charts were not interactive on mobile phones and in Safari on iMac. To prevent similar issues on other devices and browsers, I’ve added the sum of each chart field to the bottom legend. This will ensure the charts remain informative across all devices.
+
+![chart](/docs/screenshots/chart.png)
+![chart2](/docs/screenshots/chart2.png)
 
 ## Credits
 
