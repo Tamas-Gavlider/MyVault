@@ -530,6 +530,11 @@ Profile:
 
 #### Manual Testing
 
+Test account details:<br>
+Username: test_account<br>
+Password: test_pwd<br>
+Private key: Dj2xtEaNtPXlnkDXlqZGf7ejBNs6Qj
+
 - All buttons, anchor tags, and forms were thoroughly tested to verify that they performed the expected actions.
 - Responsiveness: The application was tested on multiple screen sizes (e.g., mobile,and desktop) to confirm that the layout adapts correctly and elements adjust according to the screen size.
 - Edge Case Scenarios: Manual testing was performed for edge cases such as entering invalid data, exceeding input limits, and checking system behavior under unusual conditions (e.g., withdrawal amounts greater than the balance).
