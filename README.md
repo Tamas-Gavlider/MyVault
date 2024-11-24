@@ -49,6 +49,7 @@ The live deployed site can be found [here](https://my-vault-cb8eb703ab63.herokua
 - [Credits](#credits)
   - [Media](#media)
   - [Content](#content)
+  - [Acknowledgments](#acknowledgments)
 
 ## Agile Development
 
@@ -411,6 +412,12 @@ The following issues were raised during my mid project meeting with my mentor:
 |  Transactions |  No error  | [transactions](/docs/testing/w3c/transactions.png)       |
 |  Transaction History |  No error  |[transaction history](/docs/testing/w3c/transaction-history.png)  |
 |  Send Payment |  No error  | [send payment](/docs/testing/w3c/send-payment.png) |
+|  Payment Sent |  No error  | [payment sent](/docs/testing/w3c/payment-sent.png) |
+|  Withdraw success |  No error  | [withdraw success](/docs/testing/w3c/withdraw-success.png) |
+|  Withdraw fail |  No error  | [withdraw fail](/docs/testing/w3c/withdraw-fail.png) |
+|  Top Up success |  Not retrievable | [withdraw fail](/docs/testing/w3c/topup-success.png) |
+|  Top Up fail |  Not retrievable | [withdraw fail](/docs/testing/w3c/topup-fail.png) |
+
 
 #### CSS
 
@@ -528,6 +535,27 @@ Profile:
 - Edge Case Scenarios: Manual testing was performed for edge cases such as entering invalid data, exceeding input limits, and checking system behavior under unusual conditions (e.g., withdrawal amounts greater than the balance).
 - User Flow: Testing ensured that the user flow was seamless and intuitive, including actions such as logging in, making payments, sending funds, and updating account details.
 
+Registration<br>
+![registration](/docs/testing/manual_testing/registration.gif)
+
+Edit profile<br>
+![edit](/docs/testing/manual_testing/edit-suspend-profile.gif)
+
+Private Key validation<br>
+![PK validation](/docs/testing/manual_testing/pk-validation.gif)
+
+Top Up<br>
+![topup](/docs/testing/manual_testing/topup.gif)
+
+Withdraw<br>
+![withdraw](/docs/testing/manual_testing/withdraw.gif)
+
+Send payment<br>
+![send payment](/docs/testing/manual_testing/send-payment.gif)
+
+Login and password reset<br>
+![login](/docs/testing/manual_testing/login-pwd-reset.gif)
+
 #### Full Testing
 
 Full testing was performed on the following devices:
@@ -601,3 +629,9 @@ For keeping the users/transactions history list after deletion I referred to [ar
 [W3Schools](https://www.w3schools.com/) to review how certain libraries function and for Django tutorials.
 
 Additionally, I utilized the Blog project from Code Institute to grasp basic functionalities and logic, applying these concepts to my own projects.
+
+### Acknowledgments
+
+I would like to acknowledge:
+
+- My Code Institute mentor Graeme Taylor for his valuable advices.
