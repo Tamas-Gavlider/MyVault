@@ -600,6 +600,10 @@ The following bugs were identified during the testing:
   - Issue: Automated emails were not sent, even though the email address and password were correctly configured. The terminal displayed an "email and password mismatch" error.
   - Cause: Security restrictions in Google prevented the use of the email credentials directly.
   - Fix: Resolved the issue by generating and using an app-specific password in Google for email authentication. This allowed the system to send emails successfully.
+6. DateTime Filter Issue in Transactions History View
+- Issue: Filtering transactions by date (date_from and date_to) caused a ValidationError when the date parameters included trailing spaces or were in an invalid format. The error message indicated the value must be in the format YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ].
+- Cause: The view did not validate the input date parameters before applying them as filters to the Transactions queryset.
+- Fix: Stripping any trailing or leading spaces from the date input values and using django.utils.dateparse.parse_datetime to validate and parse the date strings.
 
 ## Credits
 
@@ -622,6 +626,8 @@ For the last login time format I referred to [StackOverFlow](https://stackoverfl
 For implementing the hash private key I referred to [StackOverFlow article](https://stackoverflow.com/questions/25098466/how-to-store-django-hashed-password-without-the-user-object).
 
 For keeping the users/transactions history list after deletion I referred to [article](https://forum.djangoproject.com/t/how-to-save-user-name-after-deleting-user-for-any-report-which-is-generated-by-user/2067).
+
+For filter function I referred to this [StackOverFlow article](https://stackoverflow.com/questions/61949859/django-filter-objects-by-datetimefield-with-a-date-range).
 
 [Stripe API](https://docs.stripe.com/checkout/quickstart) documentation to implement the test payments.
 
