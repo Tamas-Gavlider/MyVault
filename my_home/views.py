@@ -23,8 +23,7 @@ common_questions = {
     "support": "To reach out the customer support, please send an"
     " email to myvaultbethekey@gmail.com",
     "delete": "To request account deletion, go to the Profile tab."
-    " Once submitted, the request will require approval from the page"
-    " admin. Please note: Deleting your account will result in the"
+    " Please note: Deleting your account will result in the"
     " permanent loss of all funds associated with it.",
     "suspend": "You can temporarily suspend your account from the"
     " profile page. During suspension, all functions will be disabled"
