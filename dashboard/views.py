@@ -36,6 +36,7 @@ def dashboard(request):
     total_sent = 0
     total_deposit = 0
     total_received = 0
+    # First chart
     bar_chart = pygal.Pie(legend_at_bottom=True)
     for transaction in transactions:
         if transaction.status == 'Completed':
@@ -56,6 +57,7 @@ def dashboard(request):
     bar_chart.add(f'Sent: {total_sent} USD', total_sent)
     bar_chart.add(f'Received: {total_received} USD', total_received)
     chart_svg = bar_chart.render().decode('utf-8')
+    # Second chart
     bar_chart = pygal.HorizontalBar(legend_at_bottom=True)
     current_month = datetime.now().strftime("%B")
     bar_chart.title = f'Account movements for {current_month} (in USD)'

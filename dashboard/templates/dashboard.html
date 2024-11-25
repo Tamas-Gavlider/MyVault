@@ -15,21 +15,24 @@
   </div>
 </div>
 {% else %}
-<!-- If private key validated from profile.html the user will have access to transaction details -->
+<!-- If private key validated from profile.html the user will have access to the page -->
 {% if is_validated %}
+<!-- First chart -->
 <div class="container">
   {{ chart_svg|safe }}
 </div>
 <br>
+<!-- Second chart -->
 <div class="container">
   {{ chart_horizontal|safe }}
 </div>
 <br>
+<!-- Third chart -->
 <div class="container">
   {{ chart_total|safe }}
 </div>
 {% else %}
-<!-- Message if the private key not validated -->
+<!-- Message if the private key not validated and account NOT suspended -->
 <div class="container">
   <div class="row">
     <div class="col-12 text-center mx-auto">

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
+/* Standard style for body */
 body {
     background-color: #333333 !important;
     color: #FFFFFF !important;
@@ -18,13 +19,10 @@ body {
     
 }
 
+/* Style for the M and V letters in navbar */
 .slogan-left {
     font-size: 450%;
     
-}
-
-#accordionExample {
-    background-color: #333333 !important;
 }
 
 .slogan-right {
@@ -33,7 +31,7 @@ body {
     
 }
 
-/* Style for logo letter V overlap the M */
+/* Style for logo letter V to overlap the M */
 #logoV {
     left: 5.6px !important;
     color: #00FFFF !important;
@@ -56,7 +54,7 @@ body {
     color: #FFFFFF !important;
 }
 
-/* Style for Google Maps */
+/* Style for Google Maps prewritten */
 #map {
     height: 350px;  /* Set a fixed height */
     width: 100%;   /* Full width */
@@ -79,30 +77,37 @@ body {
     background: rgb(235, 235, 235);
   }
 
+/* submit payment button */
 #submit_payment {
     background-color: #333333 !important;
 }
 
+/* Style for modal in transactions history*/
 .modal-body {
     color: #333333 !important;
 }
 
+/* Remove the list style from error list */
 .errorlist {
     list-style: none;
 }
 
+/* Ensure the private key text does not overflow the warning field */
 #private-key {
     word-wrap: break-word;
 }
 
+/* Style pagination button */
 .page-link {
     background-color: #6c757d !important;
 }
 
+/* Font size of profile */
 .profile {
     font-size: 300% !important;
 }
 
+/* Changing the color of the right side slogan on screens >= 965px */
 @media (min-width: 965px) {
     .slogan-right {
         color: #333333  !important;

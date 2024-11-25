@@ -64,7 +64,7 @@ def ask(request):
     user_question_text = request.GET.get('question')
     ai_response = ""
     if user_question_text:
-        # Check if the question matches any predefined responses
+        # Check if the question matches any responses from common_questions
         matched_response = next(
             (answer for keyword, answer in common_questions.items()
              if keyword in user_question_text.lower()), None
@@ -72,7 +72,7 @@ def ask(request):
         if matched_response:
             ai_response = matched_response
         else:
-            # If no match, use generative model with added context
+            # If no match, use AI model with added context
             prompt = (
                 "You are MyVault's virtual assistant, here to help"
                 " users manage their finances. "

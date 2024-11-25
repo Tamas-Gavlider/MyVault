@@ -17,6 +17,9 @@ class FAQAdmin(admin.ModelAdmin):
 
 @admin.register(UserQuestion)
 class UserQuestionAdmin(admin.ModelAdmin):
+    """
+    Questions asked from AI are visible from admin panel.
+    """
     list_display = ('user', 'question_text', 'date_asked')
     list_filter = ('date_asked',)
     search_fields = ('question_text', 'user__username')

@@ -9,16 +9,19 @@
                 class="d-flex flex-column mb-3 align-items-center align-self-center">
                 {% csrf_token %}
                 <div class="form-group mb-3">
+                    <!-- Sending amount -->
                     <label for="sending_amount">Amount</label>
                     <br>
                     <input type="number" name="sending_amount" id="sending_amount" placeholder="Amount in USD" min="1">
                 </div>
                 <div class="form-group p-3 mb-3">
+                    <!-- Optional note -->
                     <label for="note">Note</label>
                     <br>
                     <input type="text" name="note" id="note" placeholder="Optional/Max 50 characters" maxlength="50">
                 </div>
                 <div class="form-group mb-3">
+                    <!-- Receiver address -->
                     <label for="sending_address">Address</label>
                     <br>
                     <input type="text" name="sending_address" id="sending_address"

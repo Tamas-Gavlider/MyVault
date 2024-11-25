@@ -20,7 +20,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class UserUpdateForm(forms.ModelForm):
     """
-    Update user email - add first and last name of the user
+    Update user email - add/edit first and last name of the user
     """
     class Meta:
         model = User
@@ -30,6 +30,6 @@ class UserUpdateForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         if User.objects.exclude(
              pk=self.instance.pk).filter(email=email).exists():
-            raise forms.ValidationError("This email address is already/n"
+            raise forms.ValidationError("This email address is already"
                                         " in use.")
         return email

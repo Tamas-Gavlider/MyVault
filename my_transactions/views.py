@@ -27,6 +27,10 @@ def payment_success(request):
 
 
 def payment_failed(request):
+    """
+    Records hte failed topup if user cancel
+    the checkout session.
+    """
     profile = Profile.objects.get(user=request.user)
     amount = request.session.get('payment_amount', None)
 

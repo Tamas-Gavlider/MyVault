@@ -9,8 +9,8 @@ class FAQ(models.Model):
     Model representing Frequently Asked Questions (FAQs).
 
     Attributes:
-        question (CharField): The question being asked.
-        answer (TextField): The detailed answer to the question.
+        question - The question being asked.
+        answer - The detailed answer to the question.
     """
 
     class Meta:
@@ -28,7 +28,7 @@ class FAQ(models.Model):
 
 class UserQuestion(models.Model):
     """
-    User questions asked from AI
+    User questions asked from AI.
     """
     user = models.ForeignKey(User, on_delete=models.SET_NULL,
                              null=True, blank=True)
