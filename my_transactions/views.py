@@ -27,6 +27,18 @@ def payment_success(request):
 
 
 def payment_failed(request):
+    profile = Profile.objects.get(user=request.user)
+    amount = request.session.get('payment_amount', None)
+
+    if amount:
+        amount = Decimal(amount)
+        Transactions.objects.create(
+            user=request.user,
+            type='Deposit',
+            status='Failed',
+            amount=amount,
+            )
+        del request.session['payment_amount']
     return render(request, 'payment_failed.html')
 
 
@@ -137,6 +149,28 @@ The MyVault Team
         return render(request, 'payment_success.html')
 
     except (ValueError, InvalidOperation):
+        Transactions.objects.create(
+            user=request.user,
+            type='Deposit',
+            status='Failed',
+            amount=amount,
+        )
+        profile.save()
+        send_mail(
+                'Transaction Alert',
+                """
+Hello,
+
+We wanted to let you know that your recent payment attempt was unsuccessful.
+
+Thank you,
+
+The MyVault Team
+                """,
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
         return render(request, 'payment_failed.html', {'error':
                       'Invalid amount.'})
 
@@ -428,7 +462,10 @@ def transactions_history(request):
             max_amount = float(max_amount)
             transactions = transactions.filter(amount__lte=max_amount)
     except ValueError:
-        return JsonResponse({'error': 'Invalid amount format. Please provide numeric values.'}, status=400)
+        return JsonResponse({
+            'error':
+            'Invalid amount format. Please provide numeric values.'},
+            status=400)
 
     if transaction_type:
         transactions = transactions.filter(type=transaction_type)

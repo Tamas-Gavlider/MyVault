@@ -22,6 +22,7 @@ The live deployed site can be found [here](https://my-vault-cb8eb703ab63.herokua
     - [Ask](#ask)
     - [Profile](#profile)
     - [Update Profile](#update-profile)
+    - [Location](#location)
     - [Delete Profile](#delete-profile)
     - [Validate private key/Unlock account](#validate-private-keyunlock-account)
     - [Dashboard](#dashboard)
@@ -94,8 +95,7 @@ This color palette was chosen to achieve a clean, minimalistic, and modern aesth
 
 ### Typography
 
-The Nanum Myeongjo font, available via Google Fonts, is a sophisticated serif typeface inspired by traditional Korean calligraphy. The font’s graceful curves and sharp serifs make it stand out, giving your design a distinctive and memorable quality.
-
+The Nanum Myeongjo font, available via Google Fonts, is a sophisticated serif typeface inspired by traditional Korean calligraphy. The font’s graceful curves and sharp serifs make it stand out, giving to the design a distinctive and memorable quality.
 ### Features
 
 All pages feature a fully responsive navbar that transforms into a hamburger menu on smaller screens and a [favicon](/static/images/android-chrome-192x192.png) in the browser tab.<br>
@@ -171,6 +171,13 @@ Email notifications:
 | Top Up  | [top-up](/docs/email-notification/top-up-email.png) |
 | Withdraw | [withdraw](/docs/email-notification/withdraw-email.png)
 
+#### Location
+
+The location page will track the user's current location, displaying the details of their current login location alongside the details of their previous login location.
+
+
+![location](/docs/screenshots/location.png)
+
 #### Delete Profile
 
 Users can delete their profile; however, all funds will be forfeited upon deletion. A warning message will be displayed to inform users of this outcome before they confirm the deletion.
@@ -192,13 +199,23 @@ In both cases, the user must provide the private key to proceed. This ensures th
 #### Dashboard
 The Dashboard provides users with a comprehensive overview of their financial activity, featuring three insightful charts.
 Page before validation:
-![Dashboard](/docs/screenshots/dashboard-not%20validated.png)
+![Dashboard](/docs/screenshots/dashboard-not-validated.png)
 The first pie chart visualizes the distribution of the user’s transactions, breaking them down by type—Withdrawals, Deposits, Sent, and Received. It helps users understand their transaction habits at a glance.
-![Pie](/docs/screenshots/dashboard-chart-one.png)
+
+
+![Pie](/docs/screenshots/chart-updated.png)
+
+
 The bar chart displays the total number of transactions for the current month. This gives users a clear view of their activity over time, helping them track trends and patterns in their transactions.
-![Bar](/docs/screenshots/dashboard-chart-2.png)
+
+
+![Bar](/docs/screenshots/chart2-updated.png)
+
+
 The third chart shows the total sum of inflows (deposits and money received) versus outflows (withdrawals and money sent) for the current month. It provides a quick overview of the user's financial balance for the month, highlighting any surplus or deficit.
-![pie chart](/docs/screenshots/dashboard-chart-3.png)
+
+
+![pie chart](/docs/screenshots/chart3-updated.png)
 #### Transactions
 The Transactions page is designed to ensure that sensitive financial data is protected.
 Private Key Validation: After login, if the user's private key is not validated, the transaction page will remain empty, preventing access to any sensitive information.
@@ -229,12 +246,25 @@ For the Top Up process, users can follow these steps:
 
 
 This process ensures that users can top up their accounts securely while using Stripe's test environment for validation and testing purposes.
-If the payment is successful, a confirmation message will be displayed to the user.<br>
+If the payment is successful, a confirmation message will be displayed to the user.
+
+
 ![topup](/docs/screenshots/checkout.gif)
 
+
 A link has been added to the page to direct the user back to the transactions.
+
+
 ![success](/docs/screenshots/top-up-success.png)
 ![failed](/docs/screenshots/top-up-failed.png)
+
+
+Test cards for test payments:
+| Type               | Card No                | Expiry               | CVC         | ZIP        |
+|--------------------|------------------------|----------------------|-------------|------------|
+| Success            | Visa 4242 4242 4242 4242 | A date in the future  | Any 3 digits | Any 5 digits |
+| Require authorisation | 4000 0027 6000 3184  | A date in the future  | Any 3 digits | Any 5 digits |
+| Declined           | 4000 0000 0000 0002    | A date in the future  | Any 3 digits | Any 5 digits |
 
 #### Send Payment
 
@@ -268,7 +298,7 @@ The Transaction History page provides a user-friendly interface for reviewing fi
 - Each entry includes details such as the transaction type (e.g., Deposit, Withdraw, Sent, Received), amount, date, and status.
 - 6 records per page, allowing users to navigate through their history without overwhelming the interface.
 ![Transactions history](/docs/screenshots/transactions-history.png)
-- Users can move between pages using Next and Previous buttons or jump to specific pages.
+- Users can move between pages using Next and Previous buttons.
 - Users can filter transactions based on a specified range of amounts.
 - Transactions can be filtered within a specific date range to focus on relevant periods.
 - Users can refine results by selecting a specific type of transaction:
@@ -282,6 +312,8 @@ When viewing details of a Sent transaction, the sender's unique address (only vi
 ![sender view](/docs/screenshots/sent-history.png)
 When viewing details of a Received transaction, the receiver can see the name of the sender for clarity.
 ![receiver view](/docs/screenshots/received-history.png)
+
+
 The Pending status is part of the transaction model but will only be implemented and visible after integrating the testnet environment. This will allow users to track transactions that are awaiting confirmation.
 This design ensures transparency and keeps users informed about the status of their financial activities, with room for future expansion to include pending transactions once the testnet is fully utilized.
 #### Future Implementations
@@ -301,7 +333,7 @@ This design ensures transparency and keeps users informed about the status of th
 - gunicorn - a Python WSGI HTTP Server
 - psycopg2 - allow us to connect with a postgres database
 - PostgreSQL - The database used to store transactions data, user information, and other relevant data for the application.
-- Google Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
+- Chrome Dev Tools - To troubleshoot, test features and solve issues with responsiveness and styling.
 - JavaScript - for Stripe and Google Maps.
 - GitHub - Web-based platform for version control and collaboration on software projects.
 - Google Fonts - Library of free and open-source web fonts.
@@ -363,7 +395,7 @@ The project is deployed using Heroku. To deploy the project:
    12. Add the following path to settings.py<br>
      -- STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') --
    13. Collect static files -- python3 manage.py collectstatic -- and add a runtime.txt file to your app's root directory. Check your Python version and copy the runtime closest to the one used in your IDE.
-   [Supported runtimes](https://devcenter.heroku.com/articles/python-support#specifying-a-python-version)
+   [Python support](https://devcenter.heroku.com/articles/python-support#specifying-a-python-version)
    14. Save, add, commit and push the changes to GitHub. 
    15. To enable automatic deploys on Heroku, go to the deploy tab and click the connect to GitHub button in the deployment method section. Search for the projects repository and then click connect. Click enable automatic deploys at the bottom of the page.
 4. Django automatically sets a secret key when you create your project, however we shouldn't use this default key in our deployed version. We can use a random key generator to create a new SECRET_KEY which we can then add to our Heroku config vars.
@@ -417,14 +449,18 @@ The following issues were raised during my mid project meeting with my mentor:
 |  Payment Sent |  No error  | [payment sent](/docs/testing/w3c/payment-sent.png) |
 |  Withdraw success |  No error  | [withdraw success](/docs/testing/w3c/withdraw-success.png) |
 |  Withdraw fail |  No error  | [withdraw fail](/docs/testing/w3c/withdraw-fail.png) |
-|  Top Up success |  Not retrievable | [withdraw fail](/docs/testing/w3c/topup-success.png) |
-|  Top Up fail |  Not retrievable | [withdraw fail](/docs/testing/w3c/topup-fail.png) |
+|  Top Up success |  Not retrievable | [topup success](/docs/testing/w3c/topup-success.png) |
+|  Top Up fail |  No error | [topup fail](/docs/testing/w3c/topup-fail.png) |
 
 
 #### CSS
 
 [W3C](https://validator.w3.org/) was used to validate the CSS.
 ![css](/docs/testing/w3c/css-validator.png)
+
+#### JavaScript
+
+No additional validation was performed for the JavaScript code since it utilizes the pre-written libraries provided by Stripe and the Google Maps API.
 
 #### Python
 
@@ -441,7 +477,7 @@ The following issues were raised during my mid project meeting with my mentor:
 | my-profile-tests.py      |   Pass            |        [profile-tests](/docs/testing/pep8/my-profile-tests.png)   
 | my-profile-urls.py     |   Pass            |        [profile-urls](/docs/testing/pep8/my-profile-urls.png)       
 | my-profile-views.py    |   Pass         |        [profile-views](/docs/testing/pep8/my-profile-views.png)  
-| my-profile-form.py      |   Pass            |        [profile-form](/docs/testing/pep8/my-profile-form.png)
+| my-profile-form.py      |   Pass            |        [profile-form](/docs/testing/pep8/my-profile-forms.png)
 | my-profile-admin.py      |   Pass            |        [profile-admin](/docs/testing/pep8/my-profile-admin.png)  
 | my-profile-tasks.py      |   Pass            |        [profile-tasks](/docs/testing/pep8/profile-tasks.png) 
 | my-profile-app.py      |   Pass            |        [profile-app](/docs/testing/pep8/profile-app.png)  
@@ -457,7 +493,7 @@ The following issues were raised during my mid project meeting with my mentor:
 
 #### Lighthouse 
 
-I have used Googles Lighthouse testing to test the performance, accessibility, best practices and SEO of the site.
+I have used Lighthouse to test the performance, accessibility, best practices and SEO of the site.
 
 | Page      |   Mobile/Desktop     |              Score     |
 |-----------|:----------------------:|:------------------------:|
@@ -509,7 +545,7 @@ WAVE(Web Accessibility Evaluation Tool) allows developers to create content that
 | Delete profile   |   No errors     |  [delete profile](/docs/testing/wave/delete-profile.png)       |
 | Reset Password   |   No errors       |  [password reset](/docs/testing/wave/pwd-reset-wave.png)       |
 | Validate Key  |   No errors       |   [validate key](/docs/testing/wave/validate-key-wave.png)     |
-| Location   |   No errors       |   [location](/docs/testing/wave/location-wave.png)     |
+| Location   |  empty button error, originate from the prewritten code provided by Google Maps API      |   [location](/docs/testing/wave/location-wave.png)     |
 | Dashboard   |  No errors       |   [dashboard](/docs/testing/wave/dashboard-wave.png)    |
 | Transactions   |   No errors       | [transactions](/docs/testing/wave/transactions-wave.png)        |
 | Send payment   |  No errors        | [send payment](/docs/testing/wave/send-payment-wave.png)        |
@@ -567,19 +603,14 @@ Login and password reset<br>
 
 Full testing was performed on the following devices:
 - Mobile:
-  - Iphone 11
-  - Iphone 13
-  - Iphone 6s
+  - Iphone 11 - tested browsers Chrome and Safari
+  - Iphone 13 - tested browser Safari
+  - Iphone 6s - tested browser Safari
 - Laptop: 
-  - Macbook Pro 2019 13 inch screen
-  - Mackbook Pro 2014 15 inch screen
-- Desktop:
-  - iMac 2013 21.5 inch
-
-Testing was also performed using the following browsers:
-- Chrome
-- FireFox
-- Safari
+  - Macbook Pro 2019 13 inch screen - tested browsers Safari and Chrome
+  - Mackbook Pro 2014 15 inch screen - tested browsers Safari, Chrome and Firefox
+- Desktop: 
+  - iMac 2013 21.5 inch - tested browsers Safari and Chrome
 
 #### Bugs
 
@@ -590,7 +621,7 @@ The following bugs were identified during the testing:
   - Cause: Improper Python code design that violated PEP8 guidelines by using double quotes instead of single quotes within an f-string.
   - Fix: Replaced double quotes with single quotes in the f-string to resolve the issue.
 2. Stripe Template:<br>
-  - Issue: After adding styling to the payment process HTML, the transaction submitted correctly, but the user was redirected to a blank page instead of a success or failure confirmation. Additionally, the payment amount was not added to the account balance.
+  - Issue: After adding custom styling to the payment process HTML, the transaction submitted correctly, but the user was redirected to a blank page instead of a success or failure confirmation. Additionally, the payment amount was not added to the account balance.
   - Cause: Possible compatibility issues with the styled template.
   - Fix: Implemented a different Stripe template designed specifically for the testnet, using a template provided directly by Stripe.
 3. Send Payment:<br>
@@ -616,6 +647,12 @@ During manual testing, the charts were not interactive on mobile phones and in S
 
 ![chart](/docs/screenshots/chart.png)
 ![chart2](/docs/screenshots/chart2.png)
+
+
+Dashboard before the adjustment:
+![chart](/docs/screenshots/dashboard-chart-one.png)
+![chart2](/docs/screenshots/dashboard-chart-2.png)
+![chart3](/docs/screenshots/dashboard-chart-3.png)
 
 ## Credits
 
